@@ -1,0 +1,71 @@
+name: FriedAmida Release
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types: [opened, synchronize]
+
+env:
+  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+
+jobs:
+  build_project:
+    name: Build for ${{ matrix.targetPlatform }} on version ${{ matrix.unityVersion }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        projectName:
+          - FriedAmida
+        unityVersion:
+          - 2018.4.20f1
+        targetPlatform:
+          - StandaloneWindows64
+          - WebGL
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - uses: webbertakken/unity-test-runner@v1.6
+        id: testRunner
+        with:
+          unityVersion: ${{ matrix.unityVersion }}
+
+      - uses: actions/upload-artifact@v1
+        with:
+          name: Test results (all modes)
+          path: ${{ steps.testRunner.outputs.artifactsPath }}
+
+      - uses: webbertakken/unity-builder@v0.12
+        with:
+          unityVersion: ${{ matrix.unityVersion }}
+          targetPlatform: ${{ matrix.targetPlatform }}
+
+      - uses: actions/upload-artifact@v1
+        with:
+          name: Build
+          path: build
+
+      - name: Upload WebGL Build folder
+        if: matrix.targetPlatform == 'WebGL'
+        run: |
+          git clone https://github.com/koob1999/FriedAmidaPlay.git
+          cp -rf build/WebGL/WebGL FriedAmidaPlay/docs
+          cd FriedAmidaPlay
+          git config --local user.email "${{ secrets.USER_EMAIL }}"
+          git config --local user.name "${{ secrets.USER_NAME }}"
+          git add .
+          git commit -m "FriedAmida update"
+
+      - uses: ad-m/github-push-action@v0.5.0
+        if: matrix.targetPlatform == 'WebGL'
+        with:
+          github_token: ${{ secrets.USER_PAT }}
+          force: true
+          directory: 'FriedAmidaPlay'
+          repository: 'koob1999/FriedAmidaPlay'
