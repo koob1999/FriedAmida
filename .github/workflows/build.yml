@@ -1,0 +1,45 @@
+name: FriedAmida Build
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+env:
+  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+
+jobs:
+  build_project:
+    name: Build for ${{ matrix.targetPlatform }} on version ${{ matrix.unityVersion }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        projectName:
+          - FriedAmida
+        unityVersion:
+          - 2018.4.20f1
+        targetPlatform:
+          - StandaloneWindows64
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: webbertakken/unity-test-runner@v1.6
+        id: testRunner
+        with:
+          unityVersion: ${{ matrix.unityVersion }}
+
+      - uses: actions/upload-artifact@v1
+        with:
+          name: Test results (all modes)
+          path: ${{ steps.testRunner.outputs.artifactsPath }}
+
+      - uses: webbertakken/unity-builder@v0.12
+        with:
+          unityVersion: ${{ matrix.unityVersion }}
+          targetPlatform: ${{ matrix.targetPlatform }}
+
+      - uses: actions/upload-artifact@v1
+        with:
+          name: Build
+          path: build
