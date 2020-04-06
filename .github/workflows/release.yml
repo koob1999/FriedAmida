@@ -69,3 +69,16 @@ jobs:
           force: true
           directory: 'FriedAmidaPlay'
           repository: 'koob1999/FriedAmidaPlay'
+
+      - uses: 8398a7/action-slack@v3.0.0
+        if: success() && matrix.targetPlatform == 'WebGL'
+        with:
+          status: success
+          text: Upload to https://koob1999.github.io/FriedAmidaPlay
+          author_name: Build success !!!
+          username: GitHub Actions
+          mention: here
+          channel: '#team-sophomore-notification'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
