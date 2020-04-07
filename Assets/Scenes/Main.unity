@@ -922,7 +922,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94e017ed5f084f8469fb9ee40c370a32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageManager: {fileID: 235228150}
+  st: {fileID: 235228151}
   foodGenerater: {fileID: 1419647444}
 --- !u!4 &658604814
 Transform:

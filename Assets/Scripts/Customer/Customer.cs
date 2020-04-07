@@ -8,13 +8,14 @@ public class Customer : MonoBehaviour
 	[System.SerializableAttribute]
 	public class ItemNums
 	{
-		public int eggNum;
-		public int komugikoNum;
-		public int pankoNum;
-		public int badItemNum;
+		public int egg;
+		public int komugiko;
+		public int panko;
+		public int badItem;
 	}
 
 	//▼アイテム関連
+	//同時揚げの量
 	int synchroFoodNum = 1;
 	public int SynchroFoodNum
 	{
@@ -37,6 +38,7 @@ public class Customer : MonoBehaviour
 	public bool IsClear
 	{
 		get { return isClear; }
+		//GameManagerにCutomerを倒したことを表すメソッドをデリゲートで渡す
 		private set { isClear = value; }
 	}
 

@@ -50,22 +50,22 @@ public class ItemGenerater : MonoBehaviour
 		for (int j = 0; j < createNum; j++)
 		{
 			//▼生成場所の決定
-			List<int> emptyDates = new List<int>();
+			List<int> emptyDatas = new List<int>();
 
 			int i = 0;
 			foreach (GameObject generateBox in generateBoxes)
 			{
 				if (generateBox == null)
 				{
-					emptyDates.Add(i);
+					emptyDatas.Add(i);
 				}
 				i++;
 			}
 
-			if (emptyDates.Count != 0)
+			if (emptyDatas.Count != 0)
 			{
-				int rand = Random.Range(0, emptyDates.Count);
-				int generateNum = emptyDates[rand];
+				int rand = Random.Range(0, emptyDatas.Count);
+				int generateNum = emptyDatas[rand];
 
 				//▼生成
 				generateBoxes[generateNum] = Instantiate(createObj, generatePlaces[generateNum].transform.position, Quaternion.identity);

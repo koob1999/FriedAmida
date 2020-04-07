@@ -50,7 +50,7 @@ public class StageManager : MonoBehaviour
 		if (ig != null && customer != null)
 		{
 			Debug.Log("a");
-			ig.InitializeItems(customer.AppearItemNum.eggNum, customer.AppearItemNum.komugikoNum, customer.AppearItemNum.pankoNum, customer.AppearItemNum.badItemNum);
+			ig.InitializeItems(customer.AppearItemNum.egg, customer.AppearItemNum.komugiko, customer.AppearItemNum.panko, customer.AppearItemNum.badItem);
 		}
 
 		//▼敵生成
@@ -66,19 +66,14 @@ public class StageManager : MonoBehaviour
 	GameObject SelectEnemy()
 	{
 		Enemy enemy = enemies[presentEnemyNum];
-		GameObject returnObj;
 
 		switch (enemy)
 		{
 			case Enemy.nomal:
-				returnObj = nomalMob;
-				break;
+				return nomalMob;
 			default:
-				returnObj = nomalMob;
-				break;
+				return nomalMob;
 		}
-
-		return returnObj;
 	}
 
 	public bool IsLastEnemy()

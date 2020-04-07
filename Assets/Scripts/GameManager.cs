@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-	[SerializeField] GameObject stageManager;
-	StageManager st;
+	//[SerializeField] GameObject stageManager;
+	[SerializeField] StageManager st;
 	[SerializeField] GameObject foodGenerater;
 	FoodGenerater fg;
 
-	GameObject presentEnemyObj;//現在戦闘中の敵
-	Customer presentCustomer;//●変数名微妙●
+	GameObject currentEnemyObj;//現在戦闘中の敵
+	Customer currentCustomer;//●変数名微妙●
 	public FriedFood MadeFriedFood;
 
 	//●Playerクラスに分ける可能性あり●
@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-		st = stageManager.GetComponent<StageManager>();
+		//st = stageManager.GetComponent<StageManager>();
 		fg = foodGenerater.GetComponent<FoodGenerater>();
 		Invoke("GameStart", 1);
     }
@@ -38,12 +38,13 @@ public class GameManager : MonoBehaviour
 
 	IEnumerator gameStart()
 	{
+		//消したい
 		//敵が全員倒されるまでループ
 		while (true)
 		{
 			//１：次の戦闘準備
-			presentEnemyObj = st.NextBattleStart();
-			presentCustomer = presentEnemyObj.GetComponent<Customer>();
+			currentEnemyObj = st.NextBattleStart();
+			currentCustomer = currentEnemyObj.GetComponent<Customer>();
 
 			//敵が倒されるまでループ
 			while (true)
@@ -51,8 +52,9 @@ public class GameManager : MonoBehaviour
 				MadeFriedFood = null;
 
 				//2：敵に応じた食材生成
-				fg.FoodsGenerate(presentCustomer.SynchroFoodNum);
+				fg.FoodsGenerate(currentCustomer.SynchroFoodNum);
 
+				//消したい
 				//3：揚げ物を受け取るまでループ
 				while (MadeFriedFood == null)
 				{
@@ -61,12 +63,15 @@ public class GameManager : MonoBehaviour
 
 				//4：揚げ物を敵に渡す
 				//5：敵による揚げ物評価(スコア処理未実装）
-				presentCustomer.DoReaction(MadeFriedFood);
+				currentCustomer.DoReaction(MadeFriedFood);
+
+				//客のリアクションを見せるため1秒止める
+				yield return new WaitForSeconds(1);
 
 				//6：敵が倒れればループを抜ける
-				if (presentCustomer.IsClear)
+				if (currentCustomer.IsClear)
 				{
-					Destroy(presentEnemyObj);
+					Destroy(currentEnemyObj);
 					break;
 				}
 			}
