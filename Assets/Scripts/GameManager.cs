@@ -5,9 +5,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
 	//[SerializeField] GameObject stageManager;
-	[SerializeField] StageManager st;
-	[SerializeField] GameObject foodGenerater;
-	FoodGenerater fg;
+	[SerializeField] StageManager stageManager;
+	[SerializeField] FoodGenerater foodGenerater;
 
 	GameObject currentEnemyObj;//現在戦闘中の敵
 	Customer currentCustomer;//●変数名微妙●
@@ -20,8 +19,6 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-		//st = stageManager.GetComponent<StageManager>();
-		fg = foodGenerater.GetComponent<FoodGenerater>();
 		Invoke("GameStart", 1);
     }
 
@@ -43,7 +40,7 @@ public class GameManager : MonoBehaviour
 		while (true)
 		{
 			//１：次の戦闘準備
-			currentEnemyObj = st.NextBattleStart();
+			currentEnemyObj = stageManager.NextBattleStart();
 			currentCustomer = currentEnemyObj.GetComponent<Customer>();
 
 			//敵が倒されるまでループ
@@ -52,7 +49,7 @@ public class GameManager : MonoBehaviour
 				MadeFriedFood = null;
 
 				//2：敵に応じた食材生成
-				fg.FoodsGenerate(currentCustomer.SynchroFoodNum);
+				foodGenerater.FoodsGenerate(currentCustomer.SynchroFoodNum);
 
 				//消したい
 				//3：揚げ物を受け取るまでループ
@@ -77,7 +74,7 @@ public class GameManager : MonoBehaviour
 			}
 
 			//７：現在の敵が最後の敵であればループを抜ける
-			if (st.IsLastEnemy())
+			if (stageManager.IsLastEnemy())
 			{
 				break;
 			}

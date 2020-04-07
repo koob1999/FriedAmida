@@ -94,10 +94,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   appearItemNums:
-    eggNum: 2
-    komugikoNum: 2
-    pankoNum: 2
-    badItemNum: 1
+    egg: 2
+    komugiko: 2
+    panko: 2
+    badItem: 1
 --- !u!95 &8954283933166768307
 Animator:
   serializedVersion: 3

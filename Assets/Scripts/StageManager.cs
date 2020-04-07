@@ -10,8 +10,7 @@ public class StageManager : MonoBehaviour
 	}
 
 
-	[SerializeField] GameObject itemGenerater;
-	ItemGenerater ig;
+	[SerializeField] ItemGenerater itemGenerater;
 
 	//▼敵関連
 	[SerializeField] Enemy[] enemies;//出現する敵の設定用
@@ -23,7 +22,6 @@ public class StageManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-		ig = itemGenerater.GetComponent<ItemGenerater>();
     }
 
     // Update is called once per frame
@@ -47,10 +45,10 @@ public class StageManager : MonoBehaviour
 
 		//▼敵に応じたアイテム生成
 		//●ここ可読性ゴミでは？ここだけちゃうけど●
-		if (ig != null && customer != null)
+		if (itemGenerater != null && customer != null)
 		{
 			Debug.Log("a");
-			ig.InitializeItems(customer.AppearItemNum.egg, customer.AppearItemNum.komugiko, customer.AppearItemNum.panko, customer.AppearItemNum.badItem);
+			itemGenerater.InitializeItems(customer.AppearItemNum.egg, customer.AppearItemNum.komugiko, customer.AppearItemNum.panko, customer.AppearItemNum.badItem);
 		}
 
 		//▼敵生成

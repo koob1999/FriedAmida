@@ -12,7 +12,6 @@ public class ItemGenerater : MonoBehaviour
 
 	[SerializeField] GameObject[] generatePlaces;//アイテム生成場所
 	GameObject[] generateBoxes;//アイテムデータの格納場所
-	[SerializeField] float geneateSpan = 3;
 
     // Start is called before the first frame update
     void Start()
@@ -49,6 +48,7 @@ public class ItemGenerater : MonoBehaviour
 	{
 		for (int j = 0; j < createNum; j++)
 		{
+			Debug.Log("ItemCreate");
 			//▼生成場所の決定
 			List<int> emptyDatas = new List<int>();
 
