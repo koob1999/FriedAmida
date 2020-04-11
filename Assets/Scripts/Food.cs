@@ -112,7 +112,7 @@ public class Food : MonoBehaviour
 		//ゴミ箱なら破棄
 		if (oil==Cooking.OilStatus.trash)
 		{
-			return null;
+			return null ;
 		}
 		//マイナスアイテムを取得していれば腐り状態
 		else if (badItemCount >= 1)

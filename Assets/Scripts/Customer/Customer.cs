@@ -13,6 +13,9 @@ public class Customer : MonoBehaviour
 		public int panko;
 		public int badItem;
 	}
+	//▼参照パス
+	[System.NonSerialized] public FoodGenerater foodGenerater;
+	[System.NonSerialized] public ItemGenerater itemGenerater;
 
 	//▼アイテム関連
 	//同時揚げの量
@@ -64,7 +67,18 @@ public class Customer : MonoBehaviour
         
     }
 
+	public void DoAction()
+	{
+		itemGenerater.InitializeItems(AppearItemNum.egg, AppearItemNum.komugiko, AppearItemNum.panko, AppearItemNum.badItem);
+		foodGenerater.FoodsGenerate(SynchroFoodNum);
+	}
+
 	public void DoReaction(FriedFood friedFood)
+	{
+		StartCoroutine(Reacion(friedFood));
+	}
+
+	IEnumerator Reacion(FriedFood friedFood)
 	{
 		//アニメーション
 		ReactionAnime(friedFood.FryStatus);
@@ -86,6 +100,8 @@ public class Customer : MonoBehaviour
 				break;
 		}
 
+		yield return new WaitForSeconds(1);
+
 		//クリア判定
 		IsClear = true;
 	}
@@ -96,20 +112,28 @@ public class Customer : MonoBehaviour
 		switch (status)
 		{
 			case Cooking.Status.good:
+				Debug.Log("good");
 				animator.SetBool("good", true);
 				animator.SetBool("angry", false);
+				animator.SetBool("saitei", false);
 				break;
 			case Cooking.Status.usually:
-				animator.SetBool("good", false);
-				animator.SetBool("angry", false);
-				break;
-			case Cooking.Status.raw:
-				animator.SetBool("good", false);
-				animator.SetBool("angry", false);
-				break;
-			case Cooking.Status.bad:
+				Debug.Log("usually");
 				animator.SetBool("good", false);
 				animator.SetBool("angry", true);
+				animator.SetBool("saitei", false);
+				break;
+			case Cooking.Status.raw:
+				Debug.Log("raw");
+				animator.SetBool("good", false);
+				animator.SetBool("angry", true);
+				animator.SetBool("saitei", false);
+				break;
+			case Cooking.Status.bad:
+				Debug.Log("bad");
+				animator.SetBool("good", false);
+				animator.SetBool("angry", false);
+				animator.SetBool("saitei", true);
 				break;
 		}
 	}

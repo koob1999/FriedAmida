@@ -24,7 +24,6 @@ public class Oil : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		//▼食材なら揚げ物としてGameManagerに渡す
 		if (collision.gameObject.tag == "food")
 		{
 			Food food;

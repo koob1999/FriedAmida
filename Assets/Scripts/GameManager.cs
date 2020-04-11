@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 	//[SerializeField] GameObject stageManager;
 	[SerializeField] StageManager stageManager;
 	[SerializeField] FoodGenerater foodGenerater;
+	[SerializeField] ItemGenerater itemGenerater;
 
 	[System.NonSerialized] public GameObject[] OilObjs;
 	GameObject currentEnemyObj;//現在戦闘中の敵
@@ -19,6 +20,11 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+		foreach (GameObject oilObj in OilObjs)
+		{
+			oilObj.GetComponent<Oil>().completedFriedFoodDelegate = CompletedFriedFood;
+		}
+
 		Invoke("GameStart", 0.5f);
 	}
 
@@ -31,18 +37,21 @@ public class GameManager : MonoBehaviour
 	void GameStart()
 	{
 		//１：次の戦闘準備
+		AppearNextEnemy();
+
+		//2：敵に応じた行動
+		currentCustomer.DoAction();
+	}
+
+	//敵生成
+	void AppearNextEnemy()
+	{
 		currentEnemyObj = stageManager.NextBattleStart();
 		currentCustomer = currentEnemyObj.GetComponent<Customer>();
 
+		currentCustomer.foodGenerater = this.foodGenerater;
+		currentCustomer.itemGenerater = this.itemGenerater;
 		currentCustomer.killedCustomerDelegate = KilledCustomer;
-
-		foreach (GameObject oilObj in OilObjs)
-		{
-			oilObj.GetComponent<Oil>().completedFriedFoodDelegate = CompletedFriedFood;
-		}
-
-		//2：敵に応じた食材生成
-		foodGenerater.FoodsGenerate(currentCustomer.SynchroFoodNum);
 	}
 
 	void KilledCustomer()
@@ -55,10 +64,8 @@ public class GameManager : MonoBehaviour
 			return;
 		}
 
-		currentEnemyObj = stageManager.NextBattleStart();
-		currentCustomer = currentEnemyObj.GetComponent<Customer>();
-
-		currentCustomer.killedCustomerDelegate = KilledCustomer;
+		AppearNextEnemy();
+		currentCustomer.DoAction();
 	}
 
 	void CompletedFriedFood(FriedFood friedFood)
@@ -69,9 +76,10 @@ public class GameManager : MonoBehaviour
 		{
 			currentCustomer.DoReaction(friedFood);
 		}
-
-		//2：敵に応じた食材生成
-		foodGenerater.FoodsGenerate(currentCustomer.SynchroFoodNum);
+		else
+		{
+			currentCustomer.DoAction();
+		}
 	}
 
 	void ClearGame()

@@ -10,7 +10,7 @@ public class StageManager : MonoBehaviour
 	}
 
 
-	[SerializeField] ItemGenerater itemGenerater;
+	//[SerializeField] ItemGenerater itemGenerater;
 
 	//▼敵関連
 	[SerializeField] Enemy[] enemies;//出現する敵の設定用
@@ -42,14 +42,6 @@ public class StageManager : MonoBehaviour
 		//▼次の敵を設定
 		GameObject nextEnemy = SelectEnemy();
 		Customer customer = nextEnemy.GetComponent<Customer>();
-
-		//▼敵に応じたアイテム生成
-		//●ここ可読性ゴミでは？ここだけちゃうけど●
-		if (itemGenerater != null && customer != null)
-		{
-			Debug.Log("a");
-			itemGenerater.InitializeItems(customer.AppearItemNum.egg, customer.AppearItemNum.komugiko, customer.AppearItemNum.panko, customer.AppearItemNum.badItem);
-		}
 
 		//▼敵生成
 		GameObject enemy = Instantiate(nextEnemy, enemyGeneratePlace.transform.position, Quaternion.identity);
