@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField] StageManager stageManager;
 	[SerializeField] FoodGenerater foodGenerater;
 
-	[SerializeField] GameObject[] oilObjs;
+	[System.NonSerialized] public GameObject[] OilObjs;
 	GameObject currentEnemyObj;//現在戦闘中の敵
 	Customer currentCustomer;//●変数名微妙●
 
@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
 
 		currentCustomer.killedCustomerDelegate = KilledCustomer;
 
-		foreach (GameObject oilObj in oilObjs)
+		foreach (GameObject oilObj in OilObjs)
 		{
 			oilObj.GetComponent<Oil>().completedFriedFoodDelegate = CompletedFriedFood;
 		}
@@ -65,7 +65,10 @@ public class GameManager : MonoBehaviour
 	{
 		//3：揚げ物を敵に渡す
 		// ：敵による揚げ物評価(スコア処理未実装）
-		currentCustomer.DoReaction(friedFood);
+		if (friedFood != null)
+		{
+			currentCustomer.DoReaction(friedFood);
+		}
 
 		//2：敵に応じた食材生成
 		foodGenerater.FoodsGenerate(currentCustomer.SynchroFoodNum);

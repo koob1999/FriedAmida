@@ -13,7 +13,7 @@ public class Food : MonoBehaviour
 	[SerializeField] int clearKomugikoNum;
 	[SerializeField] int clearEggNum;
 	[SerializeField] int clearPankoNum;
-	[SerializeField] Cooking.OilTemp oilTemp;
+	[SerializeField] Cooking.OilStatus oilTemp;
 
 	[SerializeField] int calorie;
 
@@ -105,12 +105,17 @@ public class Food : MonoBehaviour
 		XDirection = XDirection != 0 ? 0 : x;
 	}
 
-	public FriedFood DoFry(Cooking.OilTemp oil)
+	public FriedFood DoFry(Cooking.OilStatus oil)
 	{
 		FriedFood friedFood;
 
+		//ゴミ箱なら破棄
+		if (oil==Cooking.OilStatus.trash)
+		{
+			return null;
+		}
 		//マイナスアイテムを取得していれば腐り状態
-		if (badItemCount >= 1)
+		else if (badItemCount >= 1)
 		{
 			Debug.Log("bad");
 			friedFood = new FriedFood(Cooking.Status.bad, this.calorie);

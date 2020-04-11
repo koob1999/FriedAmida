@@ -2,11 +2,12 @@
 {
 	public class Cooking
 	{
-		public enum OilTemp
+		public enum OilStatus
 		{
 			high,
 			moderate,
-			low
+			low,
+			trash
 		}
 
 		public enum Status

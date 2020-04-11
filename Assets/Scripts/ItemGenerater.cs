@@ -10,13 +10,13 @@ public class ItemGenerater : MonoBehaviour
 	[SerializeField] GameObject panko;
 	[SerializeField] GameObject badItem;
 
-	[SerializeField] GameObject[] generatePlaces;//アイテム生成場所
-	GameObject[] generateBoxes;//アイテムデータの格納場所
+	[System.NonSerialized] public GameObject[,] GeneratePlaces;
+	GameObject[,] generateBoxes;//アイテムデータの格納場所
 
     // Start is called before the first frame update
     void Start()
     {
-		generateBoxes = new GameObject[generatePlaces.Length];
+		generateBoxes = new GameObject[GeneratePlaces.GetLength(0),GeneratePlaces.GetLength(1)];
 	}
 
     // Update is called once per frame
@@ -25,15 +25,15 @@ public class ItemGenerater : MonoBehaviour
 
     }
 
-	//！関数名が微妙！
+	//●関数名が微妙●
 	public void InitializeItems(int eggNum, int komugikoNum, int pankoNum, int badItemNum)
 	{
 		//▼マップ上のアイテムを全破棄
-		foreach(GameObject obj in generateBoxes)
+		for(int i = 0; i < generateBoxes.GetLength(0); i++)
 		{
-			if (obj != null)
+			for(int j = 0; j < generateBoxes.GetLength(1); j++)
 			{
-				Destroy(obj);
+				Destroy(generateBoxes[i, j]);
 			}
 		}
 
@@ -46,29 +46,33 @@ public class ItemGenerater : MonoBehaviour
 
 	void ItemGenerate(GameObject createObj, int createNum)
 	{
-		for (int j = 0; j < createNum; j++)
+		//三重ループになっちゃった、許ちてくだちゃい
+		for (int i = 0; i < createNum; i++)
 		{
-			Debug.Log("ItemCreate");
 			//▼生成場所の決定
-			List<int> emptyDatas = new List<int>();
+			List<int> xEmptyDatas = new List<int>();
+			List<int> yEmptyDatas = new List<int>();
 
-			int i = 0;
-			foreach (GameObject generateBox in generateBoxes)
+			for (int j = 0; j < generateBoxes.GetLength(0); j++)
 			{
-				if (generateBox == null)
+				for (int k = 0; k < generateBoxes.GetLength(1); k++)
 				{
-					emptyDatas.Add(i);
+					if (generateBoxes[j, k] == null)
+					{
+						xEmptyDatas.Add(j);
+						yEmptyDatas.Add(k);
+					}
 				}
-				i++;
 			}
 
-			if (emptyDatas.Count != 0)
+			if (xEmptyDatas.Count != 0)
 			{
-				int rand = Random.Range(0, emptyDatas.Count);
-				int generateNum = emptyDatas[rand];
+				int rand = Random.Range(0, xEmptyDatas.Count);
+				int xGenerateNum = xEmptyDatas[rand];
+				int yGenerateNum = yEmptyDatas[rand];
 
 				//▼生成
-				generateBoxes[generateNum] = Instantiate(createObj, generatePlaces[generateNum].transform.position, Quaternion.identity);
+				generateBoxes[xGenerateNum, yGenerateNum] = Instantiate(createObj, GeneratePlaces[xGenerateNum, yGenerateNum].transform.position, Quaternion.identity);
 			}
 		}
 	}

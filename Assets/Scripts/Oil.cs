@@ -5,7 +5,7 @@ using Amida;
 
 public class Oil : MonoBehaviour
 {
-	[SerializeField] Cooking.OilTemp oilTemp;
+	[SerializeField] Cooking.OilStatus oilTemp;
 
 	public delegate void CompletedFriedFoodDelegate(FriedFood friedFood);
 	public CompletedFriedFoodDelegate completedFriedFoodDelegate;

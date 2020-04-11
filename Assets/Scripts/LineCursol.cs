@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class LineCursol : MonoBehaviour
 {
-	[System.SerializableAttribute]
+
+	/*[System.SerializableAttribute]
 	public class HLineList
 	{
 		public List<GameObject> YHLines;
-	}
+	}*/
 
 	class Position
 	{
 		int x = 0;
 		int y = 0;
-		List<HLineList> xHLines;
+		//List<HLineList> xHLines;
+		GameObject[,] amidaLines;
 
 		public int X
 		{
@@ -24,9 +26,9 @@ public class LineCursol : MonoBehaviour
 				{
 					x = 0;
 				}
-				else if (value >= xHLines.Count - 1)
+				else if (value >= amidaLines.GetLength(0) - 1)
 				{
-					x = xHLines.Count - 1;
+					x = amidaLines.GetLength(0) - 1;
 				}
 				else
 				{
@@ -48,9 +50,9 @@ public class LineCursol : MonoBehaviour
 				{
 					y = 0;
 				}
-				else if (value >= xHLines[X].YHLines.Count - 1)
+				else if (value >= amidaLines.GetLength(1) - 1)
 				{
-					y = xHLines[X].YHLines.Count - 1;
+					y = amidaLines.GetLength(1) - 1;
 				}
 				else
 				{
@@ -64,13 +66,15 @@ public class LineCursol : MonoBehaviour
 			}
 		}
 
-		public Position(List<HLineList> xHLines)
+		public Position(GameObject[,] amidaLines)
 		{
-			this.xHLines = xHLines;
+			this.amidaLines = amidaLines;
 		}
 	}
 
-	[SerializeField] List<HLineList> XHLines;
+	public GameObject[,] AmidaLines;
+
+	//[SerializeField] List<HLineList> XHLines;
 	Position position;
 
 	enum Direction
@@ -84,13 +88,13 @@ public class LineCursol : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-		position = new Position(XHLines);
+		position = new Position(AmidaLines);
     }
 
     // Update is called once per frame
     void Update()
     {
-		transform.position = XHLines[position.X].YHLines[position.Y].transform.position;
+		transform.position = AmidaLines[position.X, position.Y].transform.position;
 
 		if (Input.GetKeyDown(KeyCode.UpArrow))
 		{
@@ -117,7 +121,7 @@ public class LineCursol : MonoBehaviour
 
 	void DrawHLine()
 	{
-		XHLines[position.X].YHLines[position.Y].GetComponent<HorizontalLine>().OnObjActivation();
+		AmidaLines[position.X, position.Y].GetComponent<HorizontalLine>().OnObjActivation();
 	}
 
 	void MoveCursol(Direction dir)
