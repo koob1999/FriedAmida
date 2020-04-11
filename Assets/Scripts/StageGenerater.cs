@@ -21,7 +21,7 @@ public class StageGenerater : MonoBehaviour
 	float maxXPos = 4;
 	float minXPos = -7;
 	float maxYPos = 4.5f;
-	float minYPos = -4;
+	float minYPos = -3;
 	//参照パス
 	[SerializeField] LineCursol lineCursol;
 	[SerializeField] GameManager gameManager;
@@ -78,16 +78,16 @@ public class StageGenerater : MonoBehaviour
 			switch (oilStatus[i])
 			{
 				case Cooking.OilStatus.high:
-					oils[i] = Instantiate(HighOil, new Vector3(minXPos + (xInterval * i), minYPos, 0), Quaternion.identity);
+					oils[i] = Instantiate(HighOil, new Vector3(minXPos + (xInterval * i), minYPos - 1, 0), Quaternion.identity);
 					break;
 				case Cooking.OilStatus.moderate:
-					oils[i] = Instantiate(ModerateOil, new Vector3(minXPos + (xInterval * i), minYPos, 0), Quaternion.identity);
+					oils[i] = Instantiate(ModerateOil, new Vector3(minXPos + (xInterval * i), minYPos - 1, 0), Quaternion.identity);
 					break;
 				case Cooking.OilStatus.low:
-					oils[i] = Instantiate(LowOil, new Vector3(minXPos + (xInterval * i), minYPos, 0), Quaternion.identity);
+					oils[i] = Instantiate(LowOil, new Vector3(minXPos + (xInterval * i), minYPos - 1, 0), Quaternion.identity);
 					break;
 				case Cooking.OilStatus.trash:
-					oils[i] = Instantiate(TrashBox, new Vector3(minXPos + (xInterval * i), minYPos, 0), Quaternion.identity);
+					oils[i] = Instantiate(TrashBox, new Vector3(minXPos + (xInterval * i), minYPos - 1, 0), Quaternion.identity);
 					break;
 			}
 		}
