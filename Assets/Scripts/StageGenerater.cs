@@ -72,27 +72,27 @@ public class StageGenerater : MonoBehaviour
 		lineCursol.AmidaLines = amidaLines;
 
 		//▼油の生成
-		GameObject[] oils = new GameObject[oilStatus.Length];
+		Oil[] oils = new Oil[oilStatus.Length];
 		for (int i = 0; i < oilStatus.Length; i++)
 		{
 			switch (oilStatus[i])
 			{
 				case Cooking.OilStatus.high:
-					oils[i] = Instantiate(HighOil, new Vector3(minXPos + (xInterval * i), minYPos - 1, 0), Quaternion.identity);
+					oils[i] = Instantiate(HighOil, new Vector3(minXPos + (xInterval * i), minYPos - 1, 0), Quaternion.identity).GetComponent<Oil>();
 					break;
 				case Cooking.OilStatus.moderate:
-					oils[i] = Instantiate(ModerateOil, new Vector3(minXPos + (xInterval * i), minYPos - 1, 0), Quaternion.identity);
+					oils[i] = Instantiate(ModerateOil, new Vector3(minXPos + (xInterval * i), minYPos - 1, 0), Quaternion.identity).GetComponent<Oil>();
 					break;
 				case Cooking.OilStatus.low:
-					oils[i] = Instantiate(LowOil, new Vector3(minXPos + (xInterval * i), minYPos - 1, 0), Quaternion.identity);
+					oils[i] = Instantiate(LowOil, new Vector3(minXPos + (xInterval * i), minYPos - 1, 0), Quaternion.identity).GetComponent<Oil>();
 					break;
 				case Cooking.OilStatus.trash:
-					oils[i] = Instantiate(TrashBox, new Vector3(minXPos + (xInterval * i), minYPos - 1, 0), Quaternion.identity);
+					oils[i] = Instantiate(TrashBox, new Vector3(minXPos + (xInterval * i), minYPos - 1, 0), Quaternion.identity).GetComponent<Oil>();
 					break;
 			}
 		}
 
-		gameManager.OilObjs = oils;
+		gameManager.Oils = oils;
 
 		//▼食材生成場所の生成
 		//ここGameObjectよりVector３で渡したほうが良い

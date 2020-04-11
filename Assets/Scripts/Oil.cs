@@ -5,7 +5,7 @@ using Amida;
 
 public class Oil : MonoBehaviour
 {
-	[SerializeField] Cooking.OilStatus oilTemp;
+	public Cooking.OilStatus oilStatus;
 
 	public delegate void CompletedFriedFoodDelegate(FriedFood friedFood);
 	public CompletedFriedFoodDelegate completedFriedFoodDelegate;
@@ -13,7 +13,7 @@ public class Oil : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+		
 	}
 
     // Update is called once per frame
@@ -22,6 +22,21 @@ public class Oil : MonoBehaviour
         
     }
 
+	public void DoTargetAmime(bool isTarget)
+	{
+		if (oilStatus != Cooking.OilStatus.trash)
+		{
+			if (isTarget)
+			{
+				GetComponent<Animator>().SetBool("target", true);
+			}
+			else
+			{
+				GetComponent<Animator>().SetBool("target", false);
+			}
+		}
+	}
+
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		if (collision.gameObject.tag == "food")
@@ -29,7 +44,7 @@ public class Oil : MonoBehaviour
 			Food food;
 			food = collision.gameObject.GetComponent<Food>();
 			FriedFood friedFood;
-			friedFood = food.DoFry(oilTemp);
+			friedFood = food.DoFry(oilStatus);
 			completedFriedFoodDelegate(friedFood);
 			Destroy(collision.gameObject);
 		}

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Amida;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField] FoodGenerater foodGenerater;
 	[SerializeField] ItemGenerater itemGenerater;
 
-	[System.NonSerialized] public GameObject[] OilObjs;
+	[System.NonSerialized] public Oil[] Oils;
 	GameObject currentEnemyObj;//現在戦闘中の敵
 	Customer currentCustomer;//●変数名微妙●
 
@@ -20,10 +21,12 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-		foreach (GameObject oilObj in OilObjs)
+		foreach (Oil oil in Oils)
 		{
-			oilObj.GetComponent<Oil>().completedFriedFoodDelegate = CompletedFriedFood;
+			oil.completedFriedFoodDelegate = CompletedFriedFood;
 		}
+
+		foodGenerater.oilAnimeDelegate = StartOilAnime;
 
 		Invoke("GameStart", 0.5f);
 	}
@@ -39,6 +42,7 @@ public class GameManager : MonoBehaviour
 		//１：次の戦闘準備
 		AppearNextEnemy();
 
+		Debug.Log("b");
 		//2：敵に応じた行動
 		currentCustomer.DoAction();
 	}
@@ -52,6 +56,7 @@ public class GameManager : MonoBehaviour
 		currentCustomer.foodGenerater = this.foodGenerater;
 		currentCustomer.itemGenerater = this.itemGenerater;
 		currentCustomer.killedCustomerDelegate = KilledCustomer;
+		Debug.Log("a");
 	}
 
 	void KilledCustomer()
@@ -88,5 +93,20 @@ public class GameManager : MonoBehaviour
 
 		//9：次のステージへ
 		Debug.Log("clear");
+	}
+
+	void StartOilAnime(Cooking.OilStatus oilStatus)
+	{
+		foreach(Oil oil in Oils)
+		{
+			if (oil.oilStatus == oilStatus)
+			{
+				oil.DoTargetAmime(true);
+			}
+			else
+			{
+				oil.DoTargetAmime(false);
+			}
+		}
 	}
 }

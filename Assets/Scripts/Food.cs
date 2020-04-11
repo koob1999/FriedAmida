@@ -13,7 +13,7 @@ public class Food : MonoBehaviour
 	[SerializeField] int clearKomugikoNum;
 	[SerializeField] int clearEggNum;
 	[SerializeField] int clearPankoNum;
-	[SerializeField] Cooking.OilStatus oilTemp;
+	public Cooking.OilStatus oilTemp;
 
 	[SerializeField] int calorie;
 

@@ -426,10 +426,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93dc93ed3e702cf4d8d18f566367ba4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foods:
-  - {fileID: 7736513110665046056, guid: b5755545d812a6c41a3e52c3c47c38ba, type: 3}
-  - {fileID: 1960697773169935230, guid: 8304e66fdbb3e7b4980382c50ffd454f, type: 3}
-  - {fileID: 1168769728265934180, guid: 3a7c39c9dc556d84dbf6ca699b51356a, type: 3}
+  beef: {fileID: 3488893321490627490, guid: a6f75605efa5a084bbe4545cbf56c07b, type: 3}
+  chiken: {fileID: 7736513110665046056, guid: b5755545d812a6c41a3e52c3c47c38ba, type: 3}
+  pork: {fileID: 1960697773169935230, guid: 8304e66fdbb3e7b4980382c50ffd454f, type: 3}
+  shrimp: {fileID: 1168769728265934180, guid: 3a7c39c9dc556d84dbf6ca699b51356a, type: 3}
   generateSpan: 3
 --- !u!4 &1419647446
 Transform:

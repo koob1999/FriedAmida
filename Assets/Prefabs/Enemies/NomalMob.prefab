@@ -98,6 +98,7 @@ MonoBehaviour:
     komugiko: 2
     panko: 2
     badItem: 1
+  foodTypes: 
 --- !u!95 &8954283933166768307
 Animator:
   serializedVersion: 3

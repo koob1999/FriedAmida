@@ -33,6 +33,8 @@ public class Customer : MonoBehaviour
 		private set { appearItemNums = value; }
 	}
 
+	[System.NonSerialized] public Cooking.FoodType[] foodTypes;
+
 	//▼アニメーション関連
 	Animator animator;
 
@@ -56,9 +58,11 @@ public class Customer : MonoBehaviour
 	public KilledCustomerDelegate killedCustomerDelegate;
 
 	// Start is called before the first frame update
-	void Start()
+	void Awake()
     {
 		animator = GetComponent<Animator>();
+		foodTypes = new Cooking.FoodType[SynchroFoodNum];
+		Debug.Log(SynchroFoodNum);
     }
 
     // Update is called once per frame
@@ -70,7 +74,35 @@ public class Customer : MonoBehaviour
 	public void DoAction()
 	{
 		itemGenerater.InitializeItems(AppearItemNum.egg, AppearItemNum.komugiko, AppearItemNum.panko, AppearItemNum.badItem);
-		foodGenerater.FoodsGenerate(SynchroFoodNum);
+
+		FoodTypesSelect();
+		foodGenerater.FoodsGenerate(foodTypes);
+	}
+
+	void FoodTypesSelect()
+	{
+		int rand;
+
+		for(int i = 0; i < SynchroFoodNum; i++)
+		{
+			rand = Random.Range(1, 5);
+
+			switch (rand)
+			{
+				case 1:
+					foodTypes[i] = Cooking.FoodType.beef;
+					break;
+				case 2:
+					foodTypes[i] = Cooking.FoodType.chicken;
+					break;
+				case 3:
+					foodTypes[i] = Cooking.FoodType.pork;
+					break;
+				case 4:
+					foodTypes[i] = Cooking.FoodType.shrimp;
+					break;
+			}
+		}
 	}
 
 	public void DoReaction(FriedFood friedFood)

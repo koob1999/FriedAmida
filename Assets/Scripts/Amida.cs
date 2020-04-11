@@ -17,7 +17,13 @@
 			raw,
 			bad
 		}
+
+		public enum FoodType
+		{
+			beef,
+			chicken,
+			pork,
+			shrimp
+		}
 	}
-
-
 }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 13207223034922171}
   - component: {fileID: 1143426404210794772}
   - component: {fileID: 6795894526676966398}
+  - component: {fileID: 1742519776735705052}
   m_Layer: 0
   m_Name: moderateOil
   m_TagString: Untagged
@@ -93,7 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 252844b48eafeb24096c261e33adcb59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oilTemp: 1
+  oilStatus: 1
 --- !u!61 &6795894526676966398
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -120,3 +121,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.5, y: 0.56}
   m_EdgeRadius: 0
+--- !u!95 &1742519776735705052
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5644497965348045571}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7d6d68e5ff97bfa4c8c47eb44209bac1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
