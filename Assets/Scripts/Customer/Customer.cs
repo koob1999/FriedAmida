@@ -23,7 +23,7 @@ public class Customer : MonoBehaviour
 	public int SynchroFoodNum
 	{
 		get { return synchroFoodNum; }
-		private set { synchroFoodNum = value; }
+		protected set { synchroFoodNum = value; }
 	}
 
 	[SerializeField] ItemNums appearItemNums;
@@ -44,7 +44,7 @@ public class Customer : MonoBehaviour
 	{
 		get { return isClear; }
 		//GameManagerにCutomerを倒したことを表すメソッドをデリゲートで渡す
-		private set
+		protected set
 		{
 			isClear = value;
 			if (isClear)
@@ -110,7 +110,7 @@ public class Customer : MonoBehaviour
 		StartCoroutine(Reacion(friedFood));
 	}
 
-	IEnumerator Reacion(FriedFood friedFood)
+	virtual protected IEnumerator Reacion(FriedFood friedFood)
 	{
 		//アニメーション
 		ReactionAnime(friedFood.FryStatus);
@@ -135,10 +135,10 @@ public class Customer : MonoBehaviour
 		yield return new WaitForSeconds(1);
 
 		//クリア判定
-		IsClear = true;
+		CheckClear();
 	}
 
-	void ReactionAnime(Cooking.Status status)
+	protected void ReactionAnime(Cooking.Status status)
 	{
 		Debug.Log("anime");
 		switch (status)
@@ -168,5 +168,10 @@ public class Customer : MonoBehaviour
 				animator.SetBool("saitei", true);
 				break;
 		}
+	}
+
+	virtual protected void CheckClear()
+	{
+		IsClear = true;
 	}
 }

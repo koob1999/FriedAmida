@@ -7,6 +7,8 @@ public class StageManager : MonoBehaviour
 	enum Enemy
 	{
 		nomal,
+		calorieMob,
+		strongMob,
 	}
 
 
@@ -15,6 +17,7 @@ public class StageManager : MonoBehaviour
 	//▼敵関連
 	[SerializeField] Enemy[] enemies;//出現する敵の設定用
 	[SerializeField] GameObject nomalMob;//敵のPrefab設定用
+	[SerializeField] GameObject calorieMob;
 	[SerializeField] GameObject enemyGeneratePlace;//敵の生成場所設定場所
 
 	int presentEnemyNum;//現在現れている敵が何番目か
@@ -61,6 +64,8 @@ public class StageManager : MonoBehaviour
 		{
 			case Enemy.nomal:
 				return nomalMob;
+			case Enemy.calorieMob:
+				return calorieMob;
 			default:
 				return nomalMob;
 		}
