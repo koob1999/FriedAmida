@@ -332,7 +332,7 @@ MonoBehaviour:
   TrashBox: {fileID: 6476111022758738459, guid: 6892870006c50b34cb9f37bb85c41291,
     type: 3}
   oilStatus: 01000000000000000300000002000000
-  HorizontalLinesNum: 5
+  HorizontalLinesNum: 6
   lineCursol: {fileID: 1712355795}
   gameManager: {fileID: 658604813}
   foodGenerater: {fileID: 1419647445}

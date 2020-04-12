@@ -17,7 +17,7 @@ public class StageGenerater : MonoBehaviour
 	//変数名に難あり？
 	//ステージデータ
 	[SerializeField] Cooking.OilStatus[] oilStatus;
-	[SerializeField, Range(1, 8)] int HorizontalLinesNum;
+	[SerializeField, Range(3, 8)] int HorizontalLinesNum;
 	float maxXPos = 4;
 	float minXPos = -7;
 	float maxYPos = 4.5f;
@@ -106,10 +106,10 @@ public class StageGenerater : MonoBehaviour
 
 		//▼アイテム生成場所の生成
 		//ここGameObjectよりVector３で渡したほうが良い
-		GameObject[,] itemGeneraterPlaces = new GameObject[oilStatus.Length, HorizontalLinesNum];
+		GameObject[,] itemGeneraterPlaces = new GameObject[oilStatus.Length, HorizontalLinesNum - 2];
 		for (int i = 0; i < oilStatus.Length; i++)
 		{
-			for (int j = 0; j < HorizontalLinesNum; j++)
+			for (int j = 0; j < HorizontalLinesNum - 2; j++)
 			{
 				itemGeneraterPlaces[i, j] = Instantiate(new GameObject("itemGeneraterPlace"), new Vector3(minXPos + (xInterval * i), maxYPos - (yInterval * j) - 1, 0), Quaternion.identity);
 			}
