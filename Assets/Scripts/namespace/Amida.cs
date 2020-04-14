@@ -2,15 +2,14 @@
 {
 	public class Cooking
 	{
-		public enum OilStatus
+		public enum OilTemp
 		{
 			high,
 			moderate,
-			low,
-			trash
+			low
 		}
 
-		public enum Status
+		public enum FriedFoodReview
 		{
 			good,
 			usually,

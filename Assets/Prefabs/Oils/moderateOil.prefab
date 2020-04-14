@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 13207223034922171}
   - component: {fileID: 1143426404210794772}
   - component: {fileID: 6795894526676966398}
-  - component: {fileID: 1742519776735705052}
+  - component: {fileID: 8207569133461941403}
   m_Layer: 0
   m_Name: moderateOil
   m_TagString: Untagged
@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 252844b48eafeb24096c261e33adcb59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oilStatus: 1
+  oilTemp: 1
 --- !u!61 &6795894526676966398
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -121,7 +121,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.5, y: 0.56}
   m_EdgeRadius: 0
---- !u!95 &1742519776735705052
+--- !u!95 &8207569133461941403
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0

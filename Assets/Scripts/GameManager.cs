@@ -10,7 +10,8 @@ public class GameManager : MonoBehaviour
 	[SerializeField] FoodGenerater foodGenerater;
 	[SerializeField] ItemGenerater itemGenerater;
 
-	[System.NonSerialized] public Oil[] Oils;
+	[System.NonSerialized] public List<Oil> Oils;
+	[System.NonSerialized] public List<Trash> Trashes;
 	GameObject currentEnemyObj;//現在戦闘中の敵
 	Customer currentCustomer;//●変数名微妙●
 
@@ -24,6 +25,11 @@ public class GameManager : MonoBehaviour
 		foreach (Oil oil in Oils)
 		{
 			oil.completedFriedFoodDelegate = CompletedFriedFood;
+		}
+
+		foreach(Trash trash in Trashes)
+		{
+			trash.completedFriedFoodDelegate = CompletedFriedFood;
 		}
 
 		foodGenerater.oilAnimeDelegate = StartOilAnime;
@@ -79,7 +85,7 @@ public class GameManager : MonoBehaviour
 		// ：敵による揚げ物評価(スコア処理未実装）
 		if (friedFood != null)
 		{
-			currentCustomer.DoReaction(friedFood);
+			currentCustomer.CustomerReact(friedFood);
 		}
 		else
 		{
@@ -95,18 +101,11 @@ public class GameManager : MonoBehaviour
 		Debug.Log("clear");
 	}
 
-	void StartOilAnime(Cooking.OilStatus oilStatus)
+	void StartOilAnime(Cooking.OilTemp oilTemp)
 	{
 		foreach(Oil oil in Oils)
 		{
-			if (oil.oilStatus == oilStatus)
-			{
-				oil.DoTargetAmime(true);
-			}
-			else
-			{
-				oil.DoTargetAmime(false);
-			}
+			oil.DoTargetAmime(oil.oilTemp == oilTemp);
 		}
 	}
 }

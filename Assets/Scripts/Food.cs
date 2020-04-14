@@ -4,7 +4,7 @@ using UnityEngine;
 using Amida;
 
 public class Food : MonoBehaviour
-{	
+{
 	//▼移動関連
 	int xDirction = 0;
 	float speed = 0.02f;
@@ -13,7 +13,7 @@ public class Food : MonoBehaviour
 	[SerializeField] int clearKomugikoNum;
 	[SerializeField] int clearEggNum;
 	[SerializeField] int clearPankoNum;
-	public Cooking.OilStatus oilTemp;
+	public Cooking.OilTemp oilTemp;
 
 	[SerializeField] int calorie;
 
@@ -47,15 +47,15 @@ public class Food : MonoBehaviour
 		}
 	}
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	// Start is called before the first frame update
+	void Start()
+	{
 
-    // Update is called once per frame
-    void Update()
-    {
+	}
+
+	// Update is called once per frame
+	void Update()
+	{
 		//▼移動
 		if (xDirction == 0)
 		{
@@ -65,7 +65,7 @@ public class Food : MonoBehaviour
 		{
 			transform.Translate(xDirction * speed, 0, 0);
 		}
-    }
+	}
 
 	private void OnTriggerEnter2D(Collider2D col)
 	{
@@ -105,20 +105,15 @@ public class Food : MonoBehaviour
 		XDirection = XDirection != 0 ? 0 : x;
 	}
 
-	public FriedFood DoFry(Cooking.OilStatus oil)
+	public FriedFood DoFry(Cooking.OilTemp oil)
 	{
 		FriedFood friedFood;
 
-		//ゴミ箱なら破棄
-		if (oil==Cooking.OilStatus.trash)
-		{
-			return null ;
-		}
 		//マイナスアイテムを取得していれば腐り状態
-		else if (badItemCount >= 1)
+		if (badItemCount >= 1)
 		{
 			Debug.Log("bad");
-			friedFood = new FriedFood(Cooking.Status.bad, this.calorie);
+			friedFood = new FriedFood(Cooking.FriedFoodReview.bad, this.calorie);
 
 		}
 		else
@@ -127,19 +122,19 @@ public class Food : MonoBehaviour
 			if (oil == oilTemp && eggCount >= clearEggNum && komugikoCount >= clearKomugikoNum && pankoCount >= clearPankoNum)
 			{
 				Debug.Log("good");
-				friedFood = new FriedFood(Cooking.Status.good, this.calorie);
+				friedFood = new FriedFood(Cooking.FriedFoodReview.good, this.calorie);
 			}
 			//材料を全く取得していなければ素揚げ、生？
 			else if (eggCount == 0 && komugikoCount == 0 && pankoCount == 0)
 			{
 				Debug.Log("row");
-				friedFood = new FriedFood(Cooking.Status.raw, this.calorie);
+				friedFood = new FriedFood(Cooking.FriedFoodReview.raw, this.calorie);
 			}
 			//それ以外なら揚げ失敗
 			else
 			{
 				Debug.Log("usually");
-				friedFood = new FriedFood(Cooking.Status.usually, this.calorie);
+				friedFood = new FriedFood(Cooking.FriedFoodReview.usually, this.calorie);
 			}
 		}
 		return friedFood;

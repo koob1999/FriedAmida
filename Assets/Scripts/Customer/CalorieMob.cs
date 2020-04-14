@@ -7,31 +7,27 @@ public class CalorieMob : Customer
 {
 	int clearCalorie = 600;
 
-
-	override protected IEnumerator Reacion(FriedFood friedFood)
+	override public void CustomerReact(FriedFood friedFood)
 	{
-		Debug.Log("override");
 		//アニメーション
-		ReactionAnime(friedFood.FryStatus);
+		StartCoroutine(AnimeReacion(friedFood));
 
-		switch (friedFood.FryStatus)
+		switch (friedFood.FriedFoodReview)
 		{
-			case Cooking.Status.good:
+			case Cooking.FriedFoodReview.good:
 				//スコア加算
 				//ラッシュゲージ加算
 				break;
-			case Cooking.Status.usually:
+			case Cooking.FriedFoodReview.usually:
 				//スコア加算	
 				break;
-			case Cooking.Status.raw:
+			case Cooking.FriedFoodReview.raw:
 				//スコア加算
 				break;
-			case Cooking.Status.bad:
+			case Cooking.FriedFoodReview.bad:
 				//スコア加算
 				break;
 		}
-
-		yield return new WaitForSeconds(1);
 
 		clearCalorie -= friedFood.Calorie;
 
@@ -39,6 +35,7 @@ public class CalorieMob : Customer
 		CheckClear();
 	}
 
+	//関数名が微妙
 	override protected void CheckClear()
 	{
 		if (clearCalorie <= 0)

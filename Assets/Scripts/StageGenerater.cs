@@ -5,6 +5,13 @@ using Amida;
 
 public class StageGenerater : MonoBehaviour
 {
+	enum UnderBoxType{
+		highTempOil,
+		moderateTempOil,
+		lowTempOil,
+		trash
+	}
+
 	//プレハブ
 	//線
 	[SerializeField] GameObject HorizontalLine;
@@ -16,7 +23,7 @@ public class StageGenerater : MonoBehaviour
 	[SerializeField] GameObject TrashBox;
 	//変数名に難あり？
 	//ステージデータ
-	[SerializeField] Cooking.OilStatus[] oilStatus;
+	[SerializeField] UnderBoxType[] underBoxTypes;
 	[SerializeField, Range(3, 8)] int HorizontalLinesNum;
 	float maxXPos = 4;
 	float minXPos = -7;
@@ -53,51 +60,55 @@ public class StageGenerater : MonoBehaviour
 		float yInterval=yLength/(HorizontalLinesNum + 1);
 
 		//▼縦線の生成
-		for(int i = 0; i < oilStatus.Length; i++)
+		for(int i = 0; i < underBoxTypes.Length; i++)
 		{
 			Instantiate(VerticalLine, new Vector3(minXPos + (xInterval * i), 0.5f, 0), Quaternion.identity);
 		}
 
 		//▼横線の生成
-		GameObject[,] amidaLines = new GameObject[oilStatus.Length - 1, HorizontalLinesNum];
+		GameObject[,] amidaLines = new GameObject[underBoxTypes.Length - 1, HorizontalLinesNum];
 
-		for(int i = 0; i < oilStatus.Length - 1; i++)
+		for(int i = 0; i < underBoxTypes.Length - 1; i++)
 		{
 			for(int j = 0; j < HorizontalLinesNum; j++)
 			{
-				amidaLines[i, j] = Instantiate(HorizontalLine, new Vector3(minXPos + (xInterval * i) + 1, maxYPos - ((yInterval * j) + (i % 2 * yInterval / 2)) - 1, 0), Quaternion.identity);
+				amidaLines[i, j] = Instantiate(HorizontalLine, 
+												new Vector3(minXPos + (xInterval * i) + 1, maxYPos - ((yInterval * j) + (i % 2 * yInterval / 2)) - 1, 0), 
+												Quaternion.identity);
 			}
 		}
 
 		lineCursol.AmidaLines = amidaLines;
 
 		//▼油の生成
-		Oil[] oils = new Oil[oilStatus.Length];
-		for (int i = 0; i < oilStatus.Length; i++)
+		List<Oil> oils = new List<Oil>();
+		List<Trash> trashes = new List<Trash>();
+		for (int i = 0; i < underBoxTypes.Length; i++)
 		{
-			switch (oilStatus[i])
+			switch (underBoxTypes[i])
 			{
-				case Cooking.OilStatus.high:
-					oils[i] = Instantiate(HighOil, new Vector3(minXPos + (xInterval * i), minYPos - 1, 0), Quaternion.identity).GetComponent<Oil>();
+				case UnderBoxType.highTempOil:
+					oils.Add(Instantiate(HighOil, new Vector3(minXPos + (xInterval * i), minYPos - 1, 0), Quaternion.identity).GetComponent<Oil>());
 					break;
-				case Cooking.OilStatus.moderate:
-					oils[i] = Instantiate(ModerateOil, new Vector3(minXPos + (xInterval * i), minYPos - 1, 0), Quaternion.identity).GetComponent<Oil>();
+				case UnderBoxType.moderateTempOil:
+					oils.Add(Instantiate(ModerateOil, new Vector3(minXPos + (xInterval * i), minYPos - 1, 0), Quaternion.identity).GetComponent<Oil>());
 					break;
-				case Cooking.OilStatus.low:
-					oils[i] = Instantiate(LowOil, new Vector3(minXPos + (xInterval * i), minYPos - 1, 0), Quaternion.identity).GetComponent<Oil>();
+				case UnderBoxType.lowTempOil:
+					oils.Add(Instantiate(LowOil, new Vector3(minXPos + (xInterval * i), minYPos - 1, 0), Quaternion.identity).GetComponent<Oil>());
 					break;
-				case Cooking.OilStatus.trash:
-					oils[i] = Instantiate(TrashBox, new Vector3(minXPos + (xInterval * i), minYPos - 1, 0), Quaternion.identity).GetComponent<Oil>();
+				case UnderBoxType.trash:
+					trashes.Add(Instantiate(TrashBox, new Vector3(minXPos + (xInterval * i), minYPos - 1, 0), Quaternion.identity).GetComponent<Trash>());
 					break;
 			}
 		}
 
 		gameManager.Oils = oils;
+		gameManager.Trashes = trashes;
 
 		//▼食材生成場所の生成
 		//ここGameObjectよりVector３で渡したほうが良い
-		GameObject[] foodGeneratePlaces = new GameObject[oilStatus.Length];
-		for (int i = 0; i < oilStatus.Length; i++)
+		GameObject[] foodGeneratePlaces = new GameObject[underBoxTypes.Length];
+		for (int i = 0; i < underBoxTypes.Length; i++)
 		{
 			foodGeneratePlaces[i] = Instantiate(new GameObject("foodGeneratePlace"), new Vector3(minXPos + (xInterval * i), maxYPos, 0), Quaternion.identity);
 		}
@@ -106,8 +117,8 @@ public class StageGenerater : MonoBehaviour
 
 		//▼アイテム生成場所の生成
 		//ここGameObjectよりVector３で渡したほうが良い
-		GameObject[,] itemGeneraterPlaces = new GameObject[oilStatus.Length, HorizontalLinesNum - 2];
-		for (int i = 0; i < oilStatus.Length; i++)
+		GameObject[,] itemGeneraterPlaces = new GameObject[underBoxTypes.Length, HorizontalLinesNum - 2];
+		for (int i = 0; i < underBoxTypes.Length; i++)
 		{
 			for (int j = 0; j < HorizontalLinesNum - 2; j++)
 			{

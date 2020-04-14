@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5913099958688640097}
   - component: {fileID: 8709418127608261318}
-  - component: {fileID: 3330826409892211002}
   - component: {fileID: 7117401465649440360}
+  - component: {fileID: 5951139406399051802}
   m_Layer: 0
   m_Name: TrashBox
   m_TagString: Untagged
@@ -81,19 +81,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3330826409892211002
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6476111022758738459}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 252844b48eafeb24096c261e33adcb59, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  oilStatus: 3
 --- !u!61 &7117401465649440360
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -120,3 +107,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.2, y: 1.5}
   m_EdgeRadius: 0
+--- !u!114 &5951139406399051802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6476111022758738459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2151a040a533044479ad0b31166d410c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

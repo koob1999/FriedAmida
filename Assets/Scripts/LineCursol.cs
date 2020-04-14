@@ -4,18 +4,10 @@ using UnityEngine;
 
 public class LineCursol : MonoBehaviour
 {
-
-	/*[System.SerializableAttribute]
-	public class HLineList
-	{
-		public List<GameObject> YHLines;
-	}*/
-
 	class Position
 	{
 		int x = 0;
 		int y = 0;
-		//List<HLineList> xHLines;
 		GameObject[,] amidaLines;
 
 		public int X
@@ -74,7 +66,6 @@ public class LineCursol : MonoBehaviour
 
 	public GameObject[,] AmidaLines;
 
-	//[SerializeField] List<HLineList> XHLines;
 	Position position;
 
 	enum Direction

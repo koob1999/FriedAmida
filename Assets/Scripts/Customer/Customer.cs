@@ -71,6 +71,7 @@ public class Customer : MonoBehaviour
         
     }
 
+	//関数名が微妙
 	public void DoAction()
 	{
 		itemGenerater.InitializeItems(AppearItemNum.egg, AppearItemNum.komugiko, AppearItemNum.panko, AppearItemNum.badItem);
@@ -105,69 +106,59 @@ public class Customer : MonoBehaviour
 		}
 	}
 
-	public void DoReaction(FriedFood friedFood)
-	{
-		StartCoroutine(Reacion(friedFood));
-	}
-
-	virtual protected IEnumerator Reacion(FriedFood friedFood)
+	virtual public void CustomerReact(FriedFood friedFood)
 	{
 		//アニメーション
-		ReactionAnime(friedFood.FryStatus);
+		StartCoroutine(AnimeReacion(friedFood));
 
-		switch (friedFood.FryStatus)
+		switch (friedFood.FriedFoodReview)
 		{
-			case Cooking.Status.good:
+			case Cooking.FriedFoodReview.good:
 				//スコア加算
 				//ラッシュゲージ加算
 				break;
-			case Cooking.Status.usually:
+			case Cooking.FriedFoodReview.usually:
 				//スコア加算	
 				break;
-			case Cooking.Status.raw:
+			case Cooking.FriedFoodReview.raw:
 				//スコア加算
 				break;
-			case Cooking.Status.bad:
+			case Cooking.FriedFoodReview.bad:
 				//スコア加算
 				break;
 		}
-
-		yield return new WaitForSeconds(1);
 
 		//クリア判定
 		CheckClear();
 	}
 
-	protected void ReactionAnime(Cooking.Status status)
+	protected IEnumerator AnimeReacion(FriedFood friedFood)
 	{
-		Debug.Log("anime");
-		switch (status)
+		//アニメーション
+		switch (friedFood.FriedFoodReview)
 		{
-			case Cooking.Status.good:
-				Debug.Log("good");
+			case Cooking.FriedFoodReview.good:
 				animator.SetBool("good", true);
 				animator.SetBool("angry", false);
 				animator.SetBool("saitei", false);
 				break;
-			case Cooking.Status.usually:
-				Debug.Log("usually");
+			case Cooking.FriedFoodReview.usually:
 				animator.SetBool("good", false);
 				animator.SetBool("angry", true);
 				animator.SetBool("saitei", false);
 				break;
-			case Cooking.Status.raw:
-				Debug.Log("raw");
+			case Cooking.FriedFoodReview.raw:
 				animator.SetBool("good", false);
 				animator.SetBool("angry", true);
 				animator.SetBool("saitei", false);
 				break;
-			case Cooking.Status.bad:
-				Debug.Log("bad");
+			case Cooking.FriedFoodReview.bad:
 				animator.SetBool("good", false);
 				animator.SetBool("angry", false);
 				animator.SetBool("saitei", true);
 				break;
 		}
+		yield return new WaitForSeconds(1);
 	}
 
 	virtual protected void CheckClear()

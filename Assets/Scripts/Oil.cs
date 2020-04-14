@@ -5,7 +5,7 @@ using Amida;
 
 public class Oil : MonoBehaviour
 {
-	public Cooking.OilStatus oilStatus;
+	public Cooking.OilTemp oilTemp;
 
 	public delegate void CompletedFriedFoodDelegate(FriedFood friedFood);
 	public CompletedFriedFoodDelegate completedFriedFoodDelegate;
@@ -24,17 +24,7 @@ public class Oil : MonoBehaviour
 
 	public void DoTargetAmime(bool isTarget)
 	{
-		if (oilStatus != Cooking.OilStatus.trash)
-		{
-			if (isTarget)
-			{
-				GetComponent<Animator>().SetBool("target", true);
-			}
-			else
-			{
-				GetComponent<Animator>().SetBool("target", false);
-			}
-		}
+		GetComponent<Animator>().SetBool("target", isTarget);
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
@@ -44,7 +34,7 @@ public class Oil : MonoBehaviour
 			Food food;
 			food = collision.gameObject.GetComponent<Food>();
 			FriedFood friedFood;
-			friedFood = food.DoFry(oilStatus);
+			friedFood = food.DoFry(oilTemp);
 			completedFriedFoodDelegate(friedFood);
 			Destroy(collision.gameObject);
 		}

@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 252844b48eafeb24096c261e33adcb59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oilStatus: 2
+  oilTemp: 2
 --- !u!61 &8132235193790499767
 BoxCollider2D:
   m_ObjectHideFlags: 0
