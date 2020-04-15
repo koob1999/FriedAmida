@@ -23,6 +23,12 @@ public class Food : MonoBehaviour
 	int pankoCount = 0;
 	int badItemCount = 0;
 
+	//▼落下してるか
+	[System.NonSerialized] public bool isFall = false;
+
+	//▼アニメーション
+	Animator animator;
+
 	public int XDirection
 	{
 		set
@@ -50,20 +56,23 @@ public class Food : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
-
+		animator = GetComponent<Animator>();
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-		//▼移動
-		if (xDirction == 0)
+		if (isFall)
 		{
-			transform.Translate(0, -1 * speed, 0);
-		}
-		else
-		{
-			transform.Translate(xDirction * speed, 0, 0);
+			//▼移動
+			if (xDirction == 0)
+			{
+				transform.Translate(0, -1 * speed, 0);
+			}
+			else
+			{
+				transform.Translate(xDirction * speed, 0, 0);
+			}
 		}
 	}
 
@@ -138,5 +147,15 @@ public class Food : MonoBehaviour
 			}
 		}
 		return friedFood;
+	}
+
+	public void AnimeFlash()
+	{
+		animator.SetBool("flash", true);
+	}
+
+	public void StartFall()
+	{
+		isFall = true;
 	}
 }

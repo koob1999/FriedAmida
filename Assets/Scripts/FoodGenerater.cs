@@ -27,26 +27,33 @@ public class FoodGenerater : MonoBehaviour
 
     }
 
-	//●単純にずらして食材を生成しているだけなので改良の必要あり●
 	//●オーバーロードっぽく見えるのも気になる●
 	public void FoodsGenerate(Cooking.FoodType[] foodTypes)
 	{
-		StartCoroutine(FoodsGeneraterCoroutine(foodTypes));
+		GameObject[] createdObjs = new GameObject[foodTypes.Length];
+
+		//1:引数分食材を生成
+		GameObject[] generatePlaces = MyClass.GetRandomArray<GameObject>(GeneratePlaces, foodTypes.Length);
+		for(int i = 0; i < foodTypes.Length; i++)
+		{
+			createdObjs[i] = FoodGenerate(foodTypes[i], generatePlaces[i].transform.position);
+		}
+		//2:左から順にアニメーションを再生
+		StartCoroutine(AnimateFoodCoroutine(createdObjs));
 	}
 
-	IEnumerator FoodsGeneraterCoroutine(Cooking.FoodType[] foodTypes)
+	IEnumerator AnimateFoodCoroutine(GameObject[] objs)
 	{
-		foreach(Cooking.FoodType foodType in foodTypes)
+		foreach(GameObject obj in objs)
 		{
-			FoodGenerate(foodType);
+			obj.GetComponent<Animator>().SetBool("flashing", true);
 			yield return new WaitForSeconds(3);
 		}
 	}
 
-	void FoodGenerate(Cooking.FoodType foodType)
+	GameObject FoodGenerate(Cooking.FoodType foodType, Vector3 pos)
 	{
 		GameObject food;
-		GameObject place;
 
 		//▼生成食材の決定
 		switch (foodType)
@@ -68,14 +75,7 @@ public class FoodGenerater : MonoBehaviour
 				break;
 		}
 
-		//▼生成位置の決定
-		int rand = Random.Range(0, GeneratePlaces.Length);
-		place = GeneratePlaces[rand];
-
-		//▼目標油のアニメーション再生
-		oilAnimeDelegate(food.GetComponent<Food>().oilTemp);
-
 		//▼生成
-		Instantiate(food, place.transform.position, Quaternion.identity);
+		return(Instantiate(food, pos, Quaternion.identity));
 	}
 }
