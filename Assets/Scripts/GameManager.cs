@@ -5,7 +5,6 @@ using Amida;
 
 public class GameManager : MonoBehaviour
 {
-	//[SerializeField] GameObject stageManager;
 	[SerializeField] StageManager stageManager;
 	[SerializeField] FoodGenerater foodGenerater;
 	[SerializeField] ItemGenerater itemGenerater;
@@ -15,12 +14,63 @@ public class GameManager : MonoBehaviour
 	GameObject currentEnemyObj;//現在戦闘中の敵
 	Customer currentCustomer;//●変数名微妙●
 
+	bool isRush = false;
+	bool IsRush
+	{
+		get { return this.isRush; }
+
+		set
+		{
+			isRush = value;
+			itemGenerater.isRush = this.isRush;
+			//●もっときれいにやりたい●
+			foreach(Trash trash in Trashes)
+			{
+				trash.ChangeOil(value);
+			}
+			//BGM変更
+			//ゲーム速度少し上昇
+			//制限時間停止
+		}
+	}
+
 	//●Playerクラスに分ける可能性あり●
 	int rushGage;
-	int score;
+	public int RushGage
+	{
+		get { return this.rushGage; }
 
-    // Start is called before the first frame update
-    void Start()
+		set
+		{
+			if (rushGage >= 10)
+			{
+				rushGage = 0;
+				IsRush = true;
+				//●デリゲートと秒数受け取って処理を遅らせる関数作ってもいいかも●
+				Invoke("RushEnd", 5);
+			}
+		}
+	}
+	int score;
+	public int Score
+	{
+		get { return this.score; }
+
+		set
+		{
+			if (IsRush)
+			{
+				score += (int)(1.5 * value);
+			}
+			else
+			{
+				score = value;
+			}
+		}
+	}
+
+	// Start is called before the first frame update
+	void Start()
     {
 		foreach (Oil oil in Oils)
 		{
@@ -31,8 +81,6 @@ public class GameManager : MonoBehaviour
 		{
 			trash.completedFriedFoodDelegate = CompletedFriedFood;
 		}
-
-		foodGenerater.oilAnimeDelegate = StartOilAnime;
 
 		Invoke("GameStart", 0.5f);
 	}
@@ -85,12 +133,14 @@ public class GameManager : MonoBehaviour
 		// ：敵による揚げ物評価(スコア処理未実装）
 		if (friedFood != null)
 		{
-			currentCustomer.CustomerReact(friedFood);
+			//●ここら辺もっときれいにできる気がする●
+			currentCustomer.CustomerReact(friedFood, (int rushGage, int score)=> { RushGage += rushGage; Score += score; });
 		}
 		else
 		{
 			currentCustomer.DoAction();
 		}
+		Debug.Log(rushGage);
 	}
 
 	void ClearGame()
@@ -101,11 +151,8 @@ public class GameManager : MonoBehaviour
 		Debug.Log("clear");
 	}
 
-	void StartOilAnime(Cooking.OilTemp oilTemp)
+	void RushEnd()
 	{
-		foreach(Oil oil in Oils)
-		{
-			oil.DoTargetAmime(oil.oilTemp == oilTemp);
-		}
+		IsRush = false;
 	}
 }

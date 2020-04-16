@@ -22,6 +22,7 @@ public class Food : MonoBehaviour
 	int eggCount = 0;
 	int pankoCount = 0;
 	int badItemCount = 0;
+	int rushItemCount = 0;
 
 	//▼落下してるか
 	[System.NonSerialized] public bool isFall = false;
@@ -105,6 +106,9 @@ public class Food : MonoBehaviour
 			case "badItem":
 				badItemCount++;
 				break;
+			case "rushItem":
+				rushItemCount++;
+				break;
 		}
 	}
 
@@ -118,8 +122,14 @@ public class Food : MonoBehaviour
 	{
 		FriedFood friedFood;
 
+		//ラッシュアイテムを取得していれば必ずGOOD
+		if (rushItemCount >= 1)
+		{
+			Debug.Log("rush");
+			friedFood = new FriedFood(Cooking.FriedFoodReview.good, this.calorie);
+		}
 		//マイナスアイテムを取得していれば腐り状態
-		if (badItemCount >= 1)
+		else if (badItemCount >= 1)
 		{
 			Debug.Log("bad");
 			friedFood = new FriedFood(Cooking.FriedFoodReview.bad, this.calorie);

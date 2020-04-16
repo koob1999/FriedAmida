@@ -7,6 +7,12 @@ public class Trash : MonoBehaviour
 	public delegate void CompletedFriedFoodDelegate(FriedFood friedFood);
 	public CompletedFriedFoodDelegate completedFriedFoodDelegate;
 
+	[SerializeField] GameObject HighOil;
+	[SerializeField] GameObject ModerateOil;
+	[SerializeField] GameObject LowOil;
+
+	GameObject createdOil;
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -26,6 +32,33 @@ public class Trash : MonoBehaviour
 		{
 			completedFriedFoodDelegate(null);
 			Destroy(collision.gameObject);
+		}
+	}
+
+	public void ChangeOil(bool isOil)
+	{
+		if (isOil)
+		{
+			gameObject.SetActive(false);
+
+			int rand = Random.Range(0, 3);
+			switch (rand)
+			{
+				case 0:
+					createdOil = Instantiate(HighOil, transform.position, Quaternion.identity);
+					break;
+				case 1:
+					createdOil = Instantiate(ModerateOil, transform.position, Quaternion.identity);
+					break;
+				case 2:
+					createdOil = Instantiate(LowOil, transform.position, Quaternion.identity);
+					break;
+			}
+		}
+		else
+		{
+			Destroy(createdOil);
+			gameObject.SetActive(true);
 		}
 	}
 }

@@ -7,32 +7,28 @@ public class CalorieMob : Customer
 {
 	int clearCalorie = 600;
 
-	override public void CustomerReact(FriedFood friedFood)
+	override public void CustomerReact(FriedFood friedFood, AddPointDelegate addPointDelegate)
 	{
-		//アニメーション
-		StartCoroutine(AnimeReacion(friedFood));
-
 		switch (friedFood.FriedFoodReview)
 		{
 			case Cooking.FriedFoodReview.good:
-				//スコア加算
-				//ラッシュゲージ加算
+				addPointDelegate(1, 300);
 				break;
 			case Cooking.FriedFoodReview.usually:
-				//スコア加算	
+				addPointDelegate(0, 100);
 				break;
 			case Cooking.FriedFoodReview.raw:
-				//スコア加算
+				addPointDelegate(0, 100);
 				break;
 			case Cooking.FriedFoodReview.bad:
-				//スコア加算
+				addPointDelegate(0, -(friedFood.Calorie - 100));
 				break;
 		}
 
 		clearCalorie -= friedFood.Calorie;
 
-		//クリア判定
-		CheckClear();
+		//アニメーション
+		StartCoroutine(AnimeReacion(friedFood));
 	}
 
 	//関数名が微妙

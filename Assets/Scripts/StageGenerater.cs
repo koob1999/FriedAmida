@@ -128,4 +128,24 @@ public class StageGenerater : MonoBehaviour
 
 		itemGenerater.GeneratePlaces = itemGeneraterPlaces;
 	}
+
+	public void TrashToOil(Trash trash)
+	{
+		int rand = Random.Range(0, 3);
+
+		switch (rand)
+		{
+			case 0:
+				Instantiate(HighOil, trash.gameObject.transform.position, Quaternion.identity);
+				break;
+			case 1:
+				Instantiate(ModerateOil, trash.gameObject.transform.position, Quaternion.identity);
+				break;
+			case 2:
+				Instantiate(LowOil, trash.gameObject.transform.position, Quaternion.identity);
+				break;
+		}
+
+		Destroy(trash.gameObject);
+	}
 }

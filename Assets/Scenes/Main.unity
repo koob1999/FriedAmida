@@ -331,7 +331,7 @@ MonoBehaviour:
   LowOil: {fileID: 7636946211690633280, guid: 5f4715d5b51b0084d9986e77c5895ea4, type: 3}
   TrashBox: {fileID: 6476111022758738459, guid: 6892870006c50b34cb9f37bb85c41291,
     type: 3}
-  underBoxTypes: 0100000000000000010000000000000003000000
+  underBoxTypes: 0100000000000000010000000200000003000000
   HorizontalLinesNum: 6
   lineCursol: {fileID: 1712355795}
   gameManager: {fileID: 658604813}
@@ -399,6 +399,8 @@ MonoBehaviour:
     type: 3}
   panko: {fileID: 3686863500087570461, guid: f6de09888942ac3469767cce7bbadf05, type: 3}
   badItem: {fileID: 4510551673630591587, guid: 953fd8547f02baf4196f9af5c50a7d5e, type: 3}
+  rushItem: {fileID: 1511678204459753866, guid: f918e36e0a706ec44a3c23aa85f41066,
+    type: 3}
 --- !u!1 &1419647444
 GameObject:
   m_ObjectHideFlags: 0

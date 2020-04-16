@@ -13,6 +13,9 @@ public class Customer : MonoBehaviour
 		public int panko;
 		public int badItem;
 	}
+
+	public delegate void AddPointDelegate(int rushGage, int score);
+
 	//▼参照パス
 	[System.NonSerialized] public FoodGenerater foodGenerater;
 	[System.NonSerialized] public ItemGenerater itemGenerater;
@@ -106,30 +109,26 @@ public class Customer : MonoBehaviour
 		}
 	}
 
-	virtual public void CustomerReact(FriedFood friedFood)
+	virtual public void CustomerReact(FriedFood friedFood, AddPointDelegate addPointDelegate)
 	{
-		//アニメーション
-		StartCoroutine(AnimeReacion(friedFood));
-
 		switch (friedFood.FriedFoodReview)
 		{
 			case Cooking.FriedFoodReview.good:
-				//スコア加算
-				//ラッシュゲージ加算
+				addPointDelegate(1, 300);
 				break;
 			case Cooking.FriedFoodReview.usually:
-				//スコア加算	
+				addPointDelegate(0, 100);
 				break;
 			case Cooking.FriedFoodReview.raw:
-				//スコア加算
+				addPointDelegate(0, 100);
 				break;
 			case Cooking.FriedFoodReview.bad:
-				//スコア加算
+				addPointDelegate(0, -500);
 				break;
 		}
 
-		//クリア判定
-		CheckClear();
+		//アニメーション
+		StartCoroutine(AnimeReacion(friedFood));
 	}
 
 	protected IEnumerator AnimeReacion(FriedFood friedFood)
@@ -159,6 +158,9 @@ public class Customer : MonoBehaviour
 				break;
 		}
 		yield return new WaitForSeconds(1);
+
+		//クリア判定
+		CheckClear();
 	}
 
 	virtual protected void CheckClear()

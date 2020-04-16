@@ -9,9 +9,12 @@ public class ItemGenerater : MonoBehaviour
 	[SerializeField] GameObject komugiko;
 	[SerializeField] GameObject panko;
 	[SerializeField] GameObject badItem;
+	[SerializeField] GameObject rushItem;
 
 	[System.NonSerialized] public GameObject[,] GeneratePlaces;
 	GameObject[,] generateBoxes;//アイテムデータの格納場所
+
+	[System.NonSerialized] public bool isRush = false;
 
     // Start is called before the first frame update
     void Start()
@@ -38,10 +41,17 @@ public class ItemGenerater : MonoBehaviour
 		}
 
 		//▼アイテム生成
-		ItemGenerate(egg, eggNum);
-		ItemGenerate(komugiko, komugikoNum);
-		ItemGenerate(panko, pankoNum);
-		ItemGenerate(badItem, badItemNum);
+		if (isRush)
+		{
+			ItemGenerate(rushItem, eggNum + komugikoNum + pankoNum + badItemNum);
+		}
+		else
+		{
+			ItemGenerate(egg, eggNum);
+			ItemGenerate(komugiko, komugikoNum);
+			ItemGenerate(panko, pankoNum);
+			ItemGenerate(badItem, badItemNum);
+		}
 	}
 
 	void ItemGenerate(GameObject createObj, int createNum)

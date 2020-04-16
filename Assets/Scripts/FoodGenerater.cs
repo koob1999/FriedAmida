@@ -12,8 +12,6 @@ public class FoodGenerater : MonoBehaviour
 
 	[System.NonSerialized] public GameObject[] GeneratePlaces;
 	[SerializeField] int generateSpan;
-	public delegate void OilAnimeDelegate(Cooking.OilTemp oilTemp);
-	public OilAnimeDelegate oilAnimeDelegate;
 
     // Start is called before the first frame update
     void Start()

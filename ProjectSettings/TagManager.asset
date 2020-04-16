@@ -12,9 +12,7 @@ TagManager:
   - panko
   - badItem
   - food
-  - lowOil
-  - highOil
-  - moderateOil
+  - rushItem
   layers:
   - Default
   - TransparentFX
