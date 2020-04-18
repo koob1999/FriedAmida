@@ -8,7 +8,7 @@ public class LineCursol : MonoBehaviour
 	{
 		int x = 0;
 		int y = 0;
-		GameObject[,] amidaLines;
+		HorizontalLine[,] amidaLines;
 
 		public int X
 		{
@@ -58,13 +58,13 @@ public class LineCursol : MonoBehaviour
 			}
 		}
 
-		public Position(GameObject[,] amidaLines)
+		public Position(HorizontalLine[,] amidaLines)
 		{
 			this.amidaLines = amidaLines;
 		}
 	}
 
-	public GameObject[,] AmidaLines;
+	public HorizontalLine[,] AmidaLines;
 
 	Position position;
 
@@ -112,7 +112,7 @@ public class LineCursol : MonoBehaviour
 
 	void DrawHLine()
 	{
-		HorizontalLine hLine = AmidaLines[position.X, position.Y].GetComponent<HorizontalLine>();
+		HorizontalLine hLine = AmidaLines[position.X, position.Y];
 		hLine.SetOnObjActivation(!hLine.IsOnObjActive());
 	}
 

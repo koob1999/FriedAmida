@@ -66,25 +66,25 @@ public class StageGenerater : MonoBehaviour
 		}
 
 		//▼横線の生成
-		GameObject[,] amidaLines = new GameObject[underBoxTypes.Length - 1, HorizontalLinesNum];
+		HorizontalLine[,] amidaLines = new HorizontalLine[underBoxTypes.Length - 1, HorizontalLinesNum];
 
 		for(int i = 0; i < underBoxTypes.Length - 1; i++)
 		{
 			for(int j = 0; j < HorizontalLinesNum; j++)
 			{
-				amidaLines[i, j] = Instantiate(HorizontalLine, 
-												new Vector3(minXPos + (xInterval * i) + 1, maxYPos - ((yInterval * j) + (i % 2 * yInterval / 2)) - 1, 0), 
-												Quaternion.identity);
+				amidaLines[i, j] = Instantiate(HorizontalLine,
+												new Vector3(minXPos + (xInterval * i) + 1, maxYPos - ((yInterval * j) + (i % 2 * yInterval / 2)) - 1, 0),
+												Quaternion.identity).GetComponent<HorizontalLine>();
 
-				HorizontalLine hLine = amidaLines[i, j].GetComponent<HorizontalLine>();
-				hLine.minusRemainLinesDelegate = () => { gameManager.RemainLines--; };
-				hLine.plusRemainLinesDelegate = () => { gameManager.RemainLines++; };
-				hLine.isDrawLineDelegate = () => { return gameManager.RemainLines > 0; };
+				amidaLines[i, j].minusRemainLinesDelegate = () => { gameManager.RemainLines--; };
+				amidaLines[i, j].plusRemainLinesDelegate = () => { gameManager.RemainLines++; };
+				amidaLines[i, j].isDrawLineDelegate = () => { return gameManager.RemainLines > 0; };
 
 			}
 		}
 
 		lineCursol.AmidaLines = amidaLines;
+		gameManager.AmidaLines = amidaLines;
 
 		//▼油の生成
 		List<Oil> oils = new List<Oil>();

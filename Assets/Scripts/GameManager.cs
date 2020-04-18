@@ -5,6 +5,7 @@ using Amida;
 
 public class GameManager : MonoBehaviour
 {
+	//参照パス
 	[SerializeField] StageManager stageManager;
 	[SerializeField] FoodGenerater foodGenerater;
 	[SerializeField] ItemGenerater itemGenerater;
@@ -14,6 +15,7 @@ public class GameManager : MonoBehaviour
 	[System.NonSerialized] public List<Trash> Trashes;
 	GameObject currentEnemyObj;//現在戦闘中の敵
 	Customer currentCustomer;//●変数名微妙●
+	[System.NonSerialized] public HorizontalLine[,] AmidaLines;
 
 	bool isRush = false;
 	bool IsRush
@@ -154,26 +156,37 @@ public class GameManager : MonoBehaviour
 
 	void CompletedFriedFood(FriedFood friedFood)
 	{
-		//コンボ処理
-		if (friedFood.FriedFoodReview == Cooking.FriedFoodReview.good)
-		{
-			combo++;
-		}
-		else
-		{
-			maxCombo = combo > maxCombo ? combo : maxCombo;
-			combo = 0;
-		}
 		//揚げ物を敵に渡す
 		//敵による揚げ物評価(スコア処理未実装）
 		if (friedFood != null)
 		{
 			//●ここら辺もっときれいにできる気がする●
 			currentCustomer.CustomerReact(friedFood, (int rushGage, int score)=> { RushGage += rushGage; Score += score; });
+
+			//コンボ処理
+			if (friedFood.FriedFoodReview == Cooking.FriedFoodReview.good)
+			{
+				combo++;
+			}
+			else
+			{
+				maxCombo = combo > maxCombo ? combo : maxCombo;
+				combo = 0;
+			}
 		}
 		else
 		{
 			currentCustomer.DoAction();
+		}
+
+		//あみだのリセット
+		for (int i = 0; i < AmidaLines.GetLength(0); i++)
+		{
+			for (int j = 0; j < AmidaLines.GetLength(1); j++)
+			{
+				Debug.Log("OFF");
+				AmidaLines[i, j].SetOnObjActivation(false);
+			}
 		}
 	}
 
