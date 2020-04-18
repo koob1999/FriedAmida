@@ -12,6 +12,8 @@ public class HorizontalLine : MonoBehaviour
 	public PlusRemainLinesDelegate plusRemainLinesDelegate;
 	public delegate void MinusRemainLinesDelegate();
 	public MinusRemainLinesDelegate minusRemainLinesDelegate;
+	public delegate bool IsDrawLineDelegate();
+	public IsDrawLineDelegate isDrawLineDelegate;
 
 	void Update()
 	{
@@ -28,11 +30,16 @@ public class HorizontalLine : MonoBehaviour
 
 	public void SetOnObjActivation(bool isActive)
 	{
+		//線を引く
 		if (isActive)
 		{
-			OnObj.SetActive(isActive);
-			minusRemainLinesDelegate();
+			if (isDrawLineDelegate())
+			{
+				OnObj.SetActive(isActive);
+				minusRemainLinesDelegate();
+			}
 		}
+		//線を消す
 		else
 		{
 			OnObj.SetActive(isActive);

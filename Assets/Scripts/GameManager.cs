@@ -109,8 +109,6 @@ public class GameManager : MonoBehaviour
 			trash.completedFriedFoodDelegate = CompletedFriedFood;
 		}
 
-		lineCursol.isDrawLineDelegate = () => RemainLines > 0;
-
 		Invoke("GameStart", 0.5f);
 	}
 
