@@ -8,6 +8,10 @@ public class HorizontalLine : MonoBehaviour
 	[SerializeField] GameObject OffObj;
 	float time = 0;
 	bool foodStay = false;
+	public delegate void PlusRemainLinesDelegate();
+	public PlusRemainLinesDelegate plusRemainLinesDelegate;
+	public delegate void MinusRemainLinesDelegate();
+	public MinusRemainLinesDelegate minusRemainLinesDelegate;
 
 	void Update()
 	{
@@ -17,14 +21,23 @@ public class HorizontalLine : MonoBehaviour
 			if (time > 10 && !foodStay)
 			{
 				time = 0;
-				OnObj.SetActive(false);
+				SetOnObjActivation(false);
 			}
 		}
 	}
 
-	public void OnObjActivation()
+	public void SetOnObjActivation(bool isActive)
 	{
-		OnObj.SetActive(true);
+		if (isActive)
+		{
+			OnObj.SetActive(isActive);
+			minusRemainLinesDelegate();
+		}
+		else
+		{
+			OnObj.SetActive(isActive);
+			plusRemainLinesDelegate();
+		}
 	}
 
 	public bool IsOnObjActive()

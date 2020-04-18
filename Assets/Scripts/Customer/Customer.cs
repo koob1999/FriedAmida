@@ -65,7 +65,6 @@ public class Customer : MonoBehaviour
     {
 		animator = GetComponent<Animator>();
 		foodTypes = new Cooking.FoodType[SynchroFoodNum];
-		Debug.Log(SynchroFoodNum);
     }
 
     // Update is called once per frame

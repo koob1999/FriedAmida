@@ -75,6 +75,8 @@ public class StageGenerater : MonoBehaviour
 				amidaLines[i, j] = Instantiate(HorizontalLine, 
 												new Vector3(minXPos + (xInterval * i) + 1, maxYPos - ((yInterval * j) + (i % 2 * yInterval / 2)) - 1, 0), 
 												Quaternion.identity);
+				amidaLines[i, j].GetComponent<HorizontalLine>().minusRemainLinesDelegate = () => { gameManager.RemainLines--; };
+				amidaLines[i, j].GetComponent<HorizontalLine>().plusRemainLinesDelegate = () => { gameManager.RemainLines++; };
 			}
 		}
 

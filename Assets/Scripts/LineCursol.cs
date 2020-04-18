@@ -68,6 +68,11 @@ public class LineCursol : MonoBehaviour
 
 	Position position;
 
+	public delegate bool IsDrawLineDelegate();
+	public IsDrawLineDelegate isDrawLineDelegate;
+	public delegate void DeleteDelegate();
+	public DeleteDelegate deleteDelegate;
+
 	enum Direction
 	{
 		Up = 1,
@@ -112,7 +117,13 @@ public class LineCursol : MonoBehaviour
 
 	void DrawHLine()
 	{
-		AmidaLines[position.X, position.Y].GetComponent<HorizontalLine>().OnObjActivation();
+		HorizontalLine hLine = AmidaLines[position.X, position.Y].GetComponent<HorizontalLine>();
+		hLine.SetOnObjActivation(!hLine.IsOnObjActive());
+		//残り本数が1以上か判断し、1引く
+		if (isDrawLineDelegate())
+		{
+			AmidaLines[position.X, position.Y].GetComponent<HorizontalLine>().SetOnObjActivation(true);
+		}
 	}
 
 	void MoveCursol(Direction dir)

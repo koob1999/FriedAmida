@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField] StageManager stageManager;
 	[SerializeField] FoodGenerater foodGenerater;
 	[SerializeField] ItemGenerater itemGenerater;
+	[SerializeField] LineCursol lineCursol;
 
 	[System.NonSerialized] public List<Oil> Oils;
 	[System.NonSerialized] public List<Trash> Trashes;
@@ -35,6 +36,7 @@ public class GameManager : MonoBehaviour
 	}
 
 	//●Playerクラスに分ける可能性あり●
+	const int MaxDrawLineNum = 3;
 	int rushGage;
 	public int RushGage
 	{
@@ -69,6 +71,31 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
+	int remainLines = MaxDrawLineNum;
+	public int RemainLines
+	{
+		get { return this.remainLines; }
+
+		set
+		{
+			if (value > MaxDrawLineNum)
+			{
+				remainLines = MaxDrawLineNum;
+			}
+			else if (value < 0)
+			{
+				remainLines = 0;
+			}
+			else
+			{
+				remainLines = value;
+			}
+		}
+	}
+
+	int combo = 0;
+	int maxCombo;
+
 	// Start is called before the first frame update
 	void Start()
     {
@@ -81,6 +108,8 @@ public class GameManager : MonoBehaviour
 		{
 			trash.completedFriedFoodDelegate = CompletedFriedFood;
 		}
+
+		lineCursol.isDrawLineDelegate = () => RemainLines > 0;
 
 		Invoke("GameStart", 0.5f);
 	}
@@ -96,7 +125,6 @@ public class GameManager : MonoBehaviour
 		//１：次の戦闘準備
 		AppearNextEnemy();
 
-		Debug.Log("b");
 		//2：敵に応じた行動
 		currentCustomer.DoAction();
 	}
@@ -110,7 +138,6 @@ public class GameManager : MonoBehaviour
 		currentCustomer.foodGenerater = this.foodGenerater;
 		currentCustomer.itemGenerater = this.itemGenerater;
 		currentCustomer.killedCustomerDelegate = KilledCustomer;
-		Debug.Log("a");
 	}
 
 	void KilledCustomer()
@@ -129,8 +156,18 @@ public class GameManager : MonoBehaviour
 
 	void CompletedFriedFood(FriedFood friedFood)
 	{
-		//3：揚げ物を敵に渡す
-		// ：敵による揚げ物評価(スコア処理未実装）
+		//コンボ処理
+		if (friedFood.FriedFoodReview == Cooking.FriedFoodReview.good)
+		{
+			combo++;
+		}
+		else
+		{
+			maxCombo = combo > maxCombo ? combo : maxCombo;
+			combo = 0;
+		}
+		//揚げ物を敵に渡す
+		//敵による揚げ物評価(スコア処理未実装）
 		if (friedFood != null)
 		{
 			//●ここら辺もっときれいにできる気がする●
@@ -140,7 +177,6 @@ public class GameManager : MonoBehaviour
 		{
 			currentCustomer.DoAction();
 		}
-		Debug.Log(rushGage);
 	}
 
 	void ClearGame()

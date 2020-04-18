@@ -276,6 +276,7 @@ MonoBehaviour:
   stageManager: {fileID: 235228151}
   foodGenerater: {fileID: 1419647445}
   itemGenerater: {fileID: 947819758}
+  lineCursol: {fileID: 1712355795}
 --- !u!4 &658604814
 Transform:
   m_ObjectHideFlags: 0
