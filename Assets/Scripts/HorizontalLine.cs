@@ -42,8 +42,11 @@ public class HorizontalLine : MonoBehaviour
 		//線を消す
 		else
 		{
-			OnObj.SetActive(isActive);
-			plusRemainLinesDelegate();
+			if (!foodStay)
+			{
+				OnObj.SetActive(isActive);
+				plusRemainLinesDelegate();
+			}
 		}
 	}
 
