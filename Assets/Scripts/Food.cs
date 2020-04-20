@@ -25,7 +25,7 @@ public class Food : MonoBehaviour
 	int rushItemCount = 0;
 
 	//▼落下してるか
-	[System.NonSerialized] public bool isFall = false;
+	[System.NonSerialized] public bool IsFall = false;
 
 	//▼アニメーション
 	Animator animator;
@@ -63,7 +63,7 @@ public class Food : MonoBehaviour
 	// Update is called once per frame
 	void FixedUpdate()
 	{
-		if (isFall)
+		if (IsFall)
 		{
 			//▼移動
 			if (xDirction == 0)
@@ -166,6 +166,6 @@ public class Food : MonoBehaviour
 
 	public void StartFall()
 	{
-		isFall = true;
+		IsFall = true;
 	}
 }

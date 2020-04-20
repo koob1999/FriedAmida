@@ -14,7 +14,7 @@ public class ItemGenerater : MonoBehaviour
 	[System.NonSerialized] public GameObject[,] GeneratePlaces;
 	GameObject[,] generateBoxes;//アイテムデータの格納場所
 
-	[System.NonSerialized] public bool isRush = false;
+	[System.NonSerialized] public bool IsRush = false;
 
     // Start is called before the first frame update
     void Start()
@@ -41,7 +41,7 @@ public class ItemGenerater : MonoBehaviour
 		}
 
 		//▼アイテム生成
-		if (isRush)
+		if (IsRush)
 		{
 			ItemGenerate(rushItem, eggNum + komugikoNum + pankoNum + badItemNum);
 		}

@@ -54,11 +54,18 @@ public class Trash : MonoBehaviour
 					createdOil = Instantiate(LowOil, transform.position, Quaternion.identity);
 					break;
 			}
+			//●めっちゃ微妙な処理●
+			createdOil.GetComponent<Oil>().completedFriedFoodDelegate = CompletedFriedFood;
 		}
 		else
 		{
 			Destroy(createdOil);
 			gameObject.SetActive(true);
 		}
+	}
+
+	void CompletedFriedFood(FriedFood friedFood)
+	{
+		completedFriedFoodDelegate(friedFood);
 	}
 }

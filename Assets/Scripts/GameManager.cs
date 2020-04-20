@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
 		set
 		{
 			isRush = value;
-			itemGenerater.isRush = this.isRush;
+			itemGenerater.IsRush = this.isRush;
 			//●もっときれいにやりたい●
 			foreach(Trash trash in Trashes)
 			{
@@ -46,32 +46,22 @@ public class GameManager : MonoBehaviour
 
 		set
 		{
-			if (rushGage >= 10)
+			if (!IsRush)
 			{
+				rushGage = value;
+			}
+
+			if (rushGage >= 1)
+			{
+				Debug.Log("RushTime");
 				rushGage = 0;
 				IsRush = true;
 				//●デリゲートと秒数受け取って処理を遅らせる関数作ってもいいかも●
-				Invoke("RushEnd", 5);
+				Invoke("RushEnd", 20);
 			}
 		}
 	}
-	int score;
-	public int Score
-	{
-		get { return this.score; }
-
-		set
-		{
-			if (IsRush)
-			{
-				score += (int)(1.5 * value);
-			}
-			else
-			{
-				score = value;
-			}
-		}
-	}
+	public int Score;
 
 	int remainLines = MaxDrawLineNum;
 	public int RemainLines
@@ -169,7 +159,13 @@ public class GameManager : MonoBehaviour
 		if (friedFood != null)
 		{
 			//●ここら辺もっときれいにできる気がする●
-			currentCustomer.CustomerReact(friedFood, (int rushGage, int score)=> { RushGage += rushGage; Score += score; });
+			currentCustomer.CustomerReact(friedFood,
+				(int rushGage, int score) =>
+				{
+					RushGage += rushGage;
+					Score += IsRush ? (int)(score * 1.5f) : score;
+					Debug.Log(score);
+				});
 
 			//コンボ処理
 			if (friedFood.FriedFoodReview == Cooking.FriedFoodReview.good)
@@ -192,7 +188,6 @@ public class GameManager : MonoBehaviour
 		{
 			for (int j = 0; j < AmidaLines.GetLength(1); j++)
 			{
-				Debug.Log("OFF");
 				AmidaLines[i, j].SetOnObjActivation(false);
 			}
 		}
