@@ -31,7 +31,7 @@ public class FoodGenerater : MonoBehaviour
 		GameObject[] createdObjs = new GameObject[foodTypes.Length];
 
 		//1:引数分食材を生成
-		GameObject[] generatePlaces = MyClass.GetRandomArray<GameObject>(GeneratePlaces, foodTypes.Length);
+		GameObject[] generatePlaces = GeneratePlaces.Shuffle(foodTypes.Length);
 		for(int i = 0; i < foodTypes.Length; i++)
 		{
 			createdObjs[i] = FoodGenerate(foodTypes[i], generatePlaces[i].transform.position);
