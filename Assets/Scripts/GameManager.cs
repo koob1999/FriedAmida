@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Amida;
 
 public class GameManager : MonoBehaviour
@@ -10,6 +11,9 @@ public class GameManager : MonoBehaviour
 	[SerializeField] FoodGenerater foodGenerater;
 	[SerializeField] ItemGenerater itemGenerater;
 	[SerializeField] LineCursol lineCursol;
+	[SerializeField] Text scoreText;
+	[SerializeField] Text remainLinesText;
+	[SerializeField] Text comboText;
 
 	[System.NonSerialized] public List<Oil> Oils;
 	[System.NonSerialized] public List<Trash> Trashes;
@@ -61,7 +65,17 @@ public class GameManager : MonoBehaviour
 			}
 		}
 	}
-	public int Score;
+	int score;
+	public int Score
+	{
+		get { return this.score; }
+
+		set
+		{
+			score = value;
+			scoreText.text = "SCORE:" + Score.ToString();
+		}
+	}
 
 	int remainLines = MaxDrawLineNum;
 	public int RemainLines
@@ -82,10 +96,29 @@ public class GameManager : MonoBehaviour
 			{
 				remainLines = value;
 			}
+			remainLinesText.text = "残り本数" + RemainLines.ToString() + "/" + MaxDrawLineNum.ToString();
 		}
 	}
 
 	int combo = 0;
+	public int Combo
+	{
+		get { return this.combo; }
+
+		set
+		{
+			combo = value;
+			if (combo == 0)
+			{
+				comboText.gameObject.SetActive(false);
+			}
+			else
+			{
+				comboText.gameObject.SetActive(true);
+				comboText.text = combo.ToString() + "コンボ";
+			}
+		}
+	}
 	int maxCombo;
 
 	// Start is called before the first frame update
@@ -162,20 +195,20 @@ public class GameManager : MonoBehaviour
 			currentCustomer.CustomerReact(friedFood,
 				(int rushGage, int score) =>
 				{
-					RushGage += rushGage;
 					Score += IsRush ? (int)(score * 1.5f) : score;
+					RushGage += rushGage;
 					Debug.Log(score);
 				});
 
 			//コンボ処理
 			if (friedFood.FriedFoodReview == Cooking.FriedFoodReview.good)
 			{
-				combo++;
+				Combo++;
 			}
 			else
 			{
-				maxCombo = combo > maxCombo ? combo : maxCombo;
-				combo = 0;
+				maxCombo = Combo > maxCombo ? Combo : maxCombo;
+				Combo = 0;
 			}
 		}
 		else
