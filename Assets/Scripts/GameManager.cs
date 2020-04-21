@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Amida;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -174,7 +175,7 @@ public class GameManager : MonoBehaviour
 			}
 			else
 			{
-				maxCombo = combo > maxCombo ? combo : maxCombo;
+				maxCombo = Math.Max(maxCombo, combo);
 				combo = 0;
 			}
 		}
