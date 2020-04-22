@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
 	[SerializeField] Text scoreText;
 	[SerializeField] Text remainLinesText;
 	[SerializeField] Text comboText;
+	[SerializeField] Image rushGageImage;
+	[SerializeField] Image calorieGageImage;
 
 	[System.NonSerialized] public List<Oil> Oils;
 	[System.NonSerialized] public List<Trash> Trashes;
@@ -43,6 +45,9 @@ public class GameManager : MonoBehaviour
 
 	//●Playerクラスに分ける可能性あり●
 	const int MaxDrawLineNum = 3;
+
+	const float RushTime = 20;
+	const int MaxRushGage = 1;
 	int rushGage;
 	public int RushGage
 	{
@@ -50,18 +55,24 @@ public class GameManager : MonoBehaviour
 
 		set
 		{
-			if (!IsRush)
+			if (IsRush)
+			{
+				return;
+			}
+
+			if (value >= MaxRushGage)
+			{
+				rushGage = MaxRushGage;
+			}
+			else
 			{
 				rushGage = value;
 			}
 
-			if (rushGage >= 1)
+			if (rushGage >= MaxRushGage)
 			{
 				Debug.Log("RushTime");
-				rushGage = 0;
-				IsRush = true;
-				//●デリゲートと秒数受け取って処理を遅らせる関数作ってもいいかも●
-				Invoke("RushEnd", 20);
+				StartCoroutine(RushTimeCoroutine());
 			}
 		}
 	}
@@ -169,6 +180,13 @@ public class GameManager : MonoBehaviour
 		currentCustomer.foodGenerater = this.foodGenerater;
 		currentCustomer.itemGenerater = this.itemGenerater;
 		currentCustomer.killedCustomerDelegate = KilledCustomer;
+		//客がカロリーゲージを持たない場合はゲージは非表示にする
+		calorieGageImage.gameObject.transform.parent.gameObject.SetActive(currentCustomer.hasClalorie);
+		calorieGageImage.fillAmount = 1;
+		currentCustomer.calorieGageDelegate = (int clearCalorie, int currentCalorie) =>
+		{
+			calorieGageImage.fillAmount = (float)currentCalorie / clearCalorie;
+		};
 	}
 
 	void KilledCustomer()
@@ -236,6 +254,23 @@ public class GameManager : MonoBehaviour
 
 	void RushEnd()
 	{
+		IsRush = false;
+	}
+
+	IEnumerator RushTimeCoroutine()
+	{
+		float time = 0;
+		IsRush = true;
+
+		while (time < RushTime)
+		{
+			time += Time.deltaTime;
+			rushGageImage.fillAmount = (RushTime - time) / RushTime;
+			yield return null;
+		}
+
+		rushGage = 0;
+		rushGageImage.fillAmount = 1;
 		IsRush = false;
 	}
 }
