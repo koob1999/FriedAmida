@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class StageManager : MonoBehaviour
 {
@@ -13,7 +12,7 @@ public class StageManager : MonoBehaviour
 	}
 
 
-	[SerializeField] Text customerNumText;
+	//[SerializeField] ItemGenerater itemGenerater;
 
 	//▼敵関連
 	[SerializeField] Enemy[] enemies;//出現する敵の設定用
@@ -22,16 +21,6 @@ public class StageManager : MonoBehaviour
 	[SerializeField] GameObject enemyGeneratePlace;//敵の生成場所設定場所
 
 	int presentEnemyNum;//現在現れている敵が何番目か
-	public int PresentEnemyNum
-	{
-		get { return this.presentEnemyNum; }
-
-		set
-		{
-			presentEnemyNum = value;
-			customerNumText.text = (presentEnemyNum).ToString() + "人目";
-		}
-	}
 
     // Start is called before the first frame update
     void Start()
@@ -46,7 +35,7 @@ public class StageManager : MonoBehaviour
 
 	void WaveStart()
 	{
-		PresentEnemyNum = 0;
+		presentEnemyNum = 0;
 	}
 
 	//●返り値なしの関数にして変数に格納してもいい気がする●
@@ -61,7 +50,7 @@ public class StageManager : MonoBehaviour
 		GameObject enemy = Instantiate(nextEnemy, enemyGeneratePlace.transform.position, Quaternion.identity);
 
 		//▼出現する敵の順番を1進める
-		PresentEnemyNum++;
+		presentEnemyNum++;
 
 		return enemy;
 	}
@@ -69,7 +58,7 @@ public class StageManager : MonoBehaviour
 
 	GameObject SelectEnemy()
 	{
-		Enemy enemy = enemies[PresentEnemyNum];
+		Enemy enemy = enemies[presentEnemyNum];
 
 		switch (enemy)
 		{
@@ -84,6 +73,6 @@ public class StageManager : MonoBehaviour
 
 	public bool IsLastEnemy()
 	{
-		return PresentEnemyNum == enemies.Length - 1;
+		return presentEnemyNum == enemies.Length - 1;
 	}
 }

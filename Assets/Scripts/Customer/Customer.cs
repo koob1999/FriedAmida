@@ -15,9 +15,6 @@ public class Customer : MonoBehaviour
 	}
 
 	public delegate void AddPointDelegate(int rushGage, int score);
-	public delegate void CalorieGageDelegate(int clearCalorie, int currentCalorie);
-	public bool hasClalorie;
-	public CalorieGageDelegate calorieGageDelegate;
 
 	//▼参照パス
 	[System.NonSerialized] public FoodGenerater foodGenerater;
