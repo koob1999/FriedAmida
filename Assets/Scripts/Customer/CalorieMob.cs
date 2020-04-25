@@ -5,8 +5,7 @@ using Amida;
 
 public class CalorieMob : Customer
 {
-	const int clearCalorie = 600;
-	int currentCalorie = clearCalorie;
+	int clearCalorie = 600;
 
 	override public void CustomerReact(FriedFood friedFood, AddPointDelegate addPointDelegate)
 	{
@@ -26,8 +25,7 @@ public class CalorieMob : Customer
 				break;
 		}
 
-		currentCalorie -= friedFood.Calorie;
-		calorieGageDelegate(clearCalorie, currentCalorie);
+		clearCalorie -= friedFood.Calorie;
 
 		//アニメーション
 		StartCoroutine(AnimeReacion(friedFood));
@@ -36,7 +34,7 @@ public class CalorieMob : Customer
 	//関数名が微妙
 	override protected void CheckClear()
 	{
-		if (currentCalorie <= 0)
+		if (clearCalorie <= 0)
 		{
 			IsClear = true;
 		}

@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using Amida;
 
 public class GameManager : MonoBehaviour
@@ -11,11 +10,6 @@ public class GameManager : MonoBehaviour
 	[SerializeField] FoodGenerater foodGenerater;
 	[SerializeField] ItemGenerater itemGenerater;
 	[SerializeField] LineCursol lineCursol;
-	[SerializeField] Text scoreText;
-	[SerializeField] Text remainLinesText;
-	[SerializeField] Text comboText;
-	[SerializeField] Image rushGageImage;
-	[SerializeField] Image calorieGageImage;
 
 	[System.NonSerialized] public List<Oil> Oils;
 	[System.NonSerialized] public List<Trash> Trashes;
@@ -45,9 +39,6 @@ public class GameManager : MonoBehaviour
 
 	//●Playerクラスに分ける可能性あり●
 	const int MaxDrawLineNum = 3;
-
-	const float RushTime = 20;
-	const int MaxRushGage = 1;
 	int rushGage;
 	public int RushGage
 	{
@@ -55,38 +46,22 @@ public class GameManager : MonoBehaviour
 
 		set
 		{
-			if (IsRush)
-			{
-				return;
-			}
-
-			if (value >= MaxRushGage)
-			{
-				rushGage = MaxRushGage;
-			}
-			else
+			if (!IsRush)
 			{
 				rushGage = value;
 			}
 
-			if (rushGage >= MaxRushGage)
+			if (rushGage >= 1)
 			{
 				Debug.Log("RushTime");
-				StartCoroutine(RushTimeCoroutine());
+				rushGage = 0;
+				IsRush = true;
+				//●デリゲートと秒数受け取って処理を遅らせる関数作ってもいいかも●
+				Invoke("RushEnd", 20);
 			}
 		}
 	}
-	int score;
-	public int Score
-	{
-		get { return this.score; }
-
-		set
-		{
-			score = value;
-			scoreText.text = "SCORE:" + Score.ToString();
-		}
-	}
+	public int Score;
 
 	int remainLines = MaxDrawLineNum;
 	public int RemainLines
@@ -107,29 +82,10 @@ public class GameManager : MonoBehaviour
 			{
 				remainLines = value;
 			}
-			remainLinesText.text = "残り本数" + RemainLines.ToString() + "/" + MaxDrawLineNum.ToString();
 		}
 	}
 
 	int combo = 0;
-	public int Combo
-	{
-		get { return this.combo; }
-
-		set
-		{
-			combo = value;
-			if (combo == 0)
-			{
-				comboText.gameObject.SetActive(false);
-			}
-			else
-			{
-				comboText.gameObject.SetActive(true);
-				comboText.text = combo.ToString() + "コンボ";
-			}
-		}
-	}
 	int maxCombo;
 
 	// Start is called before the first frame update
@@ -180,13 +136,6 @@ public class GameManager : MonoBehaviour
 		currentCustomer.foodGenerater = this.foodGenerater;
 		currentCustomer.itemGenerater = this.itemGenerater;
 		currentCustomer.killedCustomerDelegate = KilledCustomer;
-		//客がカロリーゲージを持たない場合はゲージは非表示にする
-		calorieGageImage.gameObject.transform.parent.gameObject.SetActive(currentCustomer.hasClalorie);
-		calorieGageImage.fillAmount = 1;
-		currentCustomer.calorieGageDelegate = (int clearCalorie, int currentCalorie) =>
-		{
-			calorieGageImage.fillAmount = (float)currentCalorie / clearCalorie;
-		};
 	}
 
 	void KilledCustomer()
@@ -213,20 +162,20 @@ public class GameManager : MonoBehaviour
 			currentCustomer.CustomerReact(friedFood,
 				(int rushGage, int score) =>
 				{
-					Score += IsRush ? (int)(score * 1.5f) : score;
 					RushGage += rushGage;
+					Score += IsRush ? (int)(score * 1.5f) : score;
 					Debug.Log(score);
 				});
 
 			//コンボ処理
 			if (friedFood.FriedFoodReview == Cooking.FriedFoodReview.good)
 			{
-				Combo++;
+				combo++;
 			}
 			else
 			{
-				maxCombo = Combo > maxCombo ? Combo : maxCombo;
-				Combo = 0;
+				maxCombo = combo > maxCombo ? combo : maxCombo;
+				combo = 0;
 			}
 		}
 		else
@@ -254,23 +203,6 @@ public class GameManager : MonoBehaviour
 
 	void RushEnd()
 	{
-		IsRush = false;
-	}
-
-	IEnumerator RushTimeCoroutine()
-	{
-		float time = 0;
-		IsRush = true;
-
-		while (time < RushTime)
-		{
-			time += Time.deltaTime;
-			rushGageImage.fillAmount = (RushTime - time) / RushTime;
-			yield return null;
-		}
-
-		rushGage = 0;
-		rushGageImage.fillAmount = 1;
 		IsRush = false;
 	}
 }
