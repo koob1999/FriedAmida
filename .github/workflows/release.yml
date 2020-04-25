@@ -52,12 +52,12 @@ jobs:
       - name: Upload WebGL Build folder
         if: matrix.targetPlatform == 'WebGL'
         run: |
-          git clone https://github.com/koob1999/FriedAmidaPlay.git
-          rm -rf FriedAmidaPlay/docs
-          cp -rf build/WebGL/WebGL FriedAmidaPlay/docs
-          cd FriedAmidaPlay
+          mv build/WebGL/WebGL ../
           git config --local user.email "${{ secrets.USER_EMAIL }}"
           git config --local user.name "${{ secrets.USER_NAME }}"
+          git checkout -b gh-pages origin/gh-pages
+          rm -rf ./*
+          cp -pr ../WebGL/* ./
           git add .
           git commit -m "FriedAmida update"
 
@@ -65,16 +65,17 @@ jobs:
         if: matrix.targetPlatform == 'WebGL'
         with:
           github_token: ${{ secrets.USER_PAT }}
+          branch: 'gh-pages'
           force: true
-          directory: 'FriedAmidaPlay'
-          repository: 'koob1999/FriedAmidaPlay'
+          directory: '.'
+          repository: 'koob1999/FriedAmida'
 
       - uses: 8398a7/action-slack@v3.0.0
         if: success() && matrix.targetPlatform == 'WebGL'
         with:
           status: success
-          text: Upload to https://koob1999.github.io/FriedAmidaPlay
-          author_name: Build success !!!
+          text: Upload to https://koob1999.github.io/FriedAmida
+          author_name: Release success !!!
           username: GitHub Actions
           mention: here
           channel: '#team-sophomore-notification'
