@@ -34,6 +34,7 @@ public class StageGenerater : MonoBehaviour
 	[SerializeField] GameManager gameManager;
 	[SerializeField] FoodGenerater foodGenerater;
 	[SerializeField] ItemGenerater itemGenerater;
+	[SerializeField] PlayerController playerController;
 
 	private void Awake()
 	{
@@ -76,9 +77,9 @@ public class StageGenerater : MonoBehaviour
 												new Vector3(minXPos + (xInterval * i) + 1, maxYPos - ((yInterval * j) + (i % 2 * yInterval / 2)) - 1, 0),
 												Quaternion.identity).GetComponent<HorizontalLine>();
 
-				amidaLines[i, j].minusRemainLinesDelegate = () => { gameManager.RemainLines--; };
-				amidaLines[i, j].plusRemainLinesDelegate = () => { gameManager.RemainLines++; };
-				amidaLines[i, j].isDrawLineDelegate = () => { return gameManager.RemainLines > 0; };
+				amidaLines[i, j].minusRemainLinesDelegate = () => { playerController.RemainLines--; };
+				amidaLines[i, j].plusRemainLinesDelegate = () => { playerController.RemainLines++; };
+				amidaLines[i, j].isDrawLineDelegate = () => { return playerController.RemainLines > 0; };
 
 			}
 		}
