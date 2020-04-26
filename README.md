@@ -12,5 +12,9 @@
 
 ## WebGL
 
+### Release
+- https://koob1999.github.io/FriedAmida
+
+### Build
 - https://koob1999.github.io/FriedAmidaPlay
 
