@@ -20,9 +20,13 @@ jobs:
           - 2018.4.20f1
         targetPlatform:
           - StandaloneWindows64
+          - WebGL
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
 
       - uses: webbertakken/unity-test-runner@v1.6
         id: testRunner
@@ -43,3 +47,36 @@ jobs:
         with:
           name: Build
           path: build
+
+      - name: Upload WebGL Build folder
+        if: matrix.targetPlatform == 'WebGL'
+        run: |
+          git clone https://github.com/koob1999/FriedAmidaPlay.git
+          rm -rf FriedAmidaPlay/docs
+          cp -rf build/WebGL/WebGL FriedAmidaPlay/docs
+          cd FriedAmidaPlay
+          git config --local user.email "${{ secrets.USER_EMAIL }}"
+          git config --local user.name "${{ secrets.USER_NAME }}"
+          git add .
+          git commit -m "FriedAmida update"
+
+      - uses: ad-m/github-push-action@v0.5.0
+        if: matrix.targetPlatform == 'WebGL'
+        with:
+          github_token: ${{ secrets.USER_PAT }}
+          force: true
+          directory: 'FriedAmidaPlay'
+          repository: 'koob1999/FriedAmidaPlay'
+
+      - uses: 8398a7/action-slack@v3.0.0
+        if: success() && matrix.targetPlatform == 'WebGL'
+        with:
+          status: success
+          text: Upload to https://koob1999.github.io/FriedAmidaPlay
+          author_name: Build success !!!
+          username: GitHub Actions
+          mention: here
+          channel: '#team-sophomore-notification'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
