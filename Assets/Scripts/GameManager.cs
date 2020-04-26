@@ -26,12 +26,12 @@ public class GameManager : MonoBehaviour
 	bool isRush = false;
 	bool IsRush
 	{
-		get { return this.isRush; }
+		get { return isRush; }
 
 		set
 		{
 			isRush = value;
-			itemGenerater.IsRush = this.isRush;
+			itemGenerater.IsRush = isRush;
 			//●もっときれいにやりたい●
 			foreach(Trash trash in Trashes)
 			{
@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
 	int rushGage;
 	public int RushGage
 	{
-		get { return this.rushGage; }
+		get { return rushGage; }
 
 		set
 		{
@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
 	int score;
 	public int Score
 	{
-		get { return this.score; }
+		get { return score; }
 
 		set
 		{
@@ -91,7 +91,7 @@ public class GameManager : MonoBehaviour
 	int remainLines = MaxDrawLineNum;
 	public int RemainLines
 	{
-		get { return this.remainLines; }
+		get { return remainLines; }
 
 		set
 		{
@@ -114,7 +114,7 @@ public class GameManager : MonoBehaviour
 	int combo = 0;
 	public int Combo
 	{
-		get { return this.combo; }
+		get { return combo; }
 
 		set
 		{
@@ -177,8 +177,8 @@ public class GameManager : MonoBehaviour
 		currentEnemyObj = stageManager.NextBattleStart();
 		currentCustomer = currentEnemyObj.GetComponent<Customer>();
 
-		currentCustomer.foodGenerater = this.foodGenerater;
-		currentCustomer.itemGenerater = this.itemGenerater;
+		currentCustomer.foodGenerater = foodGenerater;
+		currentCustomer.itemGenerater = itemGenerater;
 		currentCustomer.killedCustomerDelegate = KilledCustomer;
 		//客がカロリーゲージを持たない場合はゲージは非表示にする
 		calorieGageImage.gameObject.transform.parent.gameObject.SetActive(currentCustomer.hasClalorie);
