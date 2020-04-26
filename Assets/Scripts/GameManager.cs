@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Amida;
 using UnityEngine.UI;
+using Amida;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,7 +11,10 @@ public class GameManager : MonoBehaviour
 	[SerializeField] FoodGenerater foodGenerater;
 	[SerializeField] ItemGenerater itemGenerater;
 	[SerializeField] LineCursol lineCursol;
-	[SerializeField] PlayerController playerController;
+	[SerializeField] Text scoreText;
+	[SerializeField] Text remainLinesText;
+	[SerializeField] Text comboText;
+	[SerializeField] Image rushGageImage;
 	[SerializeField] Image calorieGageImage;
 
 	[System.NonSerialized] public List<Oil> Oils;
@@ -20,6 +23,114 @@ public class GameManager : MonoBehaviour
 	Customer currentCustomer;//●変数名微妙●
 	[System.NonSerialized] public HorizontalLine[,] AmidaLines;
 
+	bool isRush = false;
+	bool IsRush
+	{
+		get { return this.isRush; }
+
+		set
+		{
+			isRush = value;
+			itemGenerater.IsRush = this.isRush;
+			//●もっときれいにやりたい●
+			foreach(Trash trash in Trashes)
+			{
+				trash.ChangeOil(value);
+			}
+			//BGM変更
+			//ゲーム速度少し上昇
+			//制限時間停止
+		}
+	}
+
+	//●Playerクラスに分ける可能性あり●
+	const int MaxDrawLineNum = 3;
+
+	const float RushTime = 20;
+	const int MaxRushGage = 1;
+	int rushGage;
+	public int RushGage
+	{
+		get { return this.rushGage; }
+
+		set
+		{
+			if (IsRush)
+			{
+				return;
+			}
+
+			if (value >= MaxRushGage)
+			{
+				rushGage = MaxRushGage;
+			}
+			else
+			{
+				rushGage = value;
+			}
+
+			if (rushGage >= MaxRushGage)
+			{
+				Debug.Log("RushTime");
+				StartCoroutine(RushTimeCoroutine());
+			}
+		}
+	}
+	int score;
+	public int Score
+	{
+		get { return this.score; }
+
+		set
+		{
+			score = value;
+			scoreText.text = "SCORE:" + Score.ToString();
+		}
+	}
+
+	int remainLines = MaxDrawLineNum;
+	public int RemainLines
+	{
+		get { return this.remainLines; }
+
+		set
+		{
+			if (value > MaxDrawLineNum)
+			{
+				remainLines = MaxDrawLineNum;
+			}
+			else if (value < 0)
+			{
+				remainLines = 0;
+			}
+			else
+			{
+				remainLines = value;
+			}
+			remainLinesText.text = "残り本数" + RemainLines.ToString() + "/" + MaxDrawLineNum.ToString();
+		}
+	}
+
+	int combo = 0;
+	public int Combo
+	{
+		get { return this.combo; }
+
+		set
+		{
+			combo = value;
+			if (combo == 0)
+			{
+				comboText.gameObject.SetActive(false);
+			}
+			else
+			{
+				comboText.gameObject.SetActive(true);
+				comboText.text = combo.ToString() + "コンボ";
+			}
+		}
+	}
+	int maxCombo;
 
 	// Start is called before the first frame update
 	void Start()
@@ -33,19 +144,6 @@ public class GameManager : MonoBehaviour
 		{
 			trash.completedFriedFoodDelegate = CompletedFriedFood;
 		}
-
-		playerController.rushDelegate = (bool isRush) =>
-		  {
-			  itemGenerater.IsRush = isRush;
-			//●もっときれいにやりたい●
-			foreach (Trash trash in Trashes)
-			  {
-				  trash.ChangeOil(isRush);
-			  }
-			//BGM変更
-			//ゲーム速度少し上昇
-			//制限時間停止
-		};
 
 		Invoke("GameStart", 0.5f);
 	}
@@ -115,11 +213,21 @@ public class GameManager : MonoBehaviour
 			currentCustomer.CustomerReact(friedFood,
 				(int rushGage, int score) =>
 				{
-					playerController.Score += playerController.IsRush ? (int)(score * 1.5f) : score;
-					playerController.RushGage += rushGage;
+					Score += IsRush ? (int)(score * 1.5f) : score;
+					RushGage += rushGage;
+					Debug.Log(score);
 				});
 
-			playerController.Combo = friedFood.FriedFoodReview == Cooking.FriedFoodReview.good ? playerController.Combo + 1 : 0;
+			//コンボ処理
+			if (friedFood.FriedFoodReview == Cooking.FriedFoodReview.good)
+			{
+				Combo++;
+			}
+			else
+			{
+				maxCombo = Combo > maxCombo ? Combo : maxCombo;
+				Combo = 0;
+			}
 		}
 		else
 		{
@@ -142,5 +250,27 @@ public class GameManager : MonoBehaviour
 
 		//9：次のステージへ
 		Debug.Log("clear");
+	}
+
+	void RushEnd()
+	{
+		IsRush = false;
+	}
+
+	IEnumerator RushTimeCoroutine()
+	{
+		float time = 0;
+		IsRush = true;
+
+		while (time < RushTime)
+		{
+			time += Time.deltaTime;
+			rushGageImage.fillAmount = (RushTime - time) / RushTime;
+			yield return null;
+		}
+
+		rushGage = 0;
+		rushGageImage.fillAmount = 1;
+		IsRush = false;
 	}
 }
