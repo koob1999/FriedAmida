@@ -754,10 +754,7 @@ MonoBehaviour:
   foodGenerater: {fileID: 1419647445}
   itemGenerater: {fileID: 947819758}
   lineCursol: {fileID: 1712355795}
-  scoreText: {fileID: 544723528}
-  remainLinesText: {fileID: 1451838258}
-  comboText: {fileID: 1778629756}
-  rushGageImage: {fileID: 616399820}
+  playerController: {fileID: 935668533}
   calorieGageImage: {fileID: 91724116}
 --- !u!4 &658604814
 Transform:
@@ -892,6 +889,7 @@ MonoBehaviour:
   gameManager: {fileID: 658604813}
   foodGenerater: {fileID: 1419647445}
   itemGenerater: {fileID: 947819758}
+  playerController: {fileID: 935668533}
 --- !u!4 &852684521
 Transform:
   m_ObjectHideFlags: 0
@@ -905,6 +903,53 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &935668532
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 935668534}
+  - component: {fileID: 935668533}
+  m_Layer: 0
+  m_Name: Player
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &935668533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935668532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf0d0a35017591d4d9fa231221029f6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreText: {fileID: 544723528}
+  remainLinesText: {fileID: 1451838258}
+  comboText: {fileID: 1778629756}
+  rushGageImage: {fileID: 616399820}
+--- !u!4 &935668534
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935668532}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 929.5037, y: 493.1261, z: -8.497483}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &947819756
 GameObject:
