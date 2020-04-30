@@ -17,12 +17,17 @@ public class GameManager : MonoBehaviour
 	[SerializeField] Text comboText;
 	[SerializeField] Image rushGageImage;
 	[SerializeField] Image calorieGageImage;
+	[SerializeField] Text minuteText;
+	[SerializeField] Text secandText;
 
 	[System.NonSerialized] public List<Oil> Oils;
 	[System.NonSerialized] public List<Trash> Trashes;
 	GameObject currentEnemyObj;//現在戦闘中の敵
 	Customer currentCustomer;//●変数名微妙●
 	[System.NonSerialized] public HorizontalLine[,] AmidaLines;
+
+	[SerializeField] int limitTime;
+	bool isTimeOver => limitTime <= 0;
 
 	bool isRush = false;
 	bool IsRush
@@ -146,6 +151,8 @@ public class GameManager : MonoBehaviour
 			trash.completedFriedFoodDelegate = CompletedFriedFood;
 		}
 
+		StartCoroutine(CountTime());
+
 		Invoke("GameStart", 0.5f);
 	}
 
@@ -206,6 +213,12 @@ public class GameManager : MonoBehaviour
 
 	void CompletedFriedFood(FriedFood friedFood)
 	{
+		//ゲームオーバーの時はここで止まる
+		if (isTimeOver)
+		{
+			return;
+		}
+
 		//揚げ物を敵に渡す
 		//敵による揚げ物評価(スコア処理未実装）
 		if (friedFood != null)
@@ -273,5 +286,26 @@ public class GameManager : MonoBehaviour
 		rushGage = 0;
 		rushGageImage.fillAmount = 1;
 		IsRush = false;
+	}
+
+	IEnumerator CountTime()
+	{
+		DisplayTime();
+
+		while (!isTimeOver)
+		{
+			yield return new WaitForSeconds(1);
+			limitTime--;
+			DisplayTime();
+		}
+	}
+
+	void DisplayTime()
+	{
+		int minute = limitTime / 60;
+		int secand = limitTime - minute * 60;
+
+		minuteText.text = minute.ToString("D2");
+		secandText.text = secand.ToString("D2");
 	}
 }
