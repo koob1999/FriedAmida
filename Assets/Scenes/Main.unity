@@ -760,6 +760,9 @@ MonoBehaviour:
   comboText: {fileID: 1778629756}
   rushGageImage: {fileID: 616399820}
   calorieGageImage: {fileID: 91724116}
+  minuteText: {fileID: 1441626312}
+  secandText: {fileID: 969084601}
+  limitTime: 90
 --- !u!4 &658604814
 Transform:
   m_ObjectHideFlags: 0
@@ -992,7 +995,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 26.5, y: 7.1}
-  m_SizeDelta: {x: 45, y: 50}
+  m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &969084601
 MonoBehaviour:
@@ -1195,7 +1198,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -32.9, y: 7.1}
-  m_SizeDelta: {x: 32, y: 50}
+  m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1441626312
 MonoBehaviour:
@@ -1228,9 +1231,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '2
-
-'
+  m_Text: 00
 --- !u!222 &1441626313
 CanvasRenderer:
   m_ObjectHideFlags: 0
