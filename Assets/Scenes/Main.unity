@@ -762,7 +762,7 @@ MonoBehaviour:
   calorieGageImage: {fileID: 91724116}
   minuteText: {fileID: 1441626312}
   secandText: {fileID: 969084601}
-  limitTime: 90
+  limitTime: 180
 --- !u!4 &658604814
 Transform:
   m_ObjectHideFlags: 0

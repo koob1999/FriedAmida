@@ -27,20 +27,7 @@ public class GameManager : MonoBehaviour
 	[System.NonSerialized] public HorizontalLine[,] AmidaLines;
 
 	[SerializeField] int limitTime;
-	public int LimitTime
-	{
-		get { return limitTime; }
-
-		set
-		{
-			if (value <= 0)
-			{
-				over = true;
-			}
-			limitTime = value;
-		}
-	}
-	bool over = false;
+	bool isTimeOver => limitTime <= 0;
 
 	bool isRush = false;
 	bool IsRush
@@ -227,7 +214,7 @@ public class GameManager : MonoBehaviour
 	void CompletedFriedFood(FriedFood friedFood)
 	{
 		//ゲームオーバーの時はここで止まる
-		if (over)
+		if (isTimeOver)
 		{
 			return;
 		}
@@ -305,10 +292,10 @@ public class GameManager : MonoBehaviour
 	{
 		DisplayTime();
 
-		while (!over)
+		while (!isTimeOver)
 		{
 			yield return new WaitForSeconds(1);
-			LimitTime--;
+			limitTime--;
 			DisplayTime();
 		}
 	}
