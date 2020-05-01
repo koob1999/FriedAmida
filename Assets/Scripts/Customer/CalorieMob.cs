@@ -5,8 +5,8 @@ using Amida;
 
 public class CalorieMob : Customer
 {
-	const int clearCalorie = 600;
-	int currentCalorie = clearCalorie;
+	const int ClearCalorie = 600;
+	int currentCalorie = ClearCalorie;
 
 	override public void CustomerReact(FriedFood friedFood, AddPointDelegate addPointDelegate)
 	{
@@ -27,7 +27,7 @@ public class CalorieMob : Customer
 		}
 
 		currentCalorie -= friedFood.Calorie;
-		calorieGageDelegate(clearCalorie, currentCalorie);
+		calorieGageDelegate(ClearCalorie, currentCalorie);
 
 		//アニメーション
 		StartCoroutine(AnimeReacion(friedFood));

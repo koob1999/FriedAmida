@@ -17,15 +17,7 @@ public class HorizontalLine : MonoBehaviour
 
 	void Update()
 	{
-		/*if (OnObj.activeSelf)
-		{
-			time += Time.deltaTime;
-			if (time > 10 && !foodStay)
-			{
-				time = 0;
-				SetOnObjActivation(false);
-			}
-		}*/
+
 	}
 
 	public void SetOnObjActivation(bool isActive)

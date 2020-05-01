@@ -5,7 +5,7 @@ using Amida;
 
 public class Oil : MonoBehaviour
 {
-	public Cooking.OilTemp oilTemp;
+	public Cooking.OilTemp OilTemp;
 
 	public delegate void CompletedFriedFoodDelegate(FriedFood friedFood);
 	public CompletedFriedFoodDelegate completedFriedFoodDelegate;
@@ -34,7 +34,7 @@ public class Oil : MonoBehaviour
 			Food food;
 			food = collision.gameObject.GetComponent<Food>();
 			FriedFood friedFood;
-			friedFood = food.DoFry(oilTemp);
+			friedFood = food.DoFry(OilTemp);
 			completedFriedFoodDelegate(friedFood);
 			Destroy(collision.gameObject);
 		}

@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
 	[System.NonSerialized] public HorizontalLine[,] AmidaLines;
 
 	[SerializeField] int limitTime;
-	bool isTimeOver => limitTime <= 0;
+	bool IsTimeOver => limitTime <= 0;
 
 	bool isRush = false;
 	bool IsRush
@@ -185,11 +185,11 @@ public class GameManager : MonoBehaviour
 		currentEnemyObj = stageManager.NextBattleStart();
 		currentCustomer = currentEnemyObj.GetComponent<Customer>();
 
-		currentCustomer.foodGenerater = foodGenerater;
-		currentCustomer.itemGenerater = itemGenerater;
+		currentCustomer.FoodGenerater = foodGenerater;
+		currentCustomer.ItemGenerater = itemGenerater;
 		currentCustomer.killedCustomerDelegate = KilledCustomer;
 		//客がカロリーゲージを持たない場合はゲージは非表示にする
-		calorieGageImage.gameObject.transform.parent.gameObject.SetActive(currentCustomer.hasClalorie);
+		calorieGageImage.gameObject.transform.parent.gameObject.SetActive(currentCustomer.HasClalorie);
 		calorieGageImage.fillAmount = 1;
 		currentCustomer.calorieGageDelegate = (int clearCalorie, int currentCalorie) =>
 		{
@@ -214,7 +214,7 @@ public class GameManager : MonoBehaviour
 	void CompletedFriedFood(FriedFood friedFood)
 	{
 		//ゲームオーバーの時はここで止まる
-		if (isTimeOver)
+		if (IsTimeOver)
 		{
 			return;
 		}
@@ -292,7 +292,7 @@ public class GameManager : MonoBehaviour
 	{
 		DisplayTime();
 
-		while (!isTimeOver)
+		while (!IsTimeOver)
 		{
 			yield return new WaitForSeconds(1);
 			limitTime--;
