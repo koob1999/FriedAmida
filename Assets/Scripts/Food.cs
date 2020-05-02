@@ -13,7 +13,7 @@ public class Food : MonoBehaviour
 	[SerializeField] int clearKomugikoNum;
 	[SerializeField] int clearEggNum;
 	[SerializeField] int clearPankoNum;
-	public Cooking.OilTemp oilTemp;
+	public Cooking.OilTemp OilTemp;
 
 	[SerializeField] int calorie;
 
@@ -138,7 +138,7 @@ public class Food : MonoBehaviour
 		else
 		{
 			//油の温度が適正、材料全てがノルマ以上取得していれば揚げ成功
-			if (oil == oilTemp && eggCount >= clearEggNum && komugikoCount >= clearKomugikoNum && pankoCount >= clearPankoNum)
+			if (oil == OilTemp && eggCount >= clearEggNum && komugikoCount >= clearKomugikoNum && pankoCount >= clearPankoNum)
 			{
 				Debug.Log("good");
 				friedFood = new FriedFood(Cooking.FriedFoodReview.good, this.calorie);

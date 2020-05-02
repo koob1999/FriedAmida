@@ -5,10 +5,10 @@ using Amida;
 
 public class Oil : MonoBehaviour
 {
-	public Cooking.OilTemp oilTemp;
+	public Cooking.OilTemp OilTemp;
 
 	public delegate void CompletedFriedFoodDelegate(FriedFood friedFood);
-	public CompletedFriedFoodDelegate completedFriedFoodDelegate;
+	public CompletedFriedFoodDelegate CompletedFriedFoodAction;
 
     // Start is called before the first frame update
     void Start()
@@ -34,8 +34,8 @@ public class Oil : MonoBehaviour
 			Food food;
 			food = collision.gameObject.GetComponent<Food>();
 			FriedFood friedFood;
-			friedFood = food.DoFry(oilTemp);
-			completedFriedFoodDelegate(friedFood);
+			friedFood = food.DoFry(OilTemp);
+			CompletedFriedFoodAction(friedFood);
 			Destroy(collision.gameObject);
 		}
 	}

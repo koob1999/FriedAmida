@@ -96,10 +96,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d753d51e0176324fbea425dc9f8ce10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clearKomugikoNum: 0
-  clearEggNum: 0
-  clearPankoNum: 0
-  oilTemp: 1
+  clearKomugikoNum: 1
+  clearEggNum: 1
+  clearPankoNum: 1
+  OilTemp: 1
   calorie: 300
 --- !u!61 &5328517870861015522
 BoxCollider2D:

@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
 	[System.NonSerialized] public HorizontalLine[,] AmidaLines;
 
 	[SerializeField] int limitTime;
-	bool isTimeOver => limitTime <= 0;
+	bool IsTimeOver => limitTime <= 0;
 
 	bool isRush = false;
 	bool IsRush
@@ -143,12 +143,12 @@ public class GameManager : MonoBehaviour
     {
 		foreach (Oil oil in Oils)
 		{
-			oil.completedFriedFoodDelegate = CompletedFriedFood;
+			oil.CompletedFriedFoodAction = CompletedFriedFood;
 		}
 
 		foreach(Trash trash in Trashes)
 		{
-			trash.completedFriedFoodDelegate = CompletedFriedFood;
+			trash.CompletedFriedFoodAction = CompletedFriedFood;
 		}
 
 		StartCoroutine(CountTime());
@@ -185,13 +185,13 @@ public class GameManager : MonoBehaviour
 		currentEnemyObj = stageManager.NextBattleStart();
 		currentCustomer = currentEnemyObj.GetComponent<Customer>();
 
-		currentCustomer.foodGenerater = foodGenerater;
-		currentCustomer.itemGenerater = itemGenerater;
-		currentCustomer.killedCustomerDelegate = KilledCustomer;
+		currentCustomer.FoodGenerater = foodGenerater;
+		currentCustomer.ItemGenerater = itemGenerater;
+		currentCustomer.KilledCustomerAction = KilledCustomer;
 		//客がカロリーゲージを持たない場合はゲージは非表示にする
-		calorieGageImage.gameObject.transform.parent.gameObject.SetActive(currentCustomer.hasClalorie);
+		calorieGageImage.gameObject.transform.parent.gameObject.SetActive(currentCustomer.HasClalorie);
 		calorieGageImage.fillAmount = 1;
-		currentCustomer.calorieGageDelegate = (int clearCalorie, int currentCalorie) =>
+		currentCustomer.CalorieGageAction = (int clearCalorie, int currentCalorie) =>
 		{
 			calorieGageImage.fillAmount = (float)currentCalorie / clearCalorie;
 		};
@@ -214,7 +214,7 @@ public class GameManager : MonoBehaviour
 	void CompletedFriedFood(FriedFood friedFood)
 	{
 		//ゲームオーバーの時はここで止まる
-		if (isTimeOver)
+		if (IsTimeOver)
 		{
 			return;
 		}
@@ -292,7 +292,7 @@ public class GameManager : MonoBehaviour
 	{
 		DisplayTime();
 
-		while (!isTimeOver)
+		while (!IsTimeOver)
 		{
 			yield return new WaitForSeconds(1);
 			limitTime--;

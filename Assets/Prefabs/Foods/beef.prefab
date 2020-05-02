@@ -225,7 +225,7 @@ MonoBehaviour:
   clearKomugikoNum: 1
   clearEggNum: 1
   clearPankoNum: 1
-  oilTemp: 1
+  OilTemp: 1
   calorie: 400
 --- !u!95 &8469332881436965431
 Animator:

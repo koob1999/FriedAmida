@@ -16,12 +16,12 @@ public class Customer : MonoBehaviour
 
 	public delegate void AddPointDelegate(int rushGage, int score);
 	public delegate void CalorieGageDelegate(int clearCalorie, int currentCalorie);
-	public bool hasClalorie;
-	public CalorieGageDelegate calorieGageDelegate;
+	public CalorieGageDelegate CalorieGageAction;
+	public bool HasClalorie;
 
 	//▼参照パス
-	[System.NonSerialized] public FoodGenerater foodGenerater;
-	[System.NonSerialized] public ItemGenerater itemGenerater;
+	[System.NonSerialized] public FoodGenerater FoodGenerater;
+	[System.NonSerialized] public ItemGenerater ItemGenerater;
 
 	//▼アイテム関連
 	//同時揚げの量
@@ -39,7 +39,7 @@ public class Customer : MonoBehaviour
 		private set { appearItemNums = value; }
 	}
 
-	[System.NonSerialized] public Cooking.FoodType[] foodTypes;
+	[System.NonSerialized] public Cooking.FoodType[] FoodTypes;
 
 	//▼アニメーション関連
 	Animator animator;
@@ -55,19 +55,19 @@ public class Customer : MonoBehaviour
 			isClear = value;
 			if (isClear)
 			{
-				killedCustomerDelegate();
+				KilledCustomerAction();
 			}
 		}
 	}
 
 	public delegate void KilledCustomerDelegate();
-	public KilledCustomerDelegate killedCustomerDelegate;
+	public KilledCustomerDelegate KilledCustomerAction;
 
 	// Start is called before the first frame update
 	void Awake()
     {
 		animator = GetComponent<Animator>();
-		foodTypes = new Cooking.FoodType[SynchroFoodNum];
+		FoodTypes = new Cooking.FoodType[SynchroFoodNum];
     }
 
     // Update is called once per frame
@@ -79,10 +79,10 @@ public class Customer : MonoBehaviour
 	//関数名が微妙
 	public void DoAction()
 	{
-		itemGenerater.InitializeItems(AppearItemNum.egg, AppearItemNum.komugiko, AppearItemNum.panko, AppearItemNum.badItem);
+		ItemGenerater.InitializeItems(AppearItemNum.egg, AppearItemNum.komugiko, AppearItemNum.panko, AppearItemNum.badItem);
 
 		FoodTypesSelect();
-		foodGenerater.FoodsGenerate(foodTypes);
+		FoodGenerater.FoodsGenerate(FoodTypes);
 	}
 
 	void FoodTypesSelect()
@@ -96,16 +96,16 @@ public class Customer : MonoBehaviour
 			switch (rand)
 			{
 				case 1:
-					foodTypes[i] = Cooking.FoodType.beef;
+					FoodTypes[i] = Cooking.FoodType.beef;
 					break;
 				case 2:
-					foodTypes[i] = Cooking.FoodType.chicken;
+					FoodTypes[i] = Cooking.FoodType.chicken;
 					break;
 				case 3:
-					foodTypes[i] = Cooking.FoodType.pork;
+					FoodTypes[i] = Cooking.FoodType.pork;
 					break;
 				case 4:
-					foodTypes[i] = Cooking.FoodType.shrimp;
+					FoodTypes[i] = Cooking.FoodType.shrimp;
 					break;
 			}
 		}

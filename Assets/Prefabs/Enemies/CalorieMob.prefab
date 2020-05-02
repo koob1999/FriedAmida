@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e163708c0da2ee646949c0655e075ddb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasClalorie: 1
+  HasClalorie: 1
   appearItemNums:
     egg: 2
     komugiko: 2

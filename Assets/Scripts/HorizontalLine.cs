@@ -9,23 +9,15 @@ public class HorizontalLine : MonoBehaviour
 	float time = 0;
 	bool foodStay = false;
 	public delegate void PlusRemainLinesDelegate();
-	public PlusRemainLinesDelegate plusRemainLinesDelegate;
+	public PlusRemainLinesDelegate PlusRemainLinesAction;
 	public delegate void MinusRemainLinesDelegate();
-	public MinusRemainLinesDelegate minusRemainLinesDelegate;
+	public MinusRemainLinesDelegate MinusRemainLinesAction;
 	public delegate bool IsDrawLineDelegate();
-	public IsDrawLineDelegate isDrawLineDelegate;
+	public IsDrawLineDelegate IsDrawLineAction;
 
 	void Update()
 	{
-		/*if (OnObj.activeSelf)
-		{
-			time += Time.deltaTime;
-			if (time > 10 && !foodStay)
-			{
-				time = 0;
-				SetOnObjActivation(false);
-			}
-		}*/
+
 	}
 
 	public void SetOnObjActivation(bool isActive)
@@ -33,10 +25,10 @@ public class HorizontalLine : MonoBehaviour
 		//線を引く
 		if (isActive)
 		{
-			if (isDrawLineDelegate())
+			if (IsDrawLineAction())
 			{
 				OnObj.SetActive(isActive);
-				minusRemainLinesDelegate();
+				MinusRemainLinesAction();
 			}
 		}
 		//線を消す
@@ -45,7 +37,7 @@ public class HorizontalLine : MonoBehaviour
 			if (!foodStay)
 			{
 				OnObj.SetActive(isActive);
-				plusRemainLinesDelegate();
+				PlusRemainLinesAction();
 			}
 		}
 	}
