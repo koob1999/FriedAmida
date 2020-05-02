@@ -8,7 +8,7 @@ public class Oil : MonoBehaviour
 	public Cooking.OilTemp OilTemp;
 
 	public delegate void CompletedFriedFoodDelegate(FriedFood friedFood);
-	public CompletedFriedFoodDelegate completedFriedFoodDelegate;
+	public CompletedFriedFoodDelegate CompletedFriedFoodAction;
 
     // Start is called before the first frame update
     void Start()
@@ -35,7 +35,7 @@ public class Oil : MonoBehaviour
 			food = collision.gameObject.GetComponent<Food>();
 			FriedFood friedFood;
 			friedFood = food.DoFry(OilTemp);
-			completedFriedFoodDelegate(friedFood);
+			CompletedFriedFoodAction(friedFood);
 			Destroy(collision.gameObject);
 		}
 	}

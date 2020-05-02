@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Trash : MonoBehaviour
 {
-	public Oil.CompletedFriedFoodDelegate completedFriedFoodDelegate;
+	public Oil.CompletedFriedFoodDelegate CompletedFriedFoodAction;
 
 	[SerializeField] GameObject HighOil;
 	[SerializeField] GameObject ModerateOil;
@@ -29,7 +29,7 @@ public class Trash : MonoBehaviour
 	{
 		if (collision.gameObject.tag == "food")
 		{
-			completedFriedFoodDelegate(null);
+			CompletedFriedFoodAction(null);
 			Destroy(collision.gameObject);
 		}
 	}
@@ -54,7 +54,7 @@ public class Trash : MonoBehaviour
 					break;
 			}
 			//●めっちゃ微妙な処理●
-			createdOil.GetComponent<Oil>().completedFriedFoodDelegate = completedFriedFoodDelegate;
+			createdOil.GetComponent<Oil>().CompletedFriedFoodAction = CompletedFriedFoodAction;
 		}
 		else
 		{

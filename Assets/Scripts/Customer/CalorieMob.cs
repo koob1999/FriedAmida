@@ -27,7 +27,7 @@ public class CalorieMob : Customer
 		}
 
 		currentCalorie -= friedFood.Calorie;
-		calorieGageDelegate(ClearCalorie, currentCalorie);
+		CalorieGageAction(ClearCalorie, currentCalorie);
 
 		//アニメーション
 		StartCoroutine(AnimeReacion(friedFood));

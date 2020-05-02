@@ -16,8 +16,8 @@ public class Customer : MonoBehaviour
 
 	public delegate void AddPointDelegate(int rushGage, int score);
 	public delegate void CalorieGageDelegate(int clearCalorie, int currentCalorie);
+	public CalorieGageDelegate CalorieGageAction;
 	public bool HasClalorie;
-	public CalorieGageDelegate calorieGageDelegate;
 
 	//▼参照パス
 	[System.NonSerialized] public FoodGenerater FoodGenerater;
@@ -55,13 +55,13 @@ public class Customer : MonoBehaviour
 			isClear = value;
 			if (isClear)
 			{
-				killedCustomerDelegate();
+				KilledCustomerAction();
 			}
 		}
 	}
 
 	public delegate void KilledCustomerDelegate();
-	public KilledCustomerDelegate killedCustomerDelegate;
+	public KilledCustomerDelegate KilledCustomerAction;
 
 	// Start is called before the first frame update
 	void Awake()

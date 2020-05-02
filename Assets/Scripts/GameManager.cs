@@ -143,12 +143,12 @@ public class GameManager : MonoBehaviour
     {
 		foreach (Oil oil in Oils)
 		{
-			oil.completedFriedFoodDelegate = CompletedFriedFood;
+			oil.CompletedFriedFoodAction = CompletedFriedFood;
 		}
 
 		foreach(Trash trash in Trashes)
 		{
-			trash.completedFriedFoodDelegate = CompletedFriedFood;
+			trash.CompletedFriedFoodAction = CompletedFriedFood;
 		}
 
 		StartCoroutine(CountTime());
@@ -187,11 +187,11 @@ public class GameManager : MonoBehaviour
 
 		currentCustomer.FoodGenerater = foodGenerater;
 		currentCustomer.ItemGenerater = itemGenerater;
-		currentCustomer.killedCustomerDelegate = KilledCustomer;
+		currentCustomer.KilledCustomerAction = KilledCustomer;
 		//客がカロリーゲージを持たない場合はゲージは非表示にする
 		calorieGageImage.gameObject.transform.parent.gameObject.SetActive(currentCustomer.HasClalorie);
 		calorieGageImage.fillAmount = 1;
-		currentCustomer.calorieGageDelegate = (int clearCalorie, int currentCalorie) =>
+		currentCustomer.CalorieGageAction = (int clearCalorie, int currentCalorie) =>
 		{
 			calorieGageImage.fillAmount = (float)currentCalorie / clearCalorie;
 		};
