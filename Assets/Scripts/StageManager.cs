@@ -20,6 +20,8 @@ public class StageManager : MonoBehaviour
 	[SerializeField] GameObject nomalMob;//敵のPrefab設定用
 	[SerializeField] GameObject calorieMob;
 	[SerializeField] GameObject enemyGeneratePlace;//敵の生成場所設定場所
+	[SerializeField] StageGenerater stageGenerater;
+	[System.NonSerialized] public HorizontalLine[,] AmidaLines;
 
 	int presentEnemyNum;//現在現れている敵が何番目か
 	public int PresentEnemyNum
@@ -36,7 +38,8 @@ public class StageManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-    }
+		stageGenerater.GenerateStage(this);
+	}
 
     // Update is called once per frame
     void Update()
@@ -85,5 +88,17 @@ public class StageManager : MonoBehaviour
 	public bool IsLastEnemy()
 	{
 		return PresentEnemyNum == enemies.Length - 1;
+	}
+
+	public void ResetAmidaLines()
+	{
+		//あみだのリセット
+		for (int i = 0; i < AmidaLines.GetLength(0); i++)
+		{
+			for (int j = 0; j < AmidaLines.GetLength(1); j++)
+			{
+				AmidaLines[i, j].SetOnObjActivation(false);
+			}
+		}
 	}
 }

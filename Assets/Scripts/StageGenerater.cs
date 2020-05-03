@@ -35,11 +35,6 @@ public class StageGenerater : MonoBehaviour
 	[SerializeField] FoodGenerater foodGenerater;
 	[SerializeField] ItemGenerater itemGenerater;
 
-	private void Awake()
-	{
-		GenerateStage();
-	}
-
 	// Start is called before the first frame update
 	void Start()
     {
@@ -52,7 +47,7 @@ public class StageGenerater : MonoBehaviour
         
     }
 
-	void GenerateStage()
+	public void GenerateStage(StageManager stageManager)
 	{
 		float xLength = maxXPos - minXPos;
 		float xInterval = 2;
@@ -84,7 +79,7 @@ public class StageGenerater : MonoBehaviour
 		}
 
 		lineCursol.AmidaLines = amidaLines;
-		gameManager.AmidaLines = amidaLines;
+		stageManager.AmidaLines = amidaLines;
 
 		//▼油の生成
 		List<Oil> oils = new List<Oil>();

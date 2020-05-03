@@ -24,7 +24,6 @@ public class GameManager : MonoBehaviour
 	[System.NonSerialized] public List<Trash> Trashes;
 	GameObject currentEnemyObj;//現在戦闘中の敵
 	Customer currentCustomer;//●変数名微妙●
-	[System.NonSerialized] public HorizontalLine[,] AmidaLines;
 
 	[SerializeField] int limitTime;
 	bool IsTimeOver => limitTime <= 0;
@@ -247,15 +246,7 @@ public class GameManager : MonoBehaviour
 		{
 			currentCustomer.DoAction();
 		}
-
-		//あみだのリセット
-		for (int i = 0; i < AmidaLines.GetLength(0); i++)
-		{
-			for (int j = 0; j < AmidaLines.GetLength(1); j++)
-			{
-				AmidaLines[i, j].SetOnObjActivation(false);
-			}
-		}
+		stageManager.ResetAmidaLines();
 	}
 
 	void ClearGame()
