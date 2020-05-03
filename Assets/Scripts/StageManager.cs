@@ -22,6 +22,8 @@ public class StageManager : MonoBehaviour
 	[SerializeField] GameObject calorieMob;
 	[SerializeField] GameObject enemyGeneratePlace;//敵の生成場所設定場所
 	[SerializeField] StageGenerater stageGenerater;
+	[System.NonSerialized] public List<Oil> Oils;
+	[System.NonSerialized] public List<Trash> Trashes;
 	[System.NonSerialized] public HorizontalLine[,] AmidaLines;
 
 	int presentEnemyNum;//現在現れている敵が何番目か
@@ -126,6 +128,28 @@ public class StageManager : MonoBehaviour
 			{
 				AmidaLines[i, j].SetOnObjActivation(false);
 			}
+		}
+	}
+
+	public void SetCompletedActionToOil(Oil.CompletedFriedFoodDelegate completedFriedFood)
+	{
+		foreach (Oil oil in Oils)
+		{
+			oil.CompletedFriedFoodAction = completedFriedFood;
+		}
+
+		foreach (Trash trash in Trashes)
+		{
+			trash.CompletedFriedFoodAction = completedFriedFood;
+		}
+	}
+
+	public void ChangeTrashToOil(bool isRush)
+	{
+		//●もっときれいにやりたい●
+		foreach (Trash trash in Trashes)
+		{
+			trash.ChangeOil(isRush);
 		}
 	}
 }

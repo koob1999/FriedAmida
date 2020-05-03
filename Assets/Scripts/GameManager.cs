@@ -20,8 +20,6 @@ public class GameManager : MonoBehaviour
 	[SerializeField] Text minuteText;
 	[SerializeField] Text secandText;
 
-	[System.NonSerialized] public List<Oil> Oils;
-	[System.NonSerialized] public List<Trash> Trashes;
 	GameObject currentEnemyObj;//現在戦闘中の敵
 	Customer currentCustomer;//●変数名微妙●
 
@@ -37,11 +35,7 @@ public class GameManager : MonoBehaviour
 		{
 			isRush = value;
 			itemGenerater.IsRush = isRush;
-			//●もっときれいにやりたい●
-			foreach(Trash trash in Trashes)
-			{
-				trash.ChangeOil(value);
-			}
+			stageManager.ChangeTrashToOil(isRush);
 			//BGM変更
 			//ゲーム速度少し上昇
 			//制限時間停止
@@ -114,15 +108,7 @@ public class GameManager : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
     {
-		foreach (Oil oil in Oils)
-		{
-			oil.CompletedFriedFoodAction = CompletedFriedFood;
-		}
-
-		foreach(Trash trash in Trashes)
-		{
-			trash.CompletedFriedFoodAction = CompletedFriedFood;
-		}
+		stageManager.SetCompletedActionToOil(CompletedFriedFood);
 
 		stageManager.UpdateRemainLinesText = text =>
 		{

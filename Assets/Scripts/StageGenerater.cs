@@ -103,8 +103,8 @@ public class StageGenerater : MonoBehaviour
 			}
 		}
 
-		gameManager.Oils = oils;
-		gameManager.Trashes = trashes;
+		stageManager.Oils = oils;
+		stageManager.Trashes = trashes;
 
 		//▼食材生成場所の生成
 		//ここGameObjectよりVector３で渡したほうが良い
