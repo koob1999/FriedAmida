@@ -22,9 +22,9 @@ public class StageManager : MonoBehaviour
 	[SerializeField] GameObject calorieMob;
 	[SerializeField] GameObject enemyGeneratePlace;//敵の生成場所設定場所
 	[SerializeField] StageGenerater stageGenerater;
-	[System.NonSerialized] public List<Oil> Oils;
-	[System.NonSerialized] public List<Trash> Trashes;
-	[System.NonSerialized] public HorizontalLine[,] AmidaLines;
+	[NonSerialized] public List<Oil> Oils;
+	[NonSerialized] public List<Trash> Trashes;
+	[NonSerialized] public HorizontalLine[,] AmidaLines;
 
 	int presentEnemyNum;//現在現れている敵が何番目か
 	public int PresentEnemyNum
