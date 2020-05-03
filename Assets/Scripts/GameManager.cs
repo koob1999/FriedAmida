@@ -48,9 +48,6 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-	//●Playerクラスに分ける可能性あり●
-	const int MaxDrawLineNum = 3;
-
 	const float RushTime = 20;
 	const int MaxRushGage = 1;
 	int rushGage;
@@ -93,29 +90,6 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-	int remainLines = MaxDrawLineNum;
-	public int RemainLines
-	{
-		get { return remainLines; }
-
-		set
-		{
-			if (value > MaxDrawLineNum)
-			{
-				remainLines = MaxDrawLineNum;
-			}
-			else if (value < 0)
-			{
-				remainLines = 0;
-			}
-			else
-			{
-				remainLines = value;
-			}
-			remainLinesText.text = "残り本数" + RemainLines.ToString() + "/" + MaxDrawLineNum.ToString();
-		}
-	}
-
 	int combo = 0;
 	public int Combo
 	{
@@ -149,6 +123,11 @@ public class GameManager : MonoBehaviour
 		{
 			trash.CompletedFriedFoodAction = CompletedFriedFood;
 		}
+
+		stageManager.UpdateRemainLinesText = text =>
+		{
+			remainLinesText.text = text;
+		};
 
 		StartCoroutine(CountTime());
 

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -35,11 +36,37 @@ public class StageManager : MonoBehaviour
 		}
 	}
 
+	//●Playerクラスに分ける可能性あり●
+	const int MaxDrawLineNum = 3;
+	public Action<string> UpdateRemainLinesText;
+	int remainLines = MaxDrawLineNum;
+	public int RemainLines
+	{
+		get { return remainLines; }
+
+		set
+		{
+			if (value > MaxDrawLineNum)
+			{
+				remainLines = MaxDrawLineNum;
+			}
+			else if (value < 0)
+			{
+				remainLines = 0;
+			}
+			else
+			{
+				remainLines = value;
+			}
+			UpdateRemainLinesText("残り本数" + RemainLines.ToString() + "/" + MaxDrawLineNum.ToString());
+		}
+	}
+
     // Start is called before the first frame update
     void Start()
     {
 		stageGenerater.GenerateStage(this);
-	}
+    }
 
     // Update is called once per frame
     void Update()
