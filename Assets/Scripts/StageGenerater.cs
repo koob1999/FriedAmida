@@ -31,7 +31,6 @@ public class StageGenerater : MonoBehaviour
 	float minYPos = -3;
 	//参照パス
 	[SerializeField] LineCursol lineCursol;
-	[SerializeField] GameManager gameManager;
 	[SerializeField] FoodGenerater foodGenerater;
 	[SerializeField] ItemGenerater itemGenerater;
 
