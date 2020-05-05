@@ -20,11 +20,8 @@ public class GameManager : MonoBehaviour
 	[SerializeField] Text minuteText;
 	[SerializeField] Text secandText;
 
-	[System.NonSerialized] public List<Oil> Oils;
-	[System.NonSerialized] public List<Trash> Trashes;
 	GameObject currentEnemyObj;//現在戦闘中の敵
 	Customer currentCustomer;//●変数名微妙●
-	[System.NonSerialized] public HorizontalLine[,] AmidaLines;
 
 	[SerializeField] int limitTime;
 	bool IsTimeOver => limitTime <= 0;
@@ -38,19 +35,12 @@ public class GameManager : MonoBehaviour
 		{
 			isRush = value;
 			itemGenerater.IsRush = isRush;
-			//●もっときれいにやりたい●
-			foreach(Trash trash in Trashes)
-			{
-				trash.ChangeOil(value);
-			}
+			stageManager.ChangeTrashToOil(isRush);
 			//BGM変更
 			//ゲーム速度少し上昇
 			//制限時間停止
 		}
 	}
-
-	//●Playerクラスに分ける可能性あり●
-	const int MaxDrawLineNum = 3;
 
 	const float RushTime = 20;
 	const int MaxRushGage = 1;
@@ -94,29 +84,6 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-	int remainLines = MaxDrawLineNum;
-	public int RemainLines
-	{
-		get { return remainLines; }
-
-		set
-		{
-			if (value > MaxDrawLineNum)
-			{
-				remainLines = MaxDrawLineNum;
-			}
-			else if (value < 0)
-			{
-				remainLines = 0;
-			}
-			else
-			{
-				remainLines = value;
-			}
-			remainLinesText.text = "残り本数" + RemainLines.ToString() + "/" + MaxDrawLineNum.ToString();
-		}
-	}
-
 	int combo = 0;
 	public int Combo
 	{
@@ -141,15 +108,12 @@ public class GameManager : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
     {
-		foreach (Oil oil in Oils)
-		{
-			oil.CompletedFriedFoodAction = CompletedFriedFood;
-		}
+		stageManager.SetCompletedActionToOil(CompletedFriedFood);
 
-		foreach(Trash trash in Trashes)
+		stageManager.UpdateRemainLinesText = text =>
 		{
-			trash.CompletedFriedFoodAction = CompletedFriedFood;
-		}
+			remainLinesText.text = text;
+		};
 
 		StartCoroutine(CountTime());
 
@@ -247,15 +211,7 @@ public class GameManager : MonoBehaviour
 		{
 			currentCustomer.DoAction();
 		}
-
-		//あみだのリセット
-		for (int i = 0; i < AmidaLines.GetLength(0); i++)
-		{
-			for (int j = 0; j < AmidaLines.GetLength(1); j++)
-			{
-				AmidaLines[i, j].SetOnObjActivation(false);
-			}
-		}
+		stageManager.ResetAmidaLines();
 	}
 
 	void ClearGame()

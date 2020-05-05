@@ -31,14 +31,8 @@ public class StageGenerater : MonoBehaviour
 	float minYPos = -3;
 	//参照パス
 	[SerializeField] LineCursol lineCursol;
-	[SerializeField] GameManager gameManager;
 	[SerializeField] FoodGenerater foodGenerater;
 	[SerializeField] ItemGenerater itemGenerater;
-
-	private void Awake()
-	{
-		GenerateStage();
-	}
 
 	// Start is called before the first frame update
 	void Start()
@@ -52,7 +46,7 @@ public class StageGenerater : MonoBehaviour
         
     }
 
-	void GenerateStage()
+	public void GenerateStage(StageManager stageManager)
 	{
 		float xLength = maxXPos - minXPos;
 		float xInterval = 2;
@@ -76,15 +70,15 @@ public class StageGenerater : MonoBehaviour
 												new Vector3(minXPos + (xInterval * i) + 1, maxYPos - ((yInterval * j) + (i % 2 * yInterval / 2)) - 1, 0),
 												Quaternion.identity).GetComponent<HorizontalLine>();
 
-				amidaLines[i, j].MinusRemainLinesAction = () => { gameManager.RemainLines--; };
-				amidaLines[i, j].PlusRemainLinesAction = () => { gameManager.RemainLines++; };
-				amidaLines[i, j].IsDrawLineAction = () => { return gameManager.RemainLines > 0; };
+				amidaLines[i, j].MinusRemainLinesAction = () => { stageManager.RemainLines--; };
+				amidaLines[i, j].PlusRemainLinesAction = () => { stageManager.RemainLines++; };
+				amidaLines[i, j].IsDrawLineAction = () => { return stageManager.RemainLines > 0; };
 
 			}
 		}
 
 		lineCursol.AmidaLines = amidaLines;
-		gameManager.AmidaLines = amidaLines;
+		stageManager.AmidaLines = amidaLines;
 
 		//▼油の生成
 		List<Oil> oils = new List<Oil>();
@@ -108,8 +102,8 @@ public class StageGenerater : MonoBehaviour
 			}
 		}
 
-		gameManager.Oils = oils;
-		gameManager.Trashes = trashes;
+		stageManager.Oils = oils;
+		stageManager.Trashes = trashes;
 
 		//▼食材生成場所の生成
 		//ここGameObjectよりVector３で渡したほうが良い

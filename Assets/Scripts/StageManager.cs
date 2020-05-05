@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,6 +21,10 @@ public class StageManager : MonoBehaviour
 	[SerializeField] GameObject nomalMob;//敵のPrefab設定用
 	[SerializeField] GameObject calorieMob;
 	[SerializeField] GameObject enemyGeneratePlace;//敵の生成場所設定場所
+	[SerializeField] StageGenerater stageGenerater;
+	[NonSerialized] public List<Oil> Oils;
+	[NonSerialized] public List<Trash> Trashes;
+	[NonSerialized] public HorizontalLine[,] AmidaLines;
 
 	int presentEnemyNum;//現在現れている敵が何番目か
 	public int PresentEnemyNum
@@ -33,9 +38,36 @@ public class StageManager : MonoBehaviour
 		}
 	}
 
+	//●Playerクラスに分ける可能性あり●
+	const int MaxDrawLineNum = 3;
+	public Action<string> UpdateRemainLinesText;
+	int remainLines = MaxDrawLineNum;
+	public int RemainLines
+	{
+		get { return remainLines; }
+
+		set
+		{
+			if (value > MaxDrawLineNum)
+			{
+				remainLines = MaxDrawLineNum;
+			}
+			else if (value < 0)
+			{
+				remainLines = 0;
+			}
+			else
+			{
+				remainLines = value;
+			}
+			UpdateRemainLinesText("残り本数" + RemainLines.ToString() + "/" + MaxDrawLineNum.ToString());
+		}
+	}
+
     // Start is called before the first frame update
     void Start()
     {
+		stageGenerater.GenerateStage(this);
     }
 
     // Update is called once per frame
@@ -85,5 +117,39 @@ public class StageManager : MonoBehaviour
 	public bool IsLastEnemy()
 	{
 		return PresentEnemyNum == enemies.Length - 1;
+	}
+
+	public void ResetAmidaLines()
+	{
+		//あみだのリセット
+		for (int i = 0; i < AmidaLines.GetLength(0); i++)
+		{
+			for (int j = 0; j < AmidaLines.GetLength(1); j++)
+			{
+				AmidaLines[i, j].SetOnObjActivation(false);
+			}
+		}
+	}
+
+	public void SetCompletedActionToOil(Oil.CompletedFriedFoodDelegate completedFriedFood)
+	{
+		foreach (Oil oil in Oils)
+		{
+			oil.CompletedFriedFoodAction = completedFriedFood;
+		}
+
+		foreach (Trash trash in Trashes)
+		{
+			trash.CompletedFriedFoodAction = completedFriedFood;
+		}
+	}
+
+	public void ChangeTrashToOil(bool isRush)
+	{
+		//●もっときれいにやりたい●
+		foreach (Trash trash in Trashes)
+		{
+			trash.ChangeOil(isRush);
+		}
 	}
 }
