@@ -27,7 +27,7 @@ public class Customer : MonoBehaviour
 
 	//▼アイテム関連
 	//同時揚げの量
-	int synchroFoodNum = 1;
+	[SerializeField] int synchroFoodNum;
 	public int SynchroFoodNum
 	{
 		get { return synchroFoodNum; }
