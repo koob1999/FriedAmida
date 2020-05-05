@@ -10,6 +10,13 @@ public class CalorieMob : Customer
 
 	override public void CustomerReact(FriedFood friedFood, AddPointDelegate addPointDelegate)
 	{
+		//揚げ物ができていないなら再行動
+		if (friedFood == null)
+		{
+			DoAction();
+			return;
+		}
+
 		switch (friedFood.FriedFoodReview)
 		{
 			case Cooking.FriedFoodReview.good:

@@ -17,6 +17,8 @@ public class Customer : MonoBehaviour
 	public delegate void AddPointDelegate(int rushGage, int score);
 	public delegate void CalorieGageDelegate(int clearCalorie, int currentCalorie);
 	public CalorieGageDelegate CalorieGageAction;
+	public delegate void AmidaResetDelegate();
+	public AmidaResetDelegate AmidaResetAction;
 	public bool HasClalorie;
 
 	//▼参照パス
@@ -80,6 +82,7 @@ public class Customer : MonoBehaviour
 	public void DoAction()
 	{
 		ItemGenerater.InitializeItems(AppearItemNum.egg, AppearItemNum.komugiko, AppearItemNum.panko, AppearItemNum.badItem);
+		AmidaResetAction();
 
 		FoodTypesSelect();
 		FoodGenerater.FoodsGenerate(FoodTypes);
@@ -113,6 +116,13 @@ public class Customer : MonoBehaviour
 
 	virtual public void CustomerReact(FriedFood friedFood, AddPointDelegate addPointDelegate)
 	{
+		//揚げ物ができていないなら再行動
+		if (friedFood == null)
+		{
+			DoAction();
+			return;
+		}
+
 		switch (friedFood.FriedFoodReview)
 		{
 			case Cooking.FriedFoodReview.good:
@@ -162,7 +172,10 @@ public class Customer : MonoBehaviour
 		yield return new WaitForSeconds(1);
 
 		//クリア判定
-		CheckClear();
+		if (friedFood.IsLastFood)
+		{
+			CheckClear();
+		}
 	}
 
 	virtual protected void CheckClear()

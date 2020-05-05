@@ -152,6 +152,7 @@ public class GameManager : MonoBehaviour
 		currentCustomer.FoodGenerater = foodGenerater;
 		currentCustomer.ItemGenerater = itemGenerater;
 		currentCustomer.KilledCustomerAction = KilledCustomer;
+		currentCustomer.AmidaResetAction = stageManager.ResetAmidaLines;
 		//客がカロリーゲージを持たない場合はゲージは非表示にする
 		calorieGageImage.gameObject.transform.parent.gameObject.SetActive(currentCustomer.HasClalorie);
 		calorieGageImage.fillAmount = 1;
@@ -183,35 +184,25 @@ public class GameManager : MonoBehaviour
 			return;
 		}
 
-		//揚げ物を敵に渡す
-		//敵による揚げ物評価(スコア処理未実装）
-		if (friedFood != null)
-		{
-			//●ここら辺もっときれいにできる気がする●
-			currentCustomer.CustomerReact(friedFood,
-				(int rushGage, int score) =>
-				{
-					Score += IsRush ? (int)(score * 1.5f) : score;
-					RushGage += rushGage;
-					Debug.Log(score);
-				});
+		//●ここら辺もっときれいにできる気がする●
+		currentCustomer.CustomerReact(friedFood,
+			(int rushGage, int score) =>
+			{
+				Score += IsRush ? (int)(score * 1.5f) : score;
+				RushGage += rushGage;
+				Debug.Log(score);
+			});
 
-			//コンボ処理
-			if (friedFood.FriedFoodReview == Cooking.FriedFoodReview.good)
-			{
-				Combo++;
-			}
-			else
-			{
-				maxCombo = Math.Max(maxCombo, Combo);
-				Combo = 0;
-			}
+		//コンボ処理
+		if (friedFood != null && friedFood.FriedFoodReview == Cooking.FriedFoodReview.good)
+		{
+			Combo++;
 		}
 		else
 		{
-			currentCustomer.DoAction();
+			maxCombo = Math.Max(maxCombo, Combo);
+			Combo = 0;
 		}
-		stageManager.ResetAmidaLines();
 	}
 
 	void ClearGame()
