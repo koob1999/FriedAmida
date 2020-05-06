@@ -36,17 +36,16 @@ public class Customer : MonoBehaviour
 				//全ての食材が揚げ物になっていない場合再行動
 				if (successFriedFoodNum == SynchroFoodNum)
 				{
-					cookedFoodNum = 0;
-					successFriedFoodNum = 0;
 					AddPointAction(totalGage, totalScore);
 					CheckClear();
 				}
 				else
 				{
-					cookedFoodNum = 0;
-					successFriedFoodNum = 0;
 					DoAction();
 				}
+
+				cookedFoodNum = 0;
+				successFriedFoodNum = 0;
 			}
 		}
 	}
@@ -147,13 +146,9 @@ public class Customer : MonoBehaviour
 		}
 	}
 
-	public void CustomerReact(FriedFood friedFood)
+	virtual public void CustomerReact(FriedFood friedFood)
 	{
-		if (friedFood == null)
-		{
-			CookedFoodNum++;
-		}
-		else
+		if (friedFood != null)
 		{
 			successFriedFoodNum++;
 			RetensionScore(friedFood);
@@ -161,6 +156,8 @@ public class Customer : MonoBehaviour
 			//アニメーション
 			StartCoroutine(AnimeReacion(friedFood));
 		}
+
+		CookedFoodNum++;
 	}
 
 	protected IEnumerator AnimeReacion(FriedFood friedFood)
@@ -190,8 +187,6 @@ public class Customer : MonoBehaviour
 				animator.SetBool("saitei", true);
 				break;
 		}
-
-		CookedFoodNum++;
 		yield return new WaitForSeconds(1);
 	}
 

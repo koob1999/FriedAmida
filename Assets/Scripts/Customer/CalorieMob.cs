@@ -8,6 +8,14 @@ public class CalorieMob : Customer
 	const int ClearCalorie = 600;
 	int currentCalorie = ClearCalorie;
 
+	override public void CustomerReact(FriedFood friedFood)
+	{
+		currentCalorie -= friedFood.Calorie;
+		CalorieGageAction(ClearCalorie, currentCalorie);
+
+		base.CustomerReact(friedFood);
+	}
+
 	override protected void RetensionScore(FriedFood friedFood)
 	{
 		switch (friedFood.FriedFoodReview)
