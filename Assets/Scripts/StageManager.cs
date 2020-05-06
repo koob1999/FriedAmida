@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Amida;
 
 public class StageManager : MonoBehaviour
 {
@@ -154,5 +155,52 @@ public class StageManager : MonoBehaviour
 		{
 			trash.ChangeOil(isRush);
 		}
+	}
+
+	public void SetOilOutline(Cooking.OilTemp oilTemp)
+	{
+		foreach(Oil oil in Oils)
+		{
+			oil.SetOutline(oil.OilTemp == oilTemp);
+		}
+	}
+
+	public void SetOilOutline(Cooking.OilTemp[] oilTemps)
+	{
+		foreach (Oil oil in Oils)
+		{
+			oil.SetOutline(oil.IsMatchOilTemp(oilTemps));
+		}
+	}
+
+	public void SetOilOutline(Cooking.FoodType[] foodTypes)
+	{
+		SetOilOutline(ChangeFoodTypesToOilTemps(foodTypes));
+	}
+
+	public Cooking.OilTemp[] ChangeFoodTypesToOilTemps(Cooking.FoodType[] foodTypes)
+	{
+		Cooking.OilTemp[] oilTemps = new Cooking.OilTemp[foodTypes.Length];
+
+		for (int i = 0; i < oilTemps.Length; i++)
+		{
+			switch (foodTypes[i])
+			{
+				case Cooking.FoodType.beef:
+					oilTemps[i] = Cooking.OilTemp.moderate;
+					break;
+				case Cooking.FoodType.chicken:
+					oilTemps[i] = Cooking.OilTemp.low;
+					break;
+				case Cooking.FoodType.pork:
+					oilTemps[i] = Cooking.OilTemp.moderate;
+					break;
+				case Cooking.FoodType.shrimp:
+					oilTemps[i] = Cooking.OilTemp.high;
+					break;
+			}
+		}
+
+		return oilTemps;
 	}
 }

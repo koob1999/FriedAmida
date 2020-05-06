@@ -10,6 +10,8 @@ public class Oil : MonoBehaviour
 	public delegate void CompletedFriedFoodDelegate(FriedFood friedFood);
 	public CompletedFriedFoodDelegate CompletedFriedFoodAction;
 
+	[SerializeField] GameObject outline;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +23,24 @@ public class Oil : MonoBehaviour
     {
         
     }
+
+	public void SetOutline(bool isActive)
+	{
+		outline.SetActive(isActive);
+	}
+
+	public bool IsMatchOilTemp(Cooking.OilTemp[] oilTemps)
+	{
+		foreach(Cooking.OilTemp oilTemp in oilTemps)
+		{
+			if (OilTemp == oilTemp)
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
 
 	public void DoTargetAmime(bool isTarget)
 	{

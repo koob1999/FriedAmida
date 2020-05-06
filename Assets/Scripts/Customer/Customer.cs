@@ -56,7 +56,7 @@ public class Customer : MonoBehaviour
 	//▼参照パス
 	[System.NonSerialized] public FoodGenerater FoodGenerater;
 	[System.NonSerialized] public ItemGenerater ItemGenerater;
-
+	[System.NonSerialized] public StageManager stageManager;
 	//▼アイテム関連
 	//同時揚げの量
 	[SerializeField] int synchroFoodNum;
@@ -117,6 +117,7 @@ public class Customer : MonoBehaviour
 		AmidaResetAction();
 
 		FoodTypesSelect();
+		stageManager.SetOilOutline(FoodTypes);
 		FoodGenerater.FoodsGenerate(FoodTypes);
 	}
 
