@@ -95,6 +95,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OilTemp: 1
+  outline: {fileID: 5741969685644834865}
 --- !u!61 &6795894526676966398
 BoxCollider2D:
   m_ObjectHideFlags: 0
