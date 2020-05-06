@@ -93,12 +93,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 307b4796026432b40b7f73abb43147f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HasClalorie: 0
+  synchroFoodNum: 1
   appearItemNums:
     egg: 2
     komugiko: 2
     panko: 2
     badItem: 1
-  foodTypes: 
 --- !u!95 &8954283933166768307
 Animator:
   serializedVersion: 3
