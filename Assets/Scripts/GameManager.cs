@@ -160,6 +160,12 @@ public class GameManager : MonoBehaviour
 		{
 			calorieGageImage.fillAmount = (float)currentCalorie / clearCalorie;
 		};
+		currentCustomer.AddPointAction = (int rushGage, int score) =>
+		{
+			Score += IsRush ? (int)(score * 1.5f) : score;
+			RushGage += rushGage;
+			Debug.Log(score);
+		};
 	}
 
 	void KilledCustomer()
@@ -184,15 +190,6 @@ public class GameManager : MonoBehaviour
 			return;
 		}
 
-		//●ここら辺もっときれいにできる気がする●
-		currentCustomer.CustomerReact(friedFood,
-			(int rushGage, int score) =>
-			{
-				Score += IsRush ? (int)(score * 1.5f) : score;
-				RushGage += rushGage;
-				Debug.Log(score);
-			});
-
 		//コンボ処理
 		if (friedFood != null && friedFood.FriedFoodReview == Cooking.FriedFoodReview.good)
 		{
@@ -203,6 +200,16 @@ public class GameManager : MonoBehaviour
 			maxCombo = Math.Max(maxCombo, Combo);
 			Combo = 0;
 		}
+
+		//揚げ物ができていないなら評価せず再行動
+		/*if (friedFood == null)
+		{
+			currentCustomer.DoAction();
+			return;
+		}*/
+
+		//●ここら辺もっときれいにできる気がする●
+		currentCustomer.CustomerReact(friedFood);
 	}
 
 	void ClearGame()

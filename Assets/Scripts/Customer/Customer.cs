@@ -15,11 +15,44 @@ public class Customer : MonoBehaviour
 	}
 
 	public delegate void AddPointDelegate(int rushGage, int score);
+	public AddPointDelegate AddPointAction;
 	public delegate void CalorieGageDelegate(int clearCalorie, int currentCalorie);
 	public CalorieGageDelegate CalorieGageAction;
 	public delegate void AmidaResetDelegate();
 	public AmidaResetDelegate AmidaResetAction;
 	public bool HasClalorie;
+	int cookedFoodNum = 0;   //一回の行動で調理した食材の数
+	int CookedFoodNum
+	{
+		get { return cookedFoodNum; }
+
+		set
+		{
+			cookedFoodNum = value;
+
+			//全ての食材を揚げ終わったときのみ判定
+			if (cookedFoodNum == SynchroFoodNum)
+			{
+				//全ての食材が揚げ物になっていない場合再行動
+				if (successFriedFoodNum == SynchroFoodNum)
+				{
+					cookedFoodNum = 0;
+					successFriedFoodNum = 0;
+					AddPointAction(totalGage, totalScore);
+					CheckClear();
+				}
+				else
+				{
+					cookedFoodNum = 0;
+					successFriedFoodNum = 0;
+					DoAction();
+				}
+			}
+		}
+	}
+	int successFriedFoodNum = 0;	//実際に揚がった揚げ物の数
+	protected int totalScore = 0;
+	protected int totalGage = 0;
 
 	//▼参照パス
 	[System.NonSerialized] public FoodGenerater FoodGenerater;
@@ -114,38 +147,26 @@ public class Customer : MonoBehaviour
 		}
 	}
 
-	virtual public void CustomerReact(FriedFood friedFood, AddPointDelegate addPointDelegate)
+	public void CustomerReact(FriedFood friedFood)
 	{
-		//揚げ物ができていないなら再行動
 		if (friedFood == null)
 		{
-			DoAction();
-			return;
+			CookedFoodNum++;
 		}
-
-		switch (friedFood.FriedFoodReview)
+		else
 		{
-			case Cooking.FriedFoodReview.good:
-				addPointDelegate(1, 300);
-				break;
-			case Cooking.FriedFoodReview.usually:
-				addPointDelegate(0, 100);
-				break;
-			case Cooking.FriedFoodReview.raw:
-				addPointDelegate(0, 100);
-				break;
-			case Cooking.FriedFoodReview.bad:
-				addPointDelegate(0, -500);
-				break;
-		}
+			successFriedFoodNum++;
+			RetensionScore(friedFood);
 
-		//アニメーション
-		StartCoroutine(AnimeReacion(friedFood));
+			//アニメーション
+			StartCoroutine(AnimeReacion(friedFood));
+		}
 	}
 
 	protected IEnumerator AnimeReacion(FriedFood friedFood)
 	{
 		//アニメーション
+
 		switch (friedFood.FriedFoodReview)
 		{
 			case Cooking.FriedFoodReview.good:
@@ -169,12 +190,28 @@ public class Customer : MonoBehaviour
 				animator.SetBool("saitei", true);
 				break;
 		}
-		yield return new WaitForSeconds(1);
 
-		//クリア判定
-		if (friedFood.IsLastFood)
+		CookedFoodNum++;
+		yield return new WaitForSeconds(1);
+	}
+
+	virtual protected void RetensionScore(FriedFood friedFood)
+	{
+		switch (friedFood.FriedFoodReview)
 		{
-			CheckClear();
+			case Cooking.FriedFoodReview.good:
+				totalScore += 300;
+				totalGage += 1;
+				break;
+			case Cooking.FriedFoodReview.usually:
+				totalScore += 100;
+				break;
+			case Cooking.FriedFoodReview.raw:
+				totalScore += 100;
+				break;
+			case Cooking.FriedFoodReview.bad:
+				totalScore -= 500;
+				break;
 		}
 	}
 

@@ -7,12 +7,10 @@ public class FriedFood
 {
 	public Cooking.FriedFoodReview FriedFoodReview { get; private set; }
 	public int Calorie { get; private set; }
-	public bool IsLastFood;
 
-	public FriedFood(Cooking.FriedFoodReview review, int calorie, bool isLastFood)
+	public FriedFood(Cooking.FriedFoodReview review, int calorie)
 	{
 		FriedFoodReview = review;
 		Calorie = calorie;
-		IsLastFood = isLastFood;
 	}
 }

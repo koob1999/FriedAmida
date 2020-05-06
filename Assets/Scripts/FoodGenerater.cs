@@ -35,7 +35,6 @@ public class FoodGenerater : MonoBehaviour
 		for(int i = 0; i < foodTypes.Length; i++)
 		{
 			createdObjs[i] = FoodGenerate(foodTypes[i], generatePlaces[i].transform.position);
-			createdObjs[i].GetComponent<Food>().IsLastFood = i == foodTypes.Length - 1;
 		}
 		//2:左から順にアニメーションを再生
 		StartCoroutine(AnimateFoodCoroutine(createdObjs));
