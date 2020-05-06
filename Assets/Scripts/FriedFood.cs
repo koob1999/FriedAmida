@@ -10,7 +10,7 @@ public class FriedFood
 
 	public FriedFood(Cooking.FriedFoodReview review, int calorie)
 	{
-		this.FriedFoodReview = review;
-		this.Calorie = calorie;
+		FriedFoodReview = review;
+		Calorie = calorie;
 	}
 }

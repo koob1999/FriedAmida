@@ -8,29 +8,32 @@ public class CalorieMob : Customer
 	const int ClearCalorie = 600;
 	int currentCalorie = ClearCalorie;
 
-	override public void CustomerReact(FriedFood friedFood, AddPointDelegate addPointDelegate)
+	override public void CustomerReact(FriedFood friedFood)
+	{
+		currentCalorie -= friedFood.Calorie;
+		CalorieGageAction(ClearCalorie, currentCalorie);
+
+		base.CustomerReact(friedFood);
+	}
+
+	override protected void SaveScore(FriedFood friedFood)
 	{
 		switch (friedFood.FriedFoodReview)
 		{
 			case Cooking.FriedFoodReview.good:
-				addPointDelegate(1, 300);
+				totalScore += 300;
+				totalGage += 1;
 				break;
 			case Cooking.FriedFoodReview.usually:
-				addPointDelegate(0, 100);
+				totalScore += 100;
 				break;
 			case Cooking.FriedFoodReview.raw:
-				addPointDelegate(0, 100);
+				totalScore += 100;
 				break;
 			case Cooking.FriedFoodReview.bad:
-				addPointDelegate(0, -(friedFood.Calorie - 100));
+				totalScore -= friedFood.Calorie - 100;
 				break;
 		}
-
-		currentCalorie -= friedFood.Calorie;
-		CalorieGageAction(ClearCalorie, currentCalorie);
-
-		//アニメーション
-		StartCoroutine(AnimeReacion(friedFood));
 	}
 
 	//関数名が微妙

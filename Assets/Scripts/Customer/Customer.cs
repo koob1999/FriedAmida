@@ -15,9 +15,43 @@ public class Customer : MonoBehaviour
 	}
 
 	public delegate void AddPointDelegate(int rushGage, int score);
+	public AddPointDelegate AddPointAction;
 	public delegate void CalorieGageDelegate(int clearCalorie, int currentCalorie);
 	public CalorieGageDelegate CalorieGageAction;
+	public delegate void AmidaResetDelegate();
+	public AmidaResetDelegate AmidaResetAction;
 	public bool HasClalorie;
+	int cookedFoodNum = 0;   //一回の行動で調理した食材の数
+	int CookedFoodNum
+	{
+		get { return cookedFoodNum; }
+
+		set
+		{
+			cookedFoodNum = value;
+
+			//全ての食材を揚げ終わったときのみ判定
+			if (cookedFoodNum == SynchroFoodNum)
+			{
+				//全ての食材が揚げ物になっていない場合再行動
+				if (successFriedFoodNum == SynchroFoodNum)
+				{
+					AddPointAction(totalGage, totalScore);
+					CheckClear();
+				}
+				else
+				{
+					DoAction();
+				}
+
+				cookedFoodNum = 0;
+				successFriedFoodNum = 0;
+			}
+		}
+	}
+	int successFriedFoodNum = 0;	//実際に揚がった揚げ物の数
+	protected int totalScore = 0;
+	protected int totalGage = 0;
 
 	//▼参照パス
 	[System.NonSerialized] public FoodGenerater FoodGenerater;
@@ -25,7 +59,7 @@ public class Customer : MonoBehaviour
 
 	//▼アイテム関連
 	//同時揚げの量
-	int synchroFoodNum = 1;
+	[SerializeField] int synchroFoodNum;
 	public int SynchroFoodNum
 	{
 		get { return synchroFoodNum; }
@@ -80,6 +114,7 @@ public class Customer : MonoBehaviour
 	public void DoAction()
 	{
 		ItemGenerater.InitializeItems(AppearItemNum.egg, AppearItemNum.komugiko, AppearItemNum.panko, AppearItemNum.badItem);
+		AmidaResetAction();
 
 		FoodTypesSelect();
 		FoodGenerater.FoodsGenerate(FoodTypes);
@@ -111,31 +146,24 @@ public class Customer : MonoBehaviour
 		}
 	}
 
-	virtual public void CustomerReact(FriedFood friedFood, AddPointDelegate addPointDelegate)
+	virtual public void CustomerReact(FriedFood friedFood)
 	{
-		switch (friedFood.FriedFoodReview)
+		if (friedFood != null)
 		{
-			case Cooking.FriedFoodReview.good:
-				addPointDelegate(1, 300);
-				break;
-			case Cooking.FriedFoodReview.usually:
-				addPointDelegate(0, 100);
-				break;
-			case Cooking.FriedFoodReview.raw:
-				addPointDelegate(0, 100);
-				break;
-			case Cooking.FriedFoodReview.bad:
-				addPointDelegate(0, -500);
-				break;
+			successFriedFoodNum++;
+			SaveScore(friedFood);
+
+			//アニメーション
+			StartCoroutine(AnimeReacion(friedFood));
 		}
 
-		//アニメーション
-		StartCoroutine(AnimeReacion(friedFood));
+		CookedFoodNum++;
 	}
 
 	protected IEnumerator AnimeReacion(FriedFood friedFood)
 	{
 		//アニメーション
+
 		switch (friedFood.FriedFoodReview)
 		{
 			case Cooking.FriedFoodReview.good:
@@ -160,9 +188,26 @@ public class Customer : MonoBehaviour
 				break;
 		}
 		yield return new WaitForSeconds(1);
+	}
 
-		//クリア判定
-		CheckClear();
+	virtual protected void SaveScore(FriedFood friedFood)
+	{
+		switch (friedFood.FriedFoodReview)
+		{
+			case Cooking.FriedFoodReview.good:
+				totalScore += 300;
+				totalGage += 1;
+				break;
+			case Cooking.FriedFoodReview.usually:
+				totalScore += 100;
+				break;
+			case Cooking.FriedFoodReview.raw:
+				totalScore += 100;
+				break;
+			case Cooking.FriedFoodReview.bad:
+				totalScore -= 500;
+				break;
+		}
 	}
 
 	virtual protected void CheckClear()

@@ -20,6 +20,7 @@ public class StageManager : MonoBehaviour
 	[SerializeField] Enemy[] enemies;//出現する敵の設定用
 	[SerializeField] GameObject nomalMob;//敵のPrefab設定用
 	[SerializeField] GameObject calorieMob;
+	[SerializeField] GameObject strongMob;
 	[SerializeField] GameObject enemyGeneratePlace;//敵の生成場所設定場所
 	[SerializeField] StageGenerater stageGenerater;
 	[NonSerialized] public List<Oil> Oils;
@@ -109,6 +110,8 @@ public class StageManager : MonoBehaviour
 				return nomalMob;
 			case Enemy.calorieMob:
 				return calorieMob;
+			case Enemy.strongMob:
+				return strongMob;
 			default:
 				return nomalMob;
 		}
