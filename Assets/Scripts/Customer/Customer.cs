@@ -151,7 +151,7 @@ public class Customer : MonoBehaviour
 		if (friedFood != null)
 		{
 			successFriedFoodNum++;
-			RetensionScore(friedFood);
+			SaveScore(friedFood);
 
 			//アニメーション
 			StartCoroutine(AnimeReacion(friedFood));
@@ -190,7 +190,7 @@ public class Customer : MonoBehaviour
 		yield return new WaitForSeconds(1);
 	}
 
-	virtual protected void RetensionScore(FriedFood friedFood)
+	virtual protected void SaveScore(FriedFood friedFood)
 	{
 		switch (friedFood.FriedFoodReview)
 		{

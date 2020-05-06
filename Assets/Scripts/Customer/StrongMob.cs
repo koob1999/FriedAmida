@@ -5,7 +5,7 @@ using Amida;
 
 public class StrongMob : Customer
 {
-	override protected void RetensionScore(FriedFood friedFood)
+	override protected void SaveScore(FriedFood friedFood)
 	{
 		switch (friedFood.FriedFoodReview)
 		{

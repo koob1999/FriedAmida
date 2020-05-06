@@ -16,7 +16,7 @@ public class CalorieMob : Customer
 		base.CustomerReact(friedFood);
 	}
 
-	override protected void RetensionScore(FriedFood friedFood)
+	override protected void SaveScore(FriedFood friedFood)
 	{
 		switch (friedFood.FriedFoodReview)
 		{
