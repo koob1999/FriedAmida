@@ -11,11 +11,12 @@ public class Trash : MonoBehaviour
 	[SerializeField] GameObject LowOil;
 
 	GameObject createdOil;
+	StageManager stageManager;
 
 	// Start is called before the first frame update
 	void Start()
 	{
-
+		stageManager = GameObject.Find("GameManager/StageManager").GetComponent<StageManager>();
 	}
 
 	// Update is called once per frame
@@ -36,9 +37,6 @@ public class Trash : MonoBehaviour
 
 	public void ChangeOil(bool isOil)
 	{
-		StageManager stageManager;
-		stageManager = GameObject.Find("GameManager/StageManager").GetComponent<StageManager>();
-
 		if (isOil)
 		{
 			gameObject.SetActive(false);
