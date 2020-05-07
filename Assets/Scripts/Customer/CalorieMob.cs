@@ -10,8 +10,11 @@ public class CalorieMob : Customer
 
 	override public void CustomerReact(FriedFood friedFood)
 	{
-		currentCalorie -= friedFood.Calorie;
-		CalorieGageAction(ClearCalorie, currentCalorie);
+		if (friedFood != null)
+		{
+			currentCalorie -= friedFood.Calorie;
+			CalorieGageAction(ClearCalorie, currentCalorie);
+		}
 
 		base.CustomerReact(friedFood);
 	}
