@@ -11,11 +11,12 @@ public class Trash : MonoBehaviour
 	[SerializeField] GameObject LowOil;
 
 	GameObject createdOil;
+	StageManager stageManager;
 
 	// Start is called before the first frame update
 	void Start()
 	{
-
+		stageManager = GameObject.Find("GameManager/StageManager").GetComponent<StageManager>();
 	}
 
 	// Update is called once per frame
@@ -55,11 +56,13 @@ public class Trash : MonoBehaviour
 			}
 			//●めっちゃ微妙な処理●
 			createdOil.GetComponent<Oil>().CompletedFriedFoodAction = CompletedFriedFoodAction;
+			stageManager.Oils.Add(createdOil.GetComponent<Oil>());
 		}
 		else
 		{
 			Destroy(createdOil);
 			gameObject.SetActive(true);
+			stageManager.Oils.RemoveAt(stageManager.Oils.Count - 1);
 		}
 	}
 }

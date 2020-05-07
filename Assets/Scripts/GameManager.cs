@@ -151,6 +151,7 @@ public class GameManager : MonoBehaviour
 
 		currentCustomer.FoodGenerater = foodGenerater;
 		currentCustomer.ItemGenerater = itemGenerater;
+		currentCustomer.stageManager = stageManager;
 		currentCustomer.KilledCustomerAction = KilledCustomer;
 		currentCustomer.AmidaResetAction = stageManager.ResetAmidaLines;
 		//客がカロリーゲージを持たない場合はゲージは非表示にする

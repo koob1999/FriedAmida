@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Amida;
 
 public class StageManager : MonoBehaviour
 {
@@ -154,5 +155,27 @@ public class StageManager : MonoBehaviour
 		{
 			trash.ChangeOil(isRush);
 		}
+	}
+
+	void SetOilOutline(Cooking.OilTemp oilTemp)
+	{
+		Oils.FindAll(oil => oil.OilTemp == oilTemp).ForEach(oil => oil.SetOutline(true));
+	}
+
+	public void SetOilOutline(Cooking.OilTemp[] oilTemps)
+	{
+		foreach (Oil oil in Oils)
+		{
+			oil.SetOutline(false);
+		}
+		foreach (Cooking.OilTemp oilTemp in oilTemps)
+		{
+			SetOilOutline(oilTemp);
+		}
+	}
+
+	public void SetOilOutline(Cooking.FoodType[] foodTypes)
+	{
+		SetOilOutline(Array.ConvertAll(foodTypes, foodType => foodType.ToOilTemp()));
 	}
 }

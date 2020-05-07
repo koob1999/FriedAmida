@@ -1,11 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Amida;
 
 public class Customer : MonoBehaviour
 {	
-	[System.SerializableAttribute]
+	[SerializableAttribute]
 	public class ItemNums
 	{
 		public int egg;
@@ -54,9 +55,9 @@ public class Customer : MonoBehaviour
 	protected int totalGage = 0;
 
 	//▼参照パス
-	[System.NonSerialized] public FoodGenerater FoodGenerater;
-	[System.NonSerialized] public ItemGenerater ItemGenerater;
-
+	[NonSerialized] public FoodGenerater FoodGenerater;
+	[NonSerialized] public ItemGenerater ItemGenerater;
+	[NonSerialized] public StageManager stageManager;
 	//▼アイテム関連
 	//同時揚げの量
 	[SerializeField] int synchroFoodNum;
@@ -73,7 +74,7 @@ public class Customer : MonoBehaviour
 		private set { appearItemNums = value; }
 	}
 
-	[System.NonSerialized] public Cooking.FoodType[] FoodTypes;
+	[NonSerialized] public Cooking.FoodType[] FoodTypes;
 
 	//▼アニメーション関連
 	Animator animator;
@@ -117,6 +118,7 @@ public class Customer : MonoBehaviour
 		AmidaResetAction();
 
 		FoodTypesSelect();
+		stageManager.SetOilOutline(FoodTypes);
 		FoodGenerater.FoodsGenerate(FoodTypes);
 	}
 
@@ -126,7 +128,7 @@ public class Customer : MonoBehaviour
 
 		for(int i = 0; i < SynchroFoodNum; i++)
 		{
-			rand = Random.Range(1, 5);
+			rand = UnityEngine.Random.Range(1, 5);
 
 			switch (rand)
 			{
