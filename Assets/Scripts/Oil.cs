@@ -29,19 +29,6 @@ public class Oil : MonoBehaviour
 		outline.SetActive(isActive);
 	}
 
-	public bool IsMatchOilTemp(Cooking.OilTemp[] oilTemps)
-	{
-		foreach(Cooking.OilTemp oilTemp in oilTemps)
-		{
-			if (OilTemp == oilTemp)
-			{
-				return true;
-			}
-		}
-
-		return false;
-	}
-
 	public void DoTargetAmime(bool isTarget)
 	{
 		GetComponent<Animator>().SetBool("target", isTarget);

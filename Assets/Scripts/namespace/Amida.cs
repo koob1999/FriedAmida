@@ -1,10 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Amida
 {
-	public class Cooking
+	public static class Cooking
 	{
 		public enum OilTemp
 		{
@@ -27,6 +28,23 @@ namespace Amida
 			chicken,
 			pork,
 			shrimp
+		}
+
+		public static OilTemp ToOilTemp(this FoodType foodType)
+		{
+			switch (foodType)
+			{
+				case FoodType.beef:
+					return OilTemp.moderate;
+				case FoodType.chicken:
+					return OilTemp.low;
+				case FoodType.pork:
+					return OilTemp.moderate;
+				case FoodType.shrimp:
+					return OilTemp.high;
+				default:
+					throw new InvalidOperationException("unknown food type");
+			}
 		}
 	}
 }
