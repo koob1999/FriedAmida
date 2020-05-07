@@ -157,50 +157,42 @@ public class StageManager : MonoBehaviour
 		}
 	}
 
-	public void SetOilOutline(Cooking.OilTemp oilTemp)
+	void SetOilOutline(Cooking.OilTemp oilTemp)
 	{
-		foreach(Oil oil in Oils)
-		{
-			oil.SetOutline(oil.OilTemp == oilTemp);
-		}
+		Oils.FindAll(oil => oil.OilTemp == oilTemp).ForEach(oil => oil.SetOutline(true));
 	}
 
 	public void SetOilOutline(Cooking.OilTemp[] oilTemps)
 	{
 		foreach (Oil oil in Oils)
 		{
-			oil.SetOutline(oil.IsMatchOilTemp(oilTemps));
+			oil.SetOutline(false);
+		}
+		foreach (Cooking.OilTemp oilTemp in oilTemps)
+		{
+			SetOilOutline(oilTemp);
 		}
 	}
 
 	public void SetOilOutline(Cooking.FoodType[] foodTypes)
 	{
-		SetOilOutline(ChangeFoodTypesToOilTemps(foodTypes));
+		SetOilOutline(Array.ConvertAll(foodTypes, ConvertFoodTypeToOilTemp));
 	}
 
-	public Cooking.OilTemp[] ChangeFoodTypesToOilTemps(Cooking.FoodType[] foodTypes)
+	public Cooking.OilTemp ConvertFoodTypeToOilTemp(Cooking.FoodType foodType)
 	{
-		Cooking.OilTemp[] oilTemps = new Cooking.OilTemp[foodTypes.Length];
-
-		for (int i = 0; i < oilTemps.Length; i++)
+		switch (foodType)
 		{
-			switch (foodTypes[i])
-			{
-				case Cooking.FoodType.beef:
-					oilTemps[i] = Cooking.OilTemp.moderate;
-					break;
-				case Cooking.FoodType.chicken:
-					oilTemps[i] = Cooking.OilTemp.low;
-					break;
-				case Cooking.FoodType.pork:
-					oilTemps[i] = Cooking.OilTemp.moderate;
-					break;
-				case Cooking.FoodType.shrimp:
-					oilTemps[i] = Cooking.OilTemp.high;
-					break;
-			}
+			case Cooking.FoodType.beef:
+				return Cooking.OilTemp.moderate;
+			case Cooking.FoodType.chicken:
+				return Cooking.OilTemp.low;
+			case Cooking.FoodType.pork:
+				return Cooking.OilTemp.moderate;
+			case Cooking.FoodType.shrimp:
+				return Cooking.OilTemp.high;
+			default:
+				throw new InvalidOperationException("unknown food type");
 		}
-
-		return oilTemps;
 	}
 }
