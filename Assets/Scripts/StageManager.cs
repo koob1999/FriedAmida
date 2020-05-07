@@ -176,23 +176,6 @@ public class StageManager : MonoBehaviour
 
 	public void SetOilOutline(Cooking.FoodType[] foodTypes)
 	{
-		SetOilOutline(Array.ConvertAll(foodTypes, ConvertFoodTypeToOilTemp));
-	}
-
-	public Cooking.OilTemp ConvertFoodTypeToOilTemp(Cooking.FoodType foodType)
-	{
-		switch (foodType)
-		{
-			case Cooking.FoodType.beef:
-				return Cooking.OilTemp.moderate;
-			case Cooking.FoodType.chicken:
-				return Cooking.OilTemp.low;
-			case Cooking.FoodType.pork:
-				return Cooking.OilTemp.moderate;
-			case Cooking.FoodType.shrimp:
-				return Cooking.OilTemp.high;
-			default:
-				throw new InvalidOperationException("unknown food type");
-		}
+		SetOilOutline(Array.ConvertAll(foodTypes, foodType => foodType.ToOilTemp()));
 	}
 }
