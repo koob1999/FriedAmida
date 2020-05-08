@@ -179,7 +179,7 @@ public class Customer : MonoBehaviour
 	virtual protected void TurnEndAction()
 	{
 		//全ての食材を揚げ終わったときのみ判定
-		if (cookedFoodNum == SynchroFoodNum)
+		if (cookedFoodNum != SynchroFoodNum)
 		{
 			return;
 		}

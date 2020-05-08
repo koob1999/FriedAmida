@@ -47,6 +47,7 @@ public class Boss : Customer
 		else if (totalScore == 1000)
 		{
 			totalScore = friedFood.FriedFoodReview == Cooking.FriedFoodReview.bad ? -3000 : totalScore;
+			return;
 		}
 
 
@@ -71,7 +72,7 @@ public class Boss : Customer
 	override protected void TurnEndAction()
 	{
 		//全ての食材を揚げ終わったときのみ判定
-		if (cookedFoodNum == SynchroFoodNum)
+		if (cookedFoodNum != SynchroFoodNum)
 		{
 			return;
 		}
