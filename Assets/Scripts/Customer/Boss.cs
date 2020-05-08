@@ -63,7 +63,7 @@ public class Boss : Customer
 				totalScore = 1000;
 				break;
 			case Cooking.FriedFoodReview.bad:
-				totalScore = -3000;s
+				totalScore = -3000;
 				break;
 		}
 	}
