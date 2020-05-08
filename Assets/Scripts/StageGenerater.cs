@@ -21,7 +21,6 @@ public class StageGenerater : MonoBehaviour
 	[SerializeField] GameObject ModerateOil;
 	[SerializeField] GameObject LowOil;
 	[SerializeField] GameObject TrashBox;
-	//変数名に難あり？
 	//ステージデータ
 	[SerializeField] UnderBoxType[] underBoxTypes;
 	[SerializeField, Range(3, 8)] int HorizontalLinesNum;
@@ -106,7 +105,6 @@ public class StageGenerater : MonoBehaviour
 		stageManager.Trashes = trashes;
 
 		//▼食材生成場所の生成
-		//ここGameObjectよりVector３で渡したほうが良い
 		GameObject[] foodGeneratePlaces = new GameObject[underBoxTypes.Length];
 		for (int i = 0; i < underBoxTypes.Length; i++)
 		{
@@ -116,7 +114,6 @@ public class StageGenerater : MonoBehaviour
 		foodGenerater.GeneratePlaces = foodGeneratePlaces;
 
 		//▼アイテム生成場所の生成
-		//ここGameObjectよりVector３で渡したほうが良い
 		GameObject[,] itemGeneraterPlaces = new GameObject[underBoxTypes.Length, HorizontalLinesNum - 2];
 		for (int i = 0; i < underBoxTypes.Length; i++)
 		{

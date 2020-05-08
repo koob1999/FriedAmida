@@ -19,7 +19,6 @@ public class FoodFighterBoss : Boss
 		base.CustomerReact(friedFood);
 	}
 
-	//関数名が微妙
 	override protected void CheckClear()
 	{
 		if (currentCalorie <= 0)

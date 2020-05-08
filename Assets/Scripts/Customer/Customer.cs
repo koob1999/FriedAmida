@@ -95,7 +95,6 @@ public class Customer : MonoBehaviour
         
     }
 
-	//関数名が微妙
 	public void DoAction()
 	{
 		ItemGenerater.InitializeItems(AppearItemNum.egg, AppearItemNum.komugiko, AppearItemNum.panko, AppearItemNum.badItem);

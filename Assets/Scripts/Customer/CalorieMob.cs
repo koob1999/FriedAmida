@@ -39,7 +39,6 @@ public class CalorieMob : Customer
 		}
 	}
 
-	//関数名が微妙
 	override protected void CheckClear()
 	{
 		if (currentCalorie <= 0)

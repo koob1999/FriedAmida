@@ -25,7 +25,6 @@ public class FoodGenerater : MonoBehaviour
 
     }
 
-	//●オーバーロードっぽく見えるのも気になる●
 	public void FoodsGenerate(Cooking.FoodType[] foodTypes)
 	{
 		GameObject[] createdObjs = new GameObject[foodTypes.Length];

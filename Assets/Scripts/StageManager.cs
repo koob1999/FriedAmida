@@ -42,7 +42,6 @@ public class StageManager : MonoBehaviour
 		}
 	}
 
-	//●Playerクラスに分ける可能性あり●
 	const int MaxDrawLineNum = 3;
 	public Action<string> UpdateRemainLinesText;
 	int remainLines = MaxDrawLineNum;
@@ -85,7 +84,6 @@ public class StageManager : MonoBehaviour
 		PresentEnemyNum = 0;
 	}
 
-	//●返り値なしの関数にして変数に格納してもいい気がする●
 	//次の敵を返り値に持つ
 	public GameObject NextBattleStart()
 	{
@@ -154,7 +152,6 @@ public class StageManager : MonoBehaviour
 
 	public void ChangeTrashToOil(bool isRush)
 	{
-		//●もっときれいにやりたい●
 		foreach (Trash trash in Trashes)
 		{
 			trash.ChangeOil(isRush);

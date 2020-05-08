@@ -54,7 +54,6 @@ public class Trash : MonoBehaviour
 					createdOil = Instantiate(LowOil, transform.position, Quaternion.identity);
 					break;
 			}
-			//●めっちゃ微妙な処理●
 			createdOil.GetComponent<Oil>().CompletedFriedFoodAction = CompletedFriedFoodAction;
 			stageManager.Oils.Add(createdOil.GetComponent<Oil>());
 		}

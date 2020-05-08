@@ -28,7 +28,6 @@ public class ItemGenerater : MonoBehaviour
 
     }
 
-	//●関数名が微妙●
 	public void InitializeItems(int eggNum, int komugikoNum, int pankoNum, int badItemNum)
 	{
 		//▼マップ上のアイテムを全破棄
@@ -56,7 +55,6 @@ public class ItemGenerater : MonoBehaviour
 
 	void ItemGenerate(GameObject createObj, int createNum)
 	{
-		//三重ループになっちゃった、許ちてくだちゃい
 		for (int i = 0; i < createNum; i++)
 		{
 			//▼生成場所の決定

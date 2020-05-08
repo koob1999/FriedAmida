@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField] Text secandText;
 
 	GameObject currentEnemyObj;//現在戦闘中の敵
-	Customer currentCustomer;//●変数名微妙●
+	Customer currentCustomer;
 
 	[SerializeField] int limitTime;
 	bool IsTimeOver => limitTime <= 0;
@@ -202,14 +202,6 @@ public class GameManager : MonoBehaviour
 			Combo = 0;
 		}
 
-		//揚げ物ができていないなら評価せず再行動
-		/*if (friedFood == null)
-		{
-			currentCustomer.DoAction();
-			return;
-		}*/
-
-		//●ここら辺もっときれいにできる気がする●
 		currentCustomer.CustomerReact(friedFood);
 	}
 
