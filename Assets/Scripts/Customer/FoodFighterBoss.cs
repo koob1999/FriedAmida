@@ -5,7 +5,7 @@ using Amida;
 
 public class FoodFighterBoss : Boss
 {
-	const int ClearCalorie = 3000;
+	const int ClearCalorie = 1000;
 	int currentCalorie = ClearCalorie;
 
 	override public void CustomerReact(FriedFood friedFood)
