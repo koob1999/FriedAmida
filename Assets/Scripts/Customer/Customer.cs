@@ -22,7 +22,7 @@ public class Customer : MonoBehaviour
 	public delegate void AmidaResetDelegate();
 	public AmidaResetDelegate AmidaResetAction;
 	public bool HasClalorie;
-	int cookedFoodNum = 0;   //一回の行動で調理した食材の数
+	protected int cookedFoodNum = 0;   //一回の行動で調理した食材の数
 	int CookedFoodNum
 	{
 		get { return cookedFoodNum; }
@@ -31,26 +31,10 @@ public class Customer : MonoBehaviour
 		{
 			cookedFoodNum = value;
 
-			//全ての食材を揚げ終わったときのみ判定
-			if (cookedFoodNum == SynchroFoodNum)
-			{
-				//全ての食材が揚げ物になっていない場合再行動
-				if (successFriedFoodNum == SynchroFoodNum)
-				{
-					AddPointAction(totalGage, totalScore);
-					CheckClear();
-				}
-				else
-				{
-					DoAction();
-				}
-
-				cookedFoodNum = 0;
-				successFriedFoodNum = 0;
-			}
+			TurnEndAction();
 		}
 	}
-	int successFriedFoodNum = 0;	//実際に揚がった揚げ物の数
+	protected int successFriedFoodNum = 0;	//実際に揚がった揚げ物の数
 	protected int totalScore = 0;
 	protected int totalGage = 0;
 
@@ -80,8 +64,8 @@ public class Customer : MonoBehaviour
 	Animator animator;
 
 	//▼クリア判定
-	bool isClear = false;
-	public bool IsClear
+	protected bool isClear = false;
+	virtual public bool IsClear
 	{
 		get { return isClear; }
 		//GameManagerにCutomerを倒したことを表すメソッドをデリゲートで渡す
@@ -190,6 +174,29 @@ public class Customer : MonoBehaviour
 				break;
 		}
 		yield return new WaitForSeconds(1);
+	}
+
+	virtual protected void TurnEndAction()
+	{
+		//全ての食材を揚げ終わったときのみ判定
+		if (cookedFoodNum != SynchroFoodNum)
+		{
+			return;
+		}
+			
+		//全ての食材が揚げ物になっていない場合再行動
+		if (successFriedFoodNum == SynchroFoodNum)
+		{
+			AddPointAction(totalGage, totalScore);
+			CheckClear();
+		}
+		else
+		{
+			DoAction();
+		}
+	
+		cookedFoodNum = 0;
+		successFriedFoodNum = 0;
 	}
 
 	virtual protected void SaveScore(FriedFood friedFood)
