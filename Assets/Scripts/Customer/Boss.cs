@@ -50,8 +50,6 @@ public class Boss : Customer
 			return;
 		}
 
-
-
 		switch (friedFood.FriedFoodReview)
 		{
 			case Cooking.FriedFoodReview.good:
