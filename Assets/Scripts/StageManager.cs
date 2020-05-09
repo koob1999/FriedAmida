@@ -12,7 +12,8 @@ public class StageManager : MonoBehaviour
 		nomal,
 		calorieMob,
 		strongMob,
-		foodFighterBoss
+		foodFighterBoss,
+		groumetBoss
 	}
 
 
@@ -24,6 +25,7 @@ public class StageManager : MonoBehaviour
 	[SerializeField] GameObject calorieMob;
 	[SerializeField] GameObject strongMob;
 	[SerializeField] GameObject foodFighterBoss;
+	[SerializeField] GameObject groumetBoss;
 	[SerializeField] GameObject enemyGeneratePlace;//敵の生成場所設定場所
 	[SerializeField] StageGenerater stageGenerater;
 	[NonSerialized] public List<Oil> Oils;
@@ -117,6 +119,8 @@ public class StageManager : MonoBehaviour
 				return strongMob;
 			case Enemy.foodFighterBoss:
 				return foodFighterBoss;
+			case Enemy.groumetBoss:
+				return groumetBoss;
 			default:
 				return nomalMob;
 		}
