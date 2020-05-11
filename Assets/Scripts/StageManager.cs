@@ -128,7 +128,7 @@ public class StageManager : MonoBehaviour
 
 	public bool IsLastEnemy()
 	{
-		return PresentEnemyNum == enemies.Length - 1;
+		return PresentEnemyNum == enemies.Length;
 	}
 
 	public void ResetAmidaLines()
