@@ -108,6 +108,8 @@ public class GameManager : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
     {
+		Time.timeScale = 1;
+
 		stageManager.SetCompletedActionToOil(CompletedFriedFood);
 
 		stageManager.UpdateRemainLinesText = text =>
@@ -218,7 +220,7 @@ public class GameManager : MonoBehaviour
 		//８：スコア表示等
 
 		//9：次のステージへ
-		Debug.Log("clear");
+		SceneChanger.MoveNextStage();
 	}
 
 	void RushEnd()
