@@ -220,7 +220,7 @@ public class GameManager : MonoBehaviour
 		//８：スコア表示等
 
 		//9：次のステージへ
-		StageChange.MoveNextStage();
+		SceneChanger.MoveNextStage();
 	}
 
 	void RushEnd()
