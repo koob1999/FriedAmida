@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Midnight.unity
     guid: bd37f160b3cc2db4e97df912020b1f57
+  - enabled: 1
+    path: Assets/Scenes/HowToPlay.unity
+    guid: 4deb01f11a5220f46a839bc9c9363e1a
   m_configObjects: {}
