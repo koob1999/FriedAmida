@@ -20,4 +20,9 @@ public class SceneChanger:MonoBehaviour
 				break;
 		}
 	}
+
+	public void SceneChange(string sceneName)
+	{
+		SceneManager.LoadScene(sceneName);
+	}
 }
