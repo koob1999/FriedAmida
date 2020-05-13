@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public static class SceneChanger
+public class SceneChanger
 {
-	public static void MoveNextStage()
+	public void MoveNextStage()
 	{
 		switch (SceneManager.GetActiveScene().name)
 		{
