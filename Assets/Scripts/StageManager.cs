@@ -18,6 +18,7 @@ public class StageManager : MonoBehaviour
 
 
 	[SerializeField] Text customerNumText;
+	[SerializeField] Text norumaText;
 
 	//▼敵関連
 	[SerializeField] Enemy[] enemies;//出現する敵の設定用
@@ -41,6 +42,7 @@ public class StageManager : MonoBehaviour
 		{
 			presentEnemyNum = value;
 			customerNumText.text = (presentEnemyNum).ToString() + "人目";
+			norumaText.text = "ノルマあと" + (enemies.Length - presentEnemyNum + 1).ToString() + "人";
 		}
 	}
 
