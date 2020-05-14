@@ -31,11 +31,27 @@ public class FoodGenerater : MonoBehaviour
 		GameObject[] createdObjs = new GameObject[foodTypes.Length];
 
 		//1:引数分食材を生成
-		GameObject[] generatePlaces = GeneratePlaces.Shuffle(foodTypes.Length);
+		GeneratePlaces.Shuffle();
 		for(int i = 0; i < foodTypes.Length; i++)
 		{
-			createdObjs[i] = FoodGenerate(foodTypes[i], generatePlaces[i].transform.position);
+			createdObjs[i] = FoodGenerate(foodTypes[i], GeneratePlaces[i].transform.position);
 		}
+		//x軸を元にソート
+		System.Array.Sort(createdObjs, (obj1, obj2) =>
+			{
+				if (obj1.transform.position.x > obj2.transform.position.x)
+				{
+					return 1;
+				}
+				else if(obj1.transform.position.x < obj2.transform.position.x)
+				{
+					return -1;
+				}
+				else
+				{
+					return 0;
+				}
+			});
 		//2:左から順にアニメーションを再生
 		StartCoroutine(AnimateFoodCoroutine(createdObjs));
 	}
