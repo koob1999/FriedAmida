@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneChanger
+public class SceneChanger : MonoBehaviour
 {
 	public void MoveNextStage()
 	{
@@ -19,5 +19,10 @@ public class SceneChanger
 				SceneManager.LoadScene("Noon");
 				break;
 		}
+	}
+
+	public void LoadScene(string sceneName)
+	{
+		SceneManager.LoadScene(sceneName);
 	}
 }
