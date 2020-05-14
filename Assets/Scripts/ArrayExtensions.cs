@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+using System;
 
 public static class ArrayExtensions
 {
@@ -8,14 +10,11 @@ public static class ArrayExtensions
 	//配列をシャッフルする
 	public static void Shuffle<T>(this T[] types)
 	{
-		for (int i = 0; i < types.Length * 10; i++) 
+		T[] types2 = types.OrderBy(i => Guid.NewGuid()).ToArray();
+	
+		for(int i=0; i < types.Length; i++)
 		{
-			int rand1 = Random.Range(0, types.Length);
-			int rand2 = Random.Range(0, types.Length);
-
-			T temp = types[rand1];
-			types[rand1] = types[rand2];
-			types[rand2] = temp;
+			types[i] = types2[i];
 		}
 	}
 }
