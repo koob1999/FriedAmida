@@ -5,16 +5,16 @@ using UnityEngine.UI;
 
 public class KeySelectButton : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
+	// Start is called before the first frame update
+	void Start()
+	{
 		Selectable sel = GetComponent<Selectable>();
 		sel.Select();
 	}
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	// Update is called once per frame
+	void Update()
+	{
+
+	}
 }
