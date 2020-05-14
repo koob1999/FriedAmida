@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Amida;
@@ -10,7 +11,7 @@ public class FoodGenerater : MonoBehaviour
 	[SerializeField] GameObject pork;
 	[SerializeField] GameObject shrimp;
 
-	[System.NonSerialized] public GameObject[] GeneratePlaces;
+	[NonSerialized] public GameObject[] GeneratePlaces;
 	[SerializeField] int generateSpan;
 
     // Start is called before the first frame update
@@ -37,7 +38,7 @@ public class FoodGenerater : MonoBehaviour
 			createdObjs[i] = FoodGenerate(foodTypes[i], GeneratePlaces[i].transform.position);
 		}
 		//x軸を元にソート
-		System.Array.Sort(createdObjs, (obj1, obj2) =>
+		Array.Sort(createdObjs, (obj1, obj2) =>
 			{
 				if (obj1.transform.position.x > obj2.transform.position.x)
 				{
