@@ -117,12 +117,12 @@ public class StageGenerater : MonoBehaviour
 
 		//▼アイテム生成場所の生成
 		//ここGameObjectよりVector３で渡したほうが良い
-		GameObject[,] itemGeneraterPlaces = new GameObject[underBoxTypes.Length, HorizontalLinesNum - 2];
+		GameObject[,] itemGeneraterPlaces = new GameObject[underBoxTypes.Length, HorizontalLinesNum - 3];
 		for (int i = 0; i < underBoxTypes.Length; i++)
 		{
-			for (int j = 0; j < HorizontalLinesNum - 2; j++)
+			for (int j = 0; j < HorizontalLinesNum - 3; j++)
 			{
-				itemGeneraterPlaces[i, j] = Instantiate(new GameObject("itemGeneraterPlace"), new Vector3(minXPos + (xInterval * i), maxYPos - (yInterval * j) - 1, 0), Quaternion.identity);
+				itemGeneraterPlaces[i, j] = Instantiate(new GameObject("itemGeneraterPlace"), new Vector3(minXPos + (xInterval * i), maxYPos - (yInterval * (j + 1)) - 1, 0), Quaternion.identity);
 			}
 		}
 
