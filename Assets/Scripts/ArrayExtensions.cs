@@ -8,13 +8,8 @@ public static class ArrayExtensions
 {
 
 	//配列をシャッフルする
-	public static void Shuffle<T>(this T[] types)
+	public static T[] Shuffle<T>(this T[] types)
 	{
-		T[] types2 = types.OrderBy(i => Guid.NewGuid()).ToArray();
-	
-		for(int i=0; i < types.Length; i++)
-		{
-			types[i] = types2[i];
-		}
+		return types.OrderBy(i => Guid.NewGuid()).ToArray();
 	}
 }
