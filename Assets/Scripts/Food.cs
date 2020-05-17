@@ -22,6 +22,16 @@ public class Food : MonoBehaviour
 	int eggCount = 0;
 	int pankoCount = 0;
 	int badItemCount = 0;
+	public int BadItemCount
+	{
+		get { return badItemCount; }
+
+		private set
+		{
+			GetComponent<SpriteRenderer>().sprite = rotFoodSprite;
+			badItemCount = value;
+		}
+	}
 	int rushItemCount = 0;
 
 	//▼落下してるか
@@ -29,6 +39,9 @@ public class Food : MonoBehaviour
 
 	//▼アニメーション
 	Animator animator;
+
+	//▼腐り絵
+	[SerializeField] Sprite rotFoodSprite;
 
 	public int XDirection
 	{
@@ -104,7 +117,7 @@ public class Food : MonoBehaviour
 				pankoCount++;
 				break;
 			case "badItem":
-				badItemCount++;
+				BadItemCount++;
 				break;
 			case "rushItem":
 				rushItemCount++;
