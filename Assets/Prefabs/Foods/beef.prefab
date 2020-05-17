@@ -227,6 +227,7 @@ MonoBehaviour:
   clearPankoNum: 1
   OilTemp: 1
   calorie: 400
+  rotFoodSprite: {fileID: 21300000, guid: 00e9784197392cd4099dfcd9fb36ca08, type: 3}
 --- !u!95 &8469332881436965431
 Animator:
   serializedVersion: 3

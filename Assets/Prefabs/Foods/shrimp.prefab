@@ -101,6 +101,7 @@ MonoBehaviour:
   clearPankoNum: 1
   OilTemp: 0
   calorie: 100
+  rotFoodSprite: {fileID: 21300000, guid: af072be016a01534784e017f6b071d66, type: 3}
 --- !u!61 &3853307136886404806
 BoxCollider2D:
   m_ObjectHideFlags: 0
