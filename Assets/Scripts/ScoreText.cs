@@ -9,10 +9,10 @@ public class ScoreText : MonoBehaviour
 	[SerializeField] Text comboScoreObj;
 	[SerializeField] Text totalScoreObj;
 
-	public void SetText(string scoreStr,string comboScoreStr,string totalScoreStr)
+	public void SetText(string scoreText, string comboScoreText, string totalScoreText)
 	{
-		scoreObj.text = scoreStr;
-		comboScoreObj.text = comboScoreStr;
-		totalScoreObj.text = totalScoreStr;
+		scoreObj.text = scoreText;
+		comboScoreObj.text = comboScoreText;
+		totalScoreObj.text = totalScoreText;
 	}
 }

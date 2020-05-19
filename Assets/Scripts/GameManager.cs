@@ -239,9 +239,9 @@ public class GameManager : MonoBehaviour
 		//８：スコア表示等
 		GameObject obj = Instantiate(scoreTextObj, new Vector3(0, 0, 0), Quaternion.identity);
 		obj.GetComponent<ScoreText>().SetText(
-			Score.ToString(),
-			Combo.ToString() + "×100",
-			"合計スコア" + (Score + Combo * 100).ToString() + "点！");
+			"スコア:" + Score.ToString(),
+			"最大コンボ数:" + Combo.ToString() + "×100",
+			"合計スコア:" + (Score + Combo * 100).ToString() + "点！");
 	}
 
 	void RushEnd()
@@ -256,6 +256,11 @@ public class GameManager : MonoBehaviour
 
 		while (time < RushTime)
 		{
+			if (IsClear)
+			{
+				yield break;
+			}
+
 			time += Time.deltaTime;
 			rushGageImage.fillAmount = (RushTime - time) / RushTime;
 			yield return null;
