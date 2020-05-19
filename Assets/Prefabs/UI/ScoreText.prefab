@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2165615172734261817}
   - component: {fileID: 2165615172734261818}
   m_Layer: 5
-  m_Name: Text (1)
+  m_Name: 'ComboScoreText '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -89,12 +89,12 @@ GameObject:
   - component: {fileID: 2165615172913796585}
   - component: {fileID: 2165615172913796586}
   m_Layer: 5
-  m_Name: Text
+  m_Name: ScoreText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2165615172913796587
 RectTransform:
   m_ObjectHideFlags: 0
@@ -167,6 +167,7 @@ GameObject:
   - component: {fileID: 2165615173074586681}
   - component: {fileID: 2165615173074586682}
   - component: {fileID: 2165615173074586683}
+  - component: {fileID: 8846745878384240614}
   m_Layer: 5
   m_Name: ScoreText
   m_TagString: Untagged
@@ -277,6 +278,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8846745878384240614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2165615173074586692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89548d5389595524dbc07440e902d0a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreObj: {fileID: 2165615172913796586}
+  comboScoreObj: {fileID: 2165615172734261818}
+  totalScoreObj: {fileID: 2165615174149550146}
 --- !u!1 &2165615174149550156
 GameObject:
   m_ObjectHideFlags: 0
@@ -289,12 +305,12 @@ GameObject:
   - component: {fileID: 2165615174149550145}
   - component: {fileID: 2165615174149550146}
   m_Layer: 5
-  m_Name: Text (2)
+  m_Name: 'TotalScoreText '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2165615174149550147
 RectTransform:
   m_ObjectHideFlags: 0

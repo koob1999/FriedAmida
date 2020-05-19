@@ -237,7 +237,11 @@ public class GameManager : MonoBehaviour
 	{
 		IsClear = true;
 		//８：スコア表示等
-		Instantiate(scoreTextObj, new Vector3(0, 0, 0), Quaternion.identity);
+		GameObject obj = Instantiate(scoreTextObj, new Vector3(0, 0, 0), Quaternion.identity);
+		obj.GetComponent<ScoreText>().SetText(
+			Score.ToString(),
+			Combo.ToString() + "×100",
+			"合計スコア" + (Score + Combo * 100).ToString() + "点！");
 	}
 
 	void RushEnd()
