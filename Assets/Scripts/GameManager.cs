@@ -27,6 +27,18 @@ public class GameManager : MonoBehaviour
 	[SerializeField] int limitTime;
 	bool IsTimeOver => limitTime <= 0;
 
+	bool isClear = false;
+	bool IsClear
+	{
+		get { return isClear; }
+
+		set
+		{
+			isClear = value;
+			lineCursol.IsClear = value;
+		}
+	}
+
 	bool isRush = false;
 	bool IsRush
 	{
@@ -126,6 +138,11 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		if (IsClear)
+		{
+			return;
+		}
+
 		//倍速処理
 		if (Input.GetKeyDown(KeyCode.X))
 		{
@@ -218,6 +235,7 @@ public class GameManager : MonoBehaviour
 
 	void ClearGame()
 	{
+		IsClear = true;
 		//８：スコア表示等
 		Instantiate(scoreTextObj, new Vector3(0, 0, 0), Quaternion.identity);
 	}
@@ -250,6 +268,11 @@ public class GameManager : MonoBehaviour
 
 		while (!IsTimeOver)
 		{
+			if (IsClear)
+			{
+				yield break;
+			}
+
 			yield return new WaitForSeconds(1);
 			limitTime--;
 			DisplayTime();
