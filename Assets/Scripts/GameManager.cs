@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField] Text minuteText;
 	[SerializeField] Text secandText;
 
+	[SerializeField] GameObject scoreTextObj;
 	GameObject currentEnemyObj;//現在戦闘中の敵
 	Customer currentCustomer;//●変数名微妙●
 
@@ -218,10 +219,7 @@ public class GameManager : MonoBehaviour
 	void ClearGame()
 	{
 		//８：スコア表示等
-
-		//9：次のステージへ
-		SceneChanger sceneChanger = new SceneChanger();
-		sceneChanger.MoveNextStage();
+		Instantiate(scoreTextObj, new Vector3(0, 0, 0), Quaternion.identity);
 	}
 
 	void RushEnd()
