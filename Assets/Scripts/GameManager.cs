@@ -20,11 +20,24 @@ public class GameManager : MonoBehaviour
 	[SerializeField] Text minuteText;
 	[SerializeField] Text secandText;
 
+	[SerializeField] GameObject scoreTextObj;
 	GameObject currentEnemyObj;//現在戦闘中の敵
 	Customer currentCustomer;//●変数名微妙●
 
 	[SerializeField] int limitTime;
 	bool IsTimeOver => limitTime <= 0;
+
+	bool isClear = false;
+	bool IsClear
+	{
+		get { return isClear; }
+
+		set
+		{
+			isClear = value;
+			lineCursol.IsClear = value;
+		}
+	}
 
 	bool isRush = false;
 	bool IsRush
@@ -125,6 +138,11 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		if (IsClear)
+		{
+			return;
+		}
+
 		//倍速処理
 		if (Input.GetKeyDown(KeyCode.X))
 		{
@@ -217,11 +235,13 @@ public class GameManager : MonoBehaviour
 
 	void ClearGame()
 	{
+		IsClear = true;
 		//８：スコア表示等
-
-		//9：次のステージへ
-		SceneChanger sceneChanger = new SceneChanger();
-		sceneChanger.MoveNextStage();
+		GameObject obj = Instantiate(scoreTextObj, new Vector3(0, 0, 0), Quaternion.identity);
+		obj.GetComponent<ScoreText>().SetText(
+			"スコア:" + Score.ToString(),
+			"最大コンボ数:" + Combo.ToString() + "×100",
+			"合計スコア:" + (Score + Combo * 100).ToString() + "点！");
 	}
 
 	void RushEnd()
@@ -236,6 +256,11 @@ public class GameManager : MonoBehaviour
 
 		while (time < RushTime)
 		{
+			if (IsClear)
+			{
+				yield break;
+			}
+
 			time += Time.deltaTime;
 			rushGageImage.fillAmount = (RushTime - time) / RushTime;
 			yield return null;
@@ -252,6 +277,11 @@ public class GameManager : MonoBehaviour
 
 		while (!IsTimeOver)
 		{
+			if (IsClear)
+			{
+				yield break;
+			}
+
 			yield return new WaitForSeconds(1);
 			limitTime--;
 			DisplayTime();

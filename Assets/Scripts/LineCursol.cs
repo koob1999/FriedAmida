@@ -67,6 +67,7 @@ public class LineCursol : MonoBehaviour
 	public HorizontalLine[,] AmidaLines;
 
 	Position position;
+	public bool IsClear = false;
 
 	enum Direction
 	{
@@ -85,6 +86,11 @@ public class LineCursol : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		if (IsClear)
+		{
+			return;
+		}
+
 		transform.position = AmidaLines[position.X, position.Y].transform.position;
 
 		if (Input.GetKeyDown(KeyCode.UpArrow))

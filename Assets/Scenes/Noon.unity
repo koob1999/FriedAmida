@@ -849,6 +849,8 @@ MonoBehaviour:
   calorieGageImage: {fileID: 91724116}
   minuteText: {fileID: 1441626312}
   secandText: {fileID: 969084601}
+  scoreTextObj: {fileID: 2165615173074586692, guid: e3c1ee48c381a314296cad512b32792e,
+    type: 3}
   limitTime: 180
 --- !u!4 &658604814
 Transform:
