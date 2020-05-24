@@ -26,8 +26,8 @@ public class StageGenerater : MonoBehaviour
 	[SerializeField] UnderBoxType[] underBoxTypes;
 	[SerializeField, Range(3, 8)] int HorizontalLinesNum;
 	float maxXPos = 4;
-	float minXPos = -7;
-	float maxYPos = 4.5f;
+	float minXPos = -7.7f;
+	float maxYPos = 4.3f;
 	float minYPos = -3;
 	//参照パス
 	[SerializeField] LineCursol lineCursol;
@@ -49,7 +49,7 @@ public class StageGenerater : MonoBehaviour
 	public void GenerateStage(StageManager stageManager)
 	{
 		float xLength = maxXPos - minXPos;
-		float xInterval = 2;
+		float xInterval = 2.55f;
 		float yLength = maxYPos - minYPos;
 		float yInterval=yLength/(HorizontalLinesNum + 1);
 
@@ -67,7 +67,7 @@ public class StageGenerater : MonoBehaviour
 			for(int j = 0; j < HorizontalLinesNum; j++)
 			{
 				amidaLines[i, j] = Instantiate(HorizontalLine,
-												new Vector3(minXPos + (xInterval * i) + 1, maxYPos - ((yInterval * j) + (i % 2 * yInterval / 2)) - 1, 0),
+												new Vector3(minXPos + (xInterval * i) + (xInterval / 2), maxYPos - ((yInterval * j) + (i % 2 * yInterval / 2)) - 1, 0),
 												Quaternion.identity).GetComponent<HorizontalLine>();
 
 				amidaLines[i, j].MinusRemainLinesAction = () => { stageManager.RemainLines--; };
