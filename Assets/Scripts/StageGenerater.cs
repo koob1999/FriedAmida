@@ -49,7 +49,7 @@ public class StageGenerater : MonoBehaviour
 	public void GenerateStage(StageManager stageManager)
 	{
 		float xLength = maxXPos - minXPos;
-		float xInterval = 2.55f;
+		float xInterval = 2.35f;
 		float yLength = maxYPos - minYPos;
 		float yInterval=yLength/(HorizontalLinesNum + 1);
 
