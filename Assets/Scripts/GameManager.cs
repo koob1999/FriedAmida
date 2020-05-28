@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField] Text secandText;
 
 	[SerializeField] GameObject scoreTextObj;
+	[SerializeField] GameObject gameOverTextObj;
 	GameObject currentEnemyObj;//現在戦闘中の敵
 	Customer currentCustomer;//●変数名微妙●
 
@@ -286,6 +287,12 @@ public class GameManager : MonoBehaviour
 			limitTime--;
 			DisplayTime();
 		}
+
+		GameObject obj = Instantiate(gameOverTextObj, new Vector3(0, 0, 0), Quaternion.identity);
+		obj.GetComponent<ScoreText>().SetText(
+			"スコア:" + Score.ToString(),
+			"最大コンボ数:" + Combo.ToString() + "×100",
+			"合計スコア:" + (Score + Combo * 100).ToString() + "点！");
 	}
 
 	void DisplayTime()
