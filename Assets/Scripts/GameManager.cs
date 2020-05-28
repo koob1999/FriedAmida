@@ -288,6 +288,7 @@ public class GameManager : MonoBehaviour
 			DisplayTime();
 		}
 
+		IsGameStop = true;
 		GameObject obj = Instantiate(gameOverTextObj, new Vector3(0, 0, 0), Quaternion.identity);
 		obj.GetComponent<ScoreText>().SetText(
 			"スコア:" + Score.ToString(),
