@@ -27,15 +27,15 @@ public class GameManager : MonoBehaviour
 	[SerializeField] int limitTime;
 	bool IsTimeOver => limitTime <= 0;
 
-	bool isClear = false;
-	bool IsClear
+	bool isGameStop = false;
+	bool IsGameStop
 	{
-		get { return isClear; }
+		get { return isGameStop; }
 
 		set
 		{
-			isClear = value;
-			lineCursol.IsClear = value;
+			isGameStop = value;
+			lineCursol.IsGameStop = value;
 		}
 	}
 
@@ -138,7 +138,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		if (IsClear)
+		if (IsGameStop)
 		{
 			return;
 		}
@@ -235,7 +235,7 @@ public class GameManager : MonoBehaviour
 
 	void ClearGame()
 	{
-		IsClear = true;
+		IsGameStop = true;
 		//８：スコア表示等
 		GameObject obj = Instantiate(scoreTextObj, new Vector3(0, 0, 0), Quaternion.identity);
 		obj.GetComponent<ScoreText>().SetText(
@@ -256,7 +256,7 @@ public class GameManager : MonoBehaviour
 
 		while (time < RushTime)
 		{
-			if (IsClear)
+			if (IsGameStop)
 			{
 				yield break;
 			}
@@ -277,7 +277,7 @@ public class GameManager : MonoBehaviour
 
 		while (!IsTimeOver)
 		{
-			if (IsClear)
+			if (IsGameStop)
 			{
 				yield break;
 			}
