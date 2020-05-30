@@ -774,6 +774,8 @@ MonoBehaviour:
   secandText: {fileID: 969084601}
   scoreTextObj: {fileID: 2165615173074586692, guid: e3c1ee48c381a314296cad512b32792e,
     type: 3}
+  gameOverTextObj: {fileID: 4683276454934729685, guid: f8abf36c0970c664588bcf6a9d8e4ae9,
+    type: 3}
   limitTime: 180
 --- !u!4 &658604814
 Transform:
@@ -1654,7 +1656,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9d9ad7dac6f9724991ff5e7ba7d777f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsClear: 0
+  IsGameStop: 0
 --- !u!212 &1712355796
 SpriteRenderer:
   m_ObjectHideFlags: 0
