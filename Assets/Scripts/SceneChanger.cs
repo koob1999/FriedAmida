@@ -15,6 +15,9 @@ public class SceneChanger : MonoBehaviour
 			case "Evening":
 				SceneManager.LoadScene("Midnight");
 				break;
+			case "Midnight":
+				SceneManager.LoadScene("Ending");
+				break;
 			default:
 				SceneManager.LoadScene("Noon");
 				break;

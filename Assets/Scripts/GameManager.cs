@@ -243,6 +243,7 @@ public class GameManager : MonoBehaviour
 			"スコア:" + Score.ToString(),
 			"最大コンボ数:" + Combo.ToString() + "×100",
 			"合計スコア:" + (Score + Combo * 100).ToString() + "点！");
+		ScoreData.SaveScore(Score + Combo * 100);
 	}
 
 	void RushEnd()
@@ -294,6 +295,8 @@ public class GameManager : MonoBehaviour
 			"スコア:" + Score.ToString(),
 			"最大コンボ数:" + Combo.ToString() + "×100",
 			"合計スコア:" + (Score + Combo * 100).ToString() + "点！");
+
+		ScoreData.ResetScore();
 	}
 
 	void DisplayTime()
