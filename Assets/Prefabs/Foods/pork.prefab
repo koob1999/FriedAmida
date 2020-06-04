@@ -96,12 +96,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d753d51e0176324fbea425dc9f8ce10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  foodType: 0
   clearKomugikoNum: 1
   clearEggNum: 1
   clearPankoNum: 1
   OilTemp: 1
   calorie: 300
-  rotFoodSprite: {fileID: 21300000, guid: f85e4c282ade5f046826182fb6703972, type: 3}
 --- !u!61 &5328517870861015522
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -159,10 +159,10 @@ Animator:
   m_GameObject: {fileID: 1960697773169935230}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 00e0be66ef5b1594fa429f7be627c5e9, type: 2}
+  m_Controller: {fileID: 9100000, guid: 9260157429f72d040afb3d4bbd59fcdb, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1

@@ -7,6 +7,9 @@ public class Food : MonoBehaviour
 {
 	public Cooking.FoodType foodType;
 
+	public delegate void FriedFoodDelegate();
+	public FriedFoodDelegate FriedFoodAction;
+
 	//▼移動関連
 	int xDirction = 0;
 	float speed = 0.02f;
@@ -30,7 +33,7 @@ public class Food : MonoBehaviour
 
 		private set
 		{
-			GetComponent<SpriteRenderer>().sprite = rotFoodSprite;
+			animator.SetTrigger("rot");
 			badItemCount = value;
 		}
 	}
@@ -41,9 +44,6 @@ public class Food : MonoBehaviour
 
 	//▼アニメーション
 	Animator animator;
-
-	//▼腐り絵
-	[SerializeField] Sprite rotFoodSprite;
 
 	public int XDirection
 	{
@@ -176,11 +176,16 @@ public class Food : MonoBehaviour
 
 	public void AnimeFlash()
 	{
-		animator.SetBool("flash", true);
+		animator.SetTrigger("flash");
 	}
 
 	public void StartFall()
 	{
 		IsFall = true;
+	}
+
+	public void FryFood()
+	{
+		FriedFoodAction();
 	}
 }
