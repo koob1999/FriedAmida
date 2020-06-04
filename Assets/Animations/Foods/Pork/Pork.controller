@@ -6,7 +6,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Beef 1
+  m_Name: Pork
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: flashing
@@ -205,7 +205,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 3e070b54652f8924c96917577ee62818, type: 2}
+  m_Motion: {fileID: 7400000, guid: 25f345e2fe3849e47ad34a88edcfcdd5, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -232,7 +232,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 464bfc29fc631f8408e69b69b7200ec6, type: 2}
+  m_Motion: {fileID: 7400000, guid: 8afcb9b7a22ff6047bcac4c13243fbde, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -258,7 +258,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: bd4ddb13f050f32479cfaa86a8c762c0, type: 2}
+  m_Motion: {fileID: 7400000, guid: 21198d7bc3dea4843b7b63cd158a64aa, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
