@@ -214,9 +214,14 @@ public class GameManager : MonoBehaviour
 		{
 			return;
 		}
+		if (friedFood == null)
+		{
+			currentCustomer.CustomerReact(null);
+			return;
+		}
 
 		//コンボ処理
-		if (friedFood != null && friedFood.FriedFoodReview == Cooking.FriedFoodReview.good)
+		if (friedFood.FriedFoodReview == Cooking.FriedFoodReview.good)
 		{
 			Combo++;
 		}
