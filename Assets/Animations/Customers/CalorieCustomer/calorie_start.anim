@@ -169,7 +169,7 @@ AnimationClip:
   m_Events:
   - time: 0.8333333
     functionName: SetText
-    data: "\u3061\u308F\u30FC\u3063\u3059"
+    data: "\u3061\u308F\u30FC\u3063\u3059\uFF01"
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
