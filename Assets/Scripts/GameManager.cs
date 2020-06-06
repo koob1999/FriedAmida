@@ -164,7 +164,7 @@ public class GameManager : MonoBehaviour
 		AppearNextEnemy();
 
 		//2：敵に応じた行動
-		currentCustomer.DoAction();
+		//currentCustomer.DoAction();
 	}
 
 	//敵生成
@@ -204,7 +204,7 @@ public class GameManager : MonoBehaviour
 		}
 
 		AppearNextEnemy();
-		currentCustomer.DoAction();
+		//currentCustomer.DoAction();
 	}
 
 	void CompletedFriedFood(FriedFood friedFood)

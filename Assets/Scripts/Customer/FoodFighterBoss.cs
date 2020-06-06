@@ -20,7 +20,7 @@ public class FoodFighterBoss : Boss
 	}
 
 	//関数名が微妙
-	override protected void CheckClear()
+	override public void CheckClear()
 	{
 		if (currentCalorie <= 0)
 		{

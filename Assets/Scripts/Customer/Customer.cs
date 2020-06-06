@@ -61,7 +61,7 @@ public class Customer : MonoBehaviour
 	[NonSerialized] public Cooking.FoodType[] FoodTypes;
 
 	//▼アニメーション関連
-	Animator animator;
+	protected Animator animator;
 
 	//▼クリア判定
 	protected bool isClear = false;
@@ -188,7 +188,8 @@ public class Customer : MonoBehaviour
 		if (successFriedFoodNum == SynchroFoodNum)
 		{
 			AddPointAction(totalGage, totalScore);
-			CheckClear();
+			//CheckClear();
+			animator.SetTrigger("end");
 		}
 		else
 		{
@@ -219,7 +220,7 @@ public class Customer : MonoBehaviour
 		}
 	}
 
-	virtual protected void CheckClear()
+	virtual public void CheckClear()
 	{
 		IsClear = true;
 	}

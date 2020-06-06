@@ -475,7 +475,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   customerNumText: {fileID: 175879454}
   norumaText: {fileID: 60612523}
-  enemies: 000000000200000001000000
+  enemies: 000000000000000000000000
   nomalMob: {fileID: 8954283933166768306, guid: 73121d680032dd842961ab7bb8037239,
     type: 3}
   calorieMob: {fileID: 990452483863180522, guid: 9e3ea8cc5de3f614fb373b0c1507d38e,
@@ -1701,7 +1701,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1704372097}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7, y: -1.84, z: 0}
+  m_LocalPosition: {x: 10.28, y: -1.84, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 235228152}
