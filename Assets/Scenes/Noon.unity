@@ -475,7 +475,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   customerNumText: {fileID: 175879454}
   norumaText: {fileID: 60612523}
-  enemies: 000000000000000000000000
+  enemies: 0000000002000000010000000300000004000000
   nomalMob: {fileID: 8954283933166768306, guid: 73121d680032dd842961ab7bb8037239,
     type: 3}
   calorieMob: {fileID: 990452483863180522, guid: 9e3ea8cc5de3f614fb373b0c1507d38e,

@@ -134,45 +134,42 @@ public class Customer : MonoBehaviour
 
 	virtual public void CustomerReact(FriedFood friedFood)
 	{
-		if (friedFood != null)
-		{
-			successFriedFoodNum++;
-			SaveScore(friedFood);
-
-			//アニメーション
-			StartCoroutine(AnimeReacion(friedFood));
-		}
+		StartCoroutine(AnimeReacion(friedFood));
 	}
 
 	protected IEnumerator AnimeReacion(FriedFood friedFood)
 	{
 		//アニメーション
-
-		switch (friedFood.FriedFoodReview)
+		if (friedFood != null)
 		{
-			case Cooking.FriedFoodReview.good:
-				animator.SetBool("good", true);
-				animator.SetBool("angry", false);
-				animator.SetBool("saitei", false);
-				break;
-			case Cooking.FriedFoodReview.usually:
-				animator.SetBool("good", false);
-				animator.SetBool("angry", true);
-				animator.SetBool("saitei", false);
-				break;
-			case Cooking.FriedFoodReview.raw:
-				animator.SetBool("good", false);
-				animator.SetBool("angry", true);
-				animator.SetBool("saitei", false);
-				break;
-			case Cooking.FriedFoodReview.bad:
-				animator.SetBool("good", false);
-				animator.SetBool("angry", false);
-				animator.SetBool("saitei", true);
-				break;
-		}
-		yield return new WaitForSeconds(1);
+			successFriedFoodNum++;
+			SaveScore(friedFood);
 
+			switch (friedFood.FriedFoodReview)
+			{
+				case Cooking.FriedFoodReview.good:
+					animator.SetBool("good", true);
+					animator.SetBool("angry", false);
+					animator.SetBool("saitei", false);
+					break;
+				case Cooking.FriedFoodReview.usually:
+					animator.SetBool("good", false);
+					animator.SetBool("angry", true);
+					animator.SetBool("saitei", false);
+					break;
+				case Cooking.FriedFoodReview.raw:
+					animator.SetBool("good", false);
+					animator.SetBool("angry", true);
+					animator.SetBool("saitei", false);
+					break;
+				case Cooking.FriedFoodReview.bad:
+					animator.SetBool("good", false);
+					animator.SetBool("angry", false);
+					animator.SetBool("saitei", true);
+					break;
+			}
+			yield return new WaitForSeconds(1);
+		}
 		CookedFoodNum++;
 	}
 
@@ -188,7 +185,6 @@ public class Customer : MonoBehaviour
 		if (successFriedFoodNum == SynchroFoodNum)
 		{
 			AddPointAction(totalGage, totalScore);
-			//CheckClear();
 			animator.SetTrigger("end");
 		}
 		else
@@ -220,7 +216,7 @@ public class Customer : MonoBehaviour
 		}
 	}
 
-	virtual public void CheckClear()
+	public void SetIsClearToTrue()
 	{
 		IsClear = true;
 	}
