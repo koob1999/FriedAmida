@@ -40,10 +40,16 @@ public class Oil : MonoBehaviour
 		{
 			Food food;
 			food = collision.gameObject.GetComponent<Food>();
-			FriedFood friedFood;
-			friedFood = food.DoFry(OilTemp);
-			CompletedFriedFoodAction(friedFood);
-			Destroy(collision.gameObject);
+			food.IsFall = false;
+			food.FriedFoodAction = () =>
+			{
+				FriedFood friedFood;
+				friedFood = food.DoFry(OilTemp);
+				CompletedFriedFoodAction(friedFood);
+				Destroy(collision.gameObject);
+			};
+
+			collision.gameObject.GetComponent<Animator>().SetTrigger("fry");
 		}
 	}
 }

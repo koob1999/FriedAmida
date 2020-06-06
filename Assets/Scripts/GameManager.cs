@@ -20,8 +20,11 @@ public class GameManager : MonoBehaviour
 	[SerializeField] Text minuteText;
 	[SerializeField] Text secandText;
 
+	//▼プレハブ
 	[SerializeField] GameObject scoreTextObj;
 	[SerializeField] GameObject gameOverTextObj;
+	[SerializeField] GameObject foodDish;
+
 	GameObject currentEnemyObj;//現在戦闘中の敵
 	Customer currentCustomer;//●変数名微妙●
 
@@ -211,9 +214,14 @@ public class GameManager : MonoBehaviour
 		{
 			return;
 		}
+		if (friedFood == null)
+		{
+			currentCustomer.CustomerReact(null);
+			return;
+		}
 
 		//コンボ処理
-		if (friedFood != null && friedFood.FriedFoodReview == Cooking.FriedFoodReview.good)
+		if (friedFood.FriedFoodReview == Cooking.FriedFoodReview.good)
 		{
 			Combo++;
 		}
@@ -223,15 +231,10 @@ public class GameManager : MonoBehaviour
 			Combo = 0;
 		}
 
-		//揚げ物ができていないなら評価せず再行動
-		/*if (friedFood == null)
-		{
-			currentCustomer.DoAction();
-			return;
-		}*/
-
-		//●ここら辺もっときれいにできる気がする●
-		currentCustomer.CustomerReact(friedFood);
+		GameObject dish = Instantiate(foodDish, new Vector3(3.13f, -4.01f, 0), Quaternion.identity);
+		dish.GetComponent<DishController>().SetData(currentCustomer, friedFood);
+		
+		//currentCustomer.CustomerReact(friedFood);
 	}
 
 	void ClearGame()

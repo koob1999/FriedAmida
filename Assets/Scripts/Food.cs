@@ -5,6 +5,11 @@ using Amida;
 
 public class Food : MonoBehaviour
 {
+	public Cooking.FoodType foodType;
+
+	public delegate void FriedFoodDelegate();
+	public FriedFoodDelegate FriedFoodAction;
+
 	//▼移動関連
 	int xDirction = 0;
 	float speed = 0.02f;
@@ -28,7 +33,7 @@ public class Food : MonoBehaviour
 
 		private set
 		{
-			GetComponent<SpriteRenderer>().sprite = rotFoodSprite;
+			animator.SetTrigger("rot");
 			badItemCount = value;
 		}
 	}
@@ -39,9 +44,6 @@ public class Food : MonoBehaviour
 
 	//▼アニメーション
 	Animator animator;
-
-	//▼腐り絵
-	[SerializeField] Sprite rotFoodSprite;
 
 	public int XDirection
 	{
@@ -139,13 +141,13 @@ public class Food : MonoBehaviour
 		if (rushItemCount >= 1)
 		{
 			Debug.Log("rush");
-			friedFood = new FriedFood(Cooking.FriedFoodReview.good, this.calorie);
+			friedFood = new FriedFood(Cooking.FriedFoodReview.good, this.calorie, foodType);
 		}
 		//マイナスアイテムを取得していれば腐り状態
 		else if (badItemCount >= 1)
 		{
 			Debug.Log("bad");
-			friedFood = new FriedFood(Cooking.FriedFoodReview.bad, this.calorie);
+			friedFood = new FriedFood(Cooking.FriedFoodReview.bad, this.calorie, foodType);
 
 		}
 		else
@@ -154,19 +156,19 @@ public class Food : MonoBehaviour
 			if (oil == OilTemp && eggCount >= clearEggNum && komugikoCount >= clearKomugikoNum && pankoCount >= clearPankoNum)
 			{
 				Debug.Log("good");
-				friedFood = new FriedFood(Cooking.FriedFoodReview.good, this.calorie);
+				friedFood = new FriedFood(Cooking.FriedFoodReview.good, this.calorie, foodType);
 			}
 			//材料を全く取得していなければ素揚げ、生？
 			else if (eggCount == 0 && komugikoCount == 0 && pankoCount == 0)
 			{
 				Debug.Log("row");
-				friedFood = new FriedFood(Cooking.FriedFoodReview.raw, this.calorie);
+				friedFood = new FriedFood(Cooking.FriedFoodReview.raw, this.calorie, foodType);
 			}
 			//それ以外なら揚げ失敗
 			else
 			{
 				Debug.Log("usually");
-				friedFood = new FriedFood(Cooking.FriedFoodReview.usually, this.calorie);
+				friedFood = new FriedFood(Cooking.FriedFoodReview.usually, this.calorie, foodType);
 			}
 		}
 		return friedFood;
@@ -174,11 +176,16 @@ public class Food : MonoBehaviour
 
 	public void AnimeFlash()
 	{
-		animator.SetBool("flash", true);
+		animator.SetTrigger("flash");
 	}
 
 	public void StartFall()
 	{
 		IsFall = true;
+	}
+
+	public void FryFood()
+	{
+		FriedFoodAction();
 	}
 }
