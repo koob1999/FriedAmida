@@ -142,8 +142,6 @@ public class Customer : MonoBehaviour
 			//アニメーション
 			StartCoroutine(AnimeReacion(friedFood));
 		}
-
-		CookedFoodNum++;
 	}
 
 	protected IEnumerator AnimeReacion(FriedFood friedFood)
@@ -174,6 +172,8 @@ public class Customer : MonoBehaviour
 				break;
 		}
 		yield return new WaitForSeconds(1);
+
+		CookedFoodNum++;
 	}
 
 	virtual protected void TurnEndAction()
