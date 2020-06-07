@@ -39,16 +39,34 @@ public class CalorieMob : Customer
 		}
 	}
 
-	//関数名が微妙
-	override protected void CheckClear()
+	override protected void TurnEndAction()
 	{
-		if (currentCalorie <= 0)
+		//全ての食材を揚げ終わったときのみ判定
+		if (cookedFoodNum != SynchroFoodNum)
 		{
-			IsClear = true;
+			return;
+		}
+
+		//全ての食材が揚げ物になっていない場合再行動
+		if (successFriedFoodNum == SynchroFoodNum)
+		{
+			AddPointAction(totalGage, totalScore);
+
+			if (currentCalorie <= 0)
+			{
+				animator.SetTrigger("end");
+			}
+			else
+			{
+				DoAction();
+			}
 		}
 		else
 		{
 			DoAction();
 		}
+
+		cookedFoodNum = 0;
+		successFriedFoodNum = 0;
 	}
 }

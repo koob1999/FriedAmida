@@ -79,7 +79,7 @@ public class Boss : Customer
 		if (successFriedFoodNum == SynchroFoodNum)
 		{
 			AddPointAction(totalGage, 0);
-			CheckClear();
+			animator.SetTrigger("end");
 		}
 		else
 		{
