@@ -20,6 +20,11 @@ public class HorizontalLine : MonoBehaviour
 
 	}
 
+	public void SetOnObjActivation()
+	{
+		SetOnObjActivation(!OnObj.activeSelf);
+	}
+
 	public void SetOnObjActivation(bool isActive)
 	{
 		//線を引く
@@ -42,10 +47,10 @@ public class HorizontalLine : MonoBehaviour
 		}
 	}
 
-	public bool IsOnObjActive()
+	/*public bool IsOnObjActive()
 	{
 		return OnObj.activeSelf;
-	}
+	}*/
 
 	private void OnTriggerStay2D(Collider2D collision)
 	{

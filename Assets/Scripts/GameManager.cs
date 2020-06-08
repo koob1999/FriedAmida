@@ -11,7 +11,6 @@ public class GameManager : MonoBehaviour
 	[SerializeField] StageManager stageManager;
 	[SerializeField] FoodGenerater foodGenerater;
 	[SerializeField] ItemGenerater itemGenerater;
-	[SerializeField] LineCursol lineCursol;
 	[SerializeField] Text scoreText;
 	[SerializeField] Text remainLinesText;
 	[SerializeField] Text comboText;
@@ -39,7 +38,6 @@ public class GameManager : MonoBehaviour
 		set
 		{
 			isGameStop = value;
-			lineCursol.IsGameStop = value;
 		}
 	}
 
@@ -145,16 +143,6 @@ public class GameManager : MonoBehaviour
 		if (IsGameStop)
 		{
 			return;
-		}
-
-		//倍速処理
-		if (Input.GetKeyDown(KeyCode.X))
-		{
-			Time.timeScale = 2;
-		}
-		if (Input.GetKeyUp(KeyCode.X))
-		{
-			Time.timeScale = 1;
 		}
     }
 
