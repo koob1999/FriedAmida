@@ -455,7 +455,6 @@ GameObject:
   - component: {fileID: 2202436763029294503}
   - component: {fileID: 6175711353102129478}
   - component: {fileID: 5183764530133266764}
-  - component: {fileID: 5711964688589302726}
   - component: {fileID: 3324951369247229218}
   m_Layer: 5
   m_Name: Button
@@ -570,18 +569,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &5711964688589302726
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2539411634471576383}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6838fa2481a4874aa84d45cc0f30f0a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3324951369247229218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -742,4 +729,4 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Enter\u30AD\u30FC\u3067\u6B21\u306E\u30B9\u30C6\u30FC\u30B8\n"
+  m_Text: "\u30BF\u30C3\u30C1\u3067\u6B21\u306E\u30B9\u30C6\u30FC\u30B8\u3078\n"

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LineCursol : MonoBehaviour
 {
-	class Position
+	/*class Position
 	{
 		int x = 0;
 		int y = 0;
@@ -80,7 +80,7 @@ public class LineCursol : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-		position = new Position(AmidaLines);
+		//position = new Position(AmidaLines);
     }
 
     // Update is called once per frame
@@ -139,5 +139,5 @@ public class LineCursol : MonoBehaviour
 				position.X--;
 				break;
 		}
-	}
+	}*/
 }

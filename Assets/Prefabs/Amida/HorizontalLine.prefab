@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 8257149241215649024}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.55, y: 0.2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8257149242028212555}
   - {fileID: 8257149242308121151}
@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 8257149241707418992}
   - component: {fileID: 8257149241707419007}
   - component: {fileID: 5857470653836886246}
+  - component: {fileID: 821097951725378217}
   m_Layer: 0
   m_Name: HorizontalLine
   m_TagString: Untagged
@@ -108,7 +109,7 @@ Transform:
   m_GameObject: {fileID: 8257149241707419006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5, y: 3, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.55, y: 0.2, z: 1}
   m_Children:
   - {fileID: 8257149241215649026}
   - {fileID: 8257149242296993603}
@@ -153,8 +154,34 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.55, y: 0.2}
+  m_Size: {x: 1, y: 2}
   m_EdgeRadius: 0
+--- !u!114 &821097951725378217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8257149241707419006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 113f36229d57e8d46a4cff11c3e2bf7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unityEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8257149241707419007}
+        m_MethodName: SetOnObjActivation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
 --- !u!1 &8257149242028212554
 GameObject:
   m_ObjectHideFlags: 0
@@ -238,7 +265,7 @@ Transform:
   m_GameObject: {fileID: 8257149242296993601}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.55, y: 0.2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8257149241707418992}
   m_RootOrder: 1

@@ -30,7 +30,7 @@ public class StageGenerater : MonoBehaviour
 	float maxYPos = 4.3f;
 	float minYPos = -3;
 	//参照パス
-	[SerializeField] LineCursol lineCursol;
+	//[SerializeField] LineCursol lineCursol;
 	[SerializeField] FoodGenerater foodGenerater;
 	[SerializeField] ItemGenerater itemGenerater;
 
@@ -77,7 +77,7 @@ public class StageGenerater : MonoBehaviour
 			}
 		}
 
-		lineCursol.AmidaLines = amidaLines;
+		//lineCursol.AmidaLines = amidaLines;
 		stageManager.AmidaLines = amidaLines;
 
 		//▼油の生成
