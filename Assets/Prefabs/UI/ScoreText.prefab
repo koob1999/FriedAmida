@@ -295,7 +295,7 @@ MonoBehaviour:
   scoreObj: {fileID: 2165615172913796586}
   comboScoreObj: {fileID: 2165615172734261818}
   totalScoreObj: {fileID: 2165615174149550146}
-  ResultSound: {fileID: 8300000, guid: aed43773ea7fe84419577cf7a21a19ab, type: 3}
+  ResultSound: {fileID: 8300000, guid: 884ed580689c22d4ca3f13aadb7132d4, type: 3}
 --- !u!82 &3056426002900809019
 AudioSource:
   m_ObjectHideFlags: 0

@@ -476,7 +476,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   customerNumText: {fileID: 175879454}
   norumaText: {fileID: 60612523}
-  enemies: 000000000200000001000000
+  enemies: 000000000000000000000000
   nomalMob: {fileID: 8954283933166768306, guid: 73121d680032dd842961ab7bb8037239,
     type: 3}
   calorieMob: {fileID: 990452483863180522, guid: 9e3ea8cc5de3f614fb373b0c1507d38e,
@@ -768,7 +768,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 7ffab1461575bcd42b3f355c053883f1, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1053,7 +1053,7 @@ MonoBehaviour:
   VisitSound: {fileID: 8300000, guid: d37e8100d79fbb64ca64824b6f06d513, type: 3}
   PointUpSound: {fileID: 8300000, guid: fb1e21e1c2028a9498bb59705f6eefb8, type: 3}
   PointDownSound: {fileID: 8300000, guid: 5922b99474efe174ca90f73507ba1cd1, type: 3}
-  GameEndSound: {fileID: 8300000, guid: f2534d6f624fa6b499928fc5b9a9f997, type: 3}
+  GameEndSound: {fileID: 8300000, guid: 6b73e5b673807f9449a286db2c81427f, type: 3}
 --- !u!4 &658604814
 Transform:
   m_ObjectHideFlags: 0
@@ -1082,7 +1082,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 0
   Mute: 0
