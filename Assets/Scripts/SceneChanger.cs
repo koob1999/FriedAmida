@@ -5,6 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class SceneChanger : MonoBehaviour
 {
+	AudioSource audioSource;
+	public AudioClip StartSound;
+
+	void Start()
+	{
+		audioSource = GetComponent<AudioSource>();	
+	}
+
 	public void MoveNextStage()
 	{
 		switch (SceneManager.GetActiveScene().name)
@@ -32,5 +40,25 @@ public class SceneChanger : MonoBehaviour
 	public void ReLoadCurrentScene()
 	{
 		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+	}
+
+	public void GameStart()
+	{
+		StartCoroutine(GameStartCoroutine());
+	}
+
+	IEnumerator GameStartCoroutine()
+	{
+		audioSource.PlayOneShot(StartSound);
+
+		float time = 0;
+
+		while (time < 2)
+		{
+			time += Time.deltaTime;
+			yield return null;
+		}
+
+		SceneManager.LoadScene("Noon");
 	}
 }
