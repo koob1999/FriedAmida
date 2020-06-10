@@ -12,10 +12,13 @@ public class Oil : MonoBehaviour
 
 	[SerializeField] GameObject outline;
 
+	AudioSource audioSource;
+	public AudioClip FrySound;
+
     // Start is called before the first frame update
     void Start()
     {
-		
+		audioSource = GetComponent<AudioSource>();
 	}
 
     // Update is called once per frame
@@ -50,6 +53,7 @@ public class Oil : MonoBehaviour
 			};
 
 			collision.gameObject.GetComponent<Animator>().SetTrigger("fry");
+			audioSource.PlayOneShot(FrySound);
 		}
 	}
 }

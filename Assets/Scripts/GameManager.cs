@@ -94,6 +94,14 @@ public class GameManager : MonoBehaviour
 
 		set
 		{
+			if (score > value)
+			{
+				audioSource.PlayOneShot(PointDownSound);
+			}
+			else if (score < value)
+			{
+				audioSource.PlayOneShot(PointUpSound);
+			}
 			score = value;
 			scoreText.text = "SCORE:" + Score.ToString();
 		}
@@ -120,9 +128,17 @@ public class GameManager : MonoBehaviour
 	}
 	int maxCombo;
 
+	AudioSource audioSource;
+	public AudioClip VisitSound;
+	public AudioClip PointUpSound;
+	public AudioClip PointDownSound;
+	public AudioClip GameEndSound;
+
 	// Start is called before the first frame update
 	void Start()
     {
+		audioSource = GetComponent<AudioSource>();
+
 		Time.timeScale = 1;
 
 		stageManager.SetCompletedActionToOil(CompletedFriedFood);
@@ -155,6 +171,8 @@ public class GameManager : MonoBehaviour
 	//敵生成
 	void AppearNextEnemy()
 	{
+		audioSource.PlayOneShot(VisitSound);
+
 		currentEnemyObj = stageManager.NextBattleStart();
 		currentCustomer = currentEnemyObj.GetComponent<Customer>();
 
@@ -276,6 +294,7 @@ public class GameManager : MonoBehaviour
 			DisplayTime();
 		}
 
+		audioSource.PlayOneShot(GameEndSound);
 		IsGameStop = true;
 		GameObject obj = Instantiate(gameOverTextObj, new Vector3(0, 0, 0), Quaternion.identity);
 		obj.GetComponent<ScoreText>().SetText(
