@@ -14,6 +14,13 @@ public class HorizontalLine : MonoBehaviour
 	public MinusRemainLinesDelegate MinusRemainLinesAction;
 	public delegate bool IsDrawLineDelegate();
 	public IsDrawLineDelegate IsDrawLineAction;
+	AudioSource audioSource;
+	public AudioClip DrawSound;
+
+	void Awake()
+	{
+		audioSource = GetComponent<AudioSource>();	
+	}
 
 	void Update()
 	{
@@ -34,6 +41,8 @@ public class HorizontalLine : MonoBehaviour
 			{
 				OnObj.SetActive(isActive);
 				MinusRemainLinesAction();
+
+				audioSource.PlayOneShot(DrawSound);
 			}
 		}
 		//線を消す
