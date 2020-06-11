@@ -309,10 +309,10 @@ MonoBehaviour:
   HasClalorie: 0
   synchroFoodNum: 4
   appearItemNums:
-    egg: 6
-    komugiko: 6
-    panko: 6
-    badItem: 1
+    egg: 5
+    komugiko: 5
+    panko: 5
+    badItem: 0
 --- !u!114 &314732492030178381
 MonoBehaviour:
   m_ObjectHideFlags: 0

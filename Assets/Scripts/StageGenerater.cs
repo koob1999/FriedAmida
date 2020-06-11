@@ -27,7 +27,7 @@ public class StageGenerater : MonoBehaviour
 	[SerializeField, Range(3, 8)] int HorizontalLinesNum;
 	float maxXPos = 4;
 	float minXPos = -7.7f;
-	float maxYPos = 4.3f;
+	float maxYPos = 3.5f;
 	float minYPos = -3;
 	//参照パス
 	//[SerializeField] LineCursol lineCursol;
@@ -56,7 +56,7 @@ public class StageGenerater : MonoBehaviour
 		//▼縦線の生成
 		for(int i = 0; i < underBoxTypes.Length; i++)
 		{
-			Instantiate(VerticalLine, new Vector3(minXPos + (xInterval * i), 0.5f, 0), Quaternion.identity);
+			Instantiate(VerticalLine, new Vector3(minXPos + (xInterval * i), -0.22f, 0), Quaternion.identity);
 		}
 
 		//▼横線の生成
