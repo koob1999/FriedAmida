@@ -20,7 +20,7 @@ jobs:
         unityVersion:
           - 2018.4.20f1
         targetPlatform:
-          - StandaloneWindows64
+          - Android
           - WebGL
 
     steps:
