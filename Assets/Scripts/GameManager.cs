@@ -102,7 +102,16 @@ public class GameManager : MonoBehaviour
 			{
 				audioSource.PlayOneShot(PointUpSound);
 			}
-			score = value;
+
+			if (value > 0)
+			{
+				score = value;
+			}
+			else
+			{
+				score = 0;
+			}
+
 			scoreText.text = "SCORE:" + Score.ToString();
 		}
 	}
