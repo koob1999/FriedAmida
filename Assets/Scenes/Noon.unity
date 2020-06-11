@@ -180,7 +180,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u30CE\u30EB\u30DE\u3042\u3068 \u4EBA\n"
+  m_Text: '
+
+'
 --- !u!222 &60612524
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1086,7 +1088,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'SCORE:10000
+  m_Text: 'SCORE:0
 
 '
 --- !u!222 &544723529
@@ -2642,7 +2644,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "1\u30B3\u30F3\u30DC"
+  m_Text: '
+
+'
 --- !u!222 &1778629757
 CanvasRenderer:
   m_ObjectHideFlags: 0
