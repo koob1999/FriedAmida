@@ -17,7 +17,6 @@ public class StageManager : MonoBehaviour
 	}
 
 
-	[SerializeField] Text customerNumText;
 	[SerializeField] Text norumaText;
 
 	//▼敵関連
@@ -41,14 +40,13 @@ public class StageManager : MonoBehaviour
 		set
 		{
 			presentEnemyNum = value;
-			customerNumText.text = (presentEnemyNum).ToString() + "人目";
 			norumaText.text = "ノルマあと" + (enemies.Length - presentEnemyNum + 1).ToString() + "人";
 		}
 	}
 
 	//●Playerクラスに分ける可能性あり●
-	const int MaxDrawLineNum = 3;
-	public Action<string> UpdateRemainLinesText;
+	const int MaxDrawLineNum = 6;
+	public Action<int,int> UpdateRemainLinesGage;
 	int remainLines = MaxDrawLineNum;
 	public int RemainLines
 	{
@@ -68,7 +66,7 @@ public class StageManager : MonoBehaviour
 			{
 				remainLines = value;
 			}
-			UpdateRemainLinesText("残り本数" + RemainLines.ToString() + "/" + MaxDrawLineNum.ToString());
+			UpdateRemainLinesGage(remainLines, MaxDrawLineNum);
 		}
 	}
 
