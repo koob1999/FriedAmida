@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField] FoodGenerater foodGenerater;
 	[SerializeField] ItemGenerater itemGenerater;
 	[SerializeField] Text scoreText;
-	[SerializeField] Text remainLinesText;
+	[SerializeField] BlockGage remainLinesGage;
 	[SerializeField] Text comboText;
 	[SerializeField] Image rushGageImage;
 	[SerializeField] Image calorieGageImage;
@@ -143,9 +143,9 @@ public class GameManager : MonoBehaviour
 
 		stageManager.SetCompletedActionToOil(CompletedFriedFood);
 
-		stageManager.UpdateRemainLinesText = text =>
+		stageManager.UpdateRemainLinesGage = (remainNum, maxNum) =>
 		{
-			remainLinesText.text = text;
+			remainLinesGage.DisplayBlockes(remainNum, maxNum);
 		};
 
 		StartCoroutine(CountTime());
