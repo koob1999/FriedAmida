@@ -37,6 +37,7 @@ public class ItemGenerater : MonoBehaviour
 			for(int j = 0; j < generateBoxes.GetLength(1); j++)
 			{
 				Destroy(generateBoxes[i, j]);
+				generateBoxes[i, j] = null;
 			}
 		}
 
