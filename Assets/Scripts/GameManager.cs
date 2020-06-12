@@ -298,7 +298,7 @@ public class GameManager : MonoBehaviour
 		}
 
 		rushGage = 0;
-		rushGageImage.fillAmount = 1;
+		rushGageImage.fillAmount = 0;
 		IsRush = false;
 	}
 
