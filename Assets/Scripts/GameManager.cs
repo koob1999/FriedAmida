@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour
 	}
 
 	const float RushTime = 20;
-	const int MaxRushGage = 1;
+	const int MaxRushGage = 4;
 	int rushGage;
 	public int RushGage
 	{
@@ -89,6 +89,8 @@ public class GameManager : MonoBehaviour
 			{
 				rushGage = value;
 			}
+
+			rushGageImage.fillAmount = (float)rushGage / MaxRushGage;
 
 			if (rushGage >= MaxRushGage)
 			{

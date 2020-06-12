@@ -734,7 +734,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &315737322
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2326,7 +2326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   norumaText: {fileID: 854954496}
-  enemies: 000000000000000000000000
+  enemies: 0200000000000000020000000100000001000000000000000100000003000000
   nomalMob: {fileID: 8954283933166768306, guid: 73121d680032dd842961ab7bb8037239,
     type: 3}
   calorieMob: {fileID: 990452483863180522, guid: 9e3ea8cc5de3f614fb373b0c1507d38e,
@@ -2816,7 +2816,7 @@ MonoBehaviour:
     type: 3}
   foodDish: {fileID: 5710014136076305053, guid: c6c4e0de0ab2ba44090e691855d1208b,
     type: 3}
-  limitTime: 180
+  limitTime: 360
   VisitSound: {fileID: 8300000, guid: d37e8100d79fbb64ca64824b6f06d513, type: 3}
   PointUpSound: {fileID: 8300000, guid: fb1e21e1c2028a9498bb59705f6eefb8, type: 3}
   PointDownSound: {fileID: 8300000, guid: 5922b99474efe174ca90f73507ba1cd1, type: 3}
@@ -3021,7 +3021,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
