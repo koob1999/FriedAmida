@@ -2809,6 +2809,7 @@ MonoBehaviour:
   calorieGageImage: {fileID: 1048765301}
   minuteText: {fileID: 59872676}
   secandText: {fileID: 303928334}
+  bgm: {fileID: 970391293}
   scoreTextObj: {fileID: 2165615173074586692, guid: e3c1ee48c381a314296cad512b32792e,
     type: 3}
   gameOverTextObj: {fileID: 4683276454934729685, guid: f8abf36c0970c664588bcf6a9d8e4ae9,
@@ -2820,6 +2821,8 @@ MonoBehaviour:
   PointUpSound: {fileID: 8300000, guid: fb1e21e1c2028a9498bb59705f6eefb8, type: 3}
   PointDownSound: {fileID: 8300000, guid: 5922b99474efe174ca90f73507ba1cd1, type: 3}
   GameEndSound: {fileID: 8300000, guid: 6b73e5b673807f9449a286db2c81427f, type: 3}
+  NomalBGM: {fileID: 8300000, guid: 7ffab1461575bcd42b3f355c053883f1, type: 3}
+  RushBGM: {fileID: 8300000, guid: cb5cfb2d14a2fd24495ff627c817b8e4, type: 3}
 --- !u!4 &1884878325
 Transform:
   m_ObjectHideFlags: 0
