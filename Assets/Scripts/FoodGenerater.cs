@@ -14,6 +14,8 @@ public class FoodGenerater : MonoBehaviour
 	[NonSerialized] public GameObject[] GeneratePlaces;
 	[SerializeField] int generateSpan;
 
+	public bool IsRush;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +38,10 @@ public class FoodGenerater : MonoBehaviour
 		for(int i = 0; i < foodTypes.Length; i++)
 		{
 			createdObjs[i] = FoodGenerate(foodTypes[i], generatePlaces[i].transform.position);
+			if (IsRush)
+			{
+				createdObjs[i].GetComponent<Food>().speed *= 2;
+			}
 		}
 		//x軸を元にソート
 		Array.Sort(createdObjs, (obj1, obj2) =>

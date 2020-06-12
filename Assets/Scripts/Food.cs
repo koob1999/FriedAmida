@@ -12,7 +12,7 @@ public class Food : MonoBehaviour
 
 	//▼移動関連
 	int xDirction = 0;
-	float speed = 0.02f;
+	public float speed = 0.02f;
 
 	//▼レシピ
 	[SerializeField] int clearKomugikoNum;

@@ -51,7 +51,9 @@ public class GameManager : MonoBehaviour
 		{
 			isRush = value;
 			itemGenerater.IsRush = isRush;
+			foodGenerater.IsRush = isRush;
 			stageManager.ChangeTrashToOil(isRush);
+
 			if (isRush)
 			{
 				bgm.clip = RushBGM;
@@ -62,7 +64,6 @@ public class GameManager : MonoBehaviour
 				bgm.clip = NomalBGM;
 				bgm.Play();
 			}
-			//ゲーム速度少し上昇
 			//制限時間停止
 		}
 	}
