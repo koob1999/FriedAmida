@@ -52,4 +52,9 @@ public class DishController : MonoBehaviour
 	{
 		currentCustomer.CustomerReact(friedFood);
 	}
+
+	public void DesTroy()
+	{
+		Destroy(gameObject);
+	}
 }

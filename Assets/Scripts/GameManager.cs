@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField] Image calorieGageImage;
 	[SerializeField] Text minuteText;
 	[SerializeField] Text secandText;
+	[SerializeField] AudioSource bgm;
 
 	//▼プレハブ
 	[SerializeField] GameObject scoreTextObj;
@@ -50,15 +51,25 @@ public class GameManager : MonoBehaviour
 		{
 			isRush = value;
 			itemGenerater.IsRush = isRush;
+			foodGenerater.IsRush = isRush;
 			stageManager.ChangeTrashToOil(isRush);
-			//BGM変更
-			//ゲーム速度少し上昇
+
+			if (isRush)
+			{
+				bgm.clip = RushBGM;
+				bgm.Play();
+			}
+			else
+			{
+				bgm.clip = NomalBGM;
+				bgm.Play();
+			}
 			//制限時間停止
 		}
 	}
 
 	const float RushTime = 20;
-	const int MaxRushGage = 1;
+	const int MaxRushGage = 4;
 	int rushGage;
 	public int RushGage
 	{
@@ -79,6 +90,8 @@ public class GameManager : MonoBehaviour
 			{
 				rushGage = value;
 			}
+
+			rushGageImage.fillAmount = (float)rushGage / MaxRushGage;
 
 			if (rushGage >= MaxRushGage)
 			{
@@ -142,6 +155,9 @@ public class GameManager : MonoBehaviour
 	public AudioClip PointUpSound;
 	public AudioClip PointDownSound;
 	public AudioClip GameEndSound;
+
+	public AudioClip NomalBGM;
+	public AudioClip RushBGM;
 
 	// Start is called before the first frame update
 	void Start()
@@ -283,7 +299,7 @@ public class GameManager : MonoBehaviour
 		}
 
 		rushGage = 0;
-		rushGageImage.fillAmount = 1;
+		rushGageImage.fillAmount = 0;
 		IsRush = false;
 	}
 
